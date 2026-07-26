@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Convene delivers ServiceNow, Salesforce, AI, custom development, and vCISO services with senior teams and measurable outcomes.">
+<title>How we work · Distributed Teams · Convene</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap');
+:root{
+--char:#1F1F1F;--slate:#3F3F3F;--muted:#565654;--sage:#00AD4A;--sage-deep:#00773A;--sage-darker:#005A2B;--sage-glow:#8AD3AC;--blue:#5B7A99;--blue-deep:#3F5E7C;--blue-glow:#8FB6D6;
+--paper:#F4F4F2;--card:#FFFFFF;--line:#E6E6E1;--maxw:1160px;--ease:cubic-bezier(.2,.7,.2,1);
+--focus:#00773A
+}
+body{font-family:"Inter",system-ui,sans-serif;color:var(--char);background:var(--paper);margin:0;-webkit-font-smoothing:antialiased}
+.demo-page{min-height:60vh;padding:8rem 2rem 4rem;text-align:center}
+.demo-page h1{font-family:"Bricolage Grotesque";font-weight:600;font-size:2.4rem;margin:0;letter-spacing:-.02em}
+.demo-page p{color:var(--muted);margin-top:1rem;max-width:56ch;margin-inline:auto}
+
+/* Utility: visually hidden but announced by AT */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ============================================================
+   SECONDARY UTILITY BAR — GRADIENT
+   ============================================================ */
+.c-topbar{position:sticky;top:0;z-index:1001;color:#EAF2EC;font-size:.82rem;background:linear-gradient(96deg,#00773A 0%,#005A2B 42%,#0A2818 76%,#0E1B12 100%);overflow:hidden}
+.c-topbar::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 12% 50%,rgba(154,224,187,.22),transparent 60%),radial-gradient(60% 90% at 88% 50%,rgba(143,182,214,.10),transparent 60%);pointer-events:none;z-index:0}
+.c-topbar-inner{max-width:var(--maxw);margin-inline:auto;padding:.55rem 1.5rem;display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;position:relative;z-index:2}
+
+/* Left links — faded pill buttons with icons (the "faded version" of the primary CTA) */
+.c-topbar-links{list-style:none;margin:0;padding:0;display:flex;gap:.55rem;flex-wrap:wrap;align-items:center}
+.c-topbar-links a{position:relative;display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .95rem .4rem .8rem;background:rgba(255,255,255,.05);backdrop-filter:blur(10px) saturate(130%);-webkit-backdrop-filter:blur(10px) saturate(130%);border:1px solid rgba(255,255,255,.14);border-radius:999px;color:rgba(234,242,236,.9);text-decoration:none;font-weight:600;font-size:.82rem;letter-spacing:.005em;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);overflow:hidden;transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease),transform .16s var(--ease)}
+.c-topbar-links a::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,0) 55%);pointer-events:none;border-radius:inherit}
+.c-topbar-links a:hover{background:rgba(255,255,255,.11);border-color:rgba(154,224,187,.36);color:#fff;transform:translateY(-1px)}
+.c-topbar-links a:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px}
+.c-topbar-links a svg{width:13px;height:13px;flex:0 0 auto;color:var(--sage-glow);opacity:.85;transition:opacity .2s var(--ease),transform .2s var(--ease)}
+.c-topbar-links a:hover svg{opacity:1;transform:scale(1.1)}
+
+/* Glass CTA button — primary, brighter, sage-tinted so it clearly wins the hierarchy */
+.c-topbar-cta{margin-left:auto;position:relative;display:inline-flex;align-items:center;gap:.5rem;padding:.42rem 1.05rem .42rem 1.1rem;background:rgba(255,255,255,.13);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);border:1px solid rgba(154,224,187,.5);border-radius:8px;color:#fff;font-weight:700;font-size:.86rem;letter-spacing:.01em;text-decoration:none;box-shadow:0 6px 18px rgba(0,90,43,.35),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -8px 12px -6px rgba(0,0,0,.16);overflow:hidden;transition:background .22s var(--ease),border-color .22s var(--ease),transform .18s var(--ease),box-shadow .22s var(--ease)}
+.c-topbar-cta::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 55%);pointer-events:none;border-radius:inherit}
+.c-topbar-cta::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-22deg);transition:left .7s var(--ease);pointer-events:none}
+.c-topbar-cta:hover{background:rgba(255,255,255,.2);border-color:rgba(154,224,187,.75);transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,110,52,.44),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -8px 12px -6px rgba(0,0,0,.12)}
+.c-topbar-cta:hover::after{left:130%}
+.c-topbar-cta:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px}
+.c-topbar-cta .arr{position:relative;z-index:1;transition:transform .2s var(--ease)}
+.c-topbar-cta:hover .arr{transform:translate(2px,-2px)}
+@media(max-width:640px){.c-topbar-inner{padding:.5rem 1rem;gap:.4rem}.c-topbar-links{gap:.4rem}.c-topbar-links a{font-size:.76rem;padding:.35rem .7rem .35rem .6rem}}
+
+/* ============================================================
+   PRIMARY NAV — disclosure pattern
+   ============================================================ */
+.c-nav{position:sticky;top:36px;z-index:1000;background:rgba(244,244,242,.86);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid transparent;transition:background .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.c-nav.scrolled{background:rgba(255,255,255,.94);border-bottom-color:var(--line);box-shadow:0 8px 24px rgba(20,40,30,.06)}
+@media(max-width:640px){.c-nav{top:40px}}
+.c-nav-inner{max-width:var(--maxw);margin-inline:auto;padding:.9rem 1.5rem;display:flex;align-items:center;gap:1.5rem}
+.c-logo{display:inline-flex;align-items:center;text-decoration:none;padding:.25rem;border-radius:4px}
+.c-logo img{display:block;height:34px;width:auto}
+.c-logo:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+.c-nav-menu{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:.25rem;margin-left:auto}
+.c-nav-menu > li{position:relative}
+.c-nav-menu a,.c-nav-menu .c-nav-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .95rem;font-family:"Inter";font-weight:500;font-size:.95rem;color:var(--char);text-decoration:none;background:transparent;border:0;border-radius:6px;cursor:pointer;transition:background .18s var(--ease),color .18s var(--ease);font:inherit}
+.c-nav-menu a:hover,.c-nav-menu .c-nav-btn:hover,.c-nav-menu .c-nav-btn[aria-expanded="true"]{background:rgba(0,119,58,.06);color:var(--sage-deep)}
+.c-nav-menu a:focus-visible,.c-nav-menu .c-nav-btn:focus-visible{outline:3px solid var(--focus);outline-offset:2px;background:rgba(0,119,58,.04)}
+.c-nav-btn .caret{width:9px;height:9px;flex:0 0 auto;transition:transform .2s var(--ease)}
+.c-nav-btn[aria-expanded="true"] .caret{transform:rotate(-180deg)}
+
+.c-dropdown{position:absolute;top:100%;left:0;margin-top:.35rem;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.5rem;list-style:none;box-shadow:0 20px 48px rgba(20,40,30,.14)}
+.c-dropdown[hidden]{display:none}
+.c-dropdown li{margin:0}
+.c-dropdown a{display:block;padding:.7rem .85rem;border-radius:8px;color:var(--char);text-decoration:none;font-weight:500;font-size:.94rem;line-height:1.35}
+.c-dropdown a .d-desc{display:block;font-size:.8rem;font-weight:400;color:var(--muted);margin-top:.15rem}
+.c-dropdown a:hover{background:rgba(0,119,58,.07);color:var(--sage-deep)}
+.c-dropdown a:focus-visible{outline:3px solid var(--focus);outline-offset:-3px;background:rgba(0,119,58,.06)}
+
+.c-nav-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;padding:.55rem;cursor:pointer;margin-left:auto}
+.c-nav-toggle:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+@media(max-width:900px){
+  .c-nav-toggle{display:inline-flex}
+  .c-nav-menu{position:absolute;top:100%;right:1.5rem;left:1.5rem;flex-direction:column;align-items:stretch;gap:0;margin-top:.5rem;padding:.6rem;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 48px rgba(20,40,30,.14)}
+  .c-nav-menu[hidden]{display:none}
+  .c-nav-menu a,.c-nav-menu .c-nav-btn{padding:.85rem .9rem;width:100%;justify-content:space-between}
+  .c-dropdown{position:static;box-shadow:none;border:0;border-left:2px solid var(--line);border-radius:0;margin:.2rem 0 .5rem .5rem;padding:.2rem 0 .2rem .5rem;min-width:0}
+}
+
+/* ============================================================
+   FOOTER — EDITORIAL TREATMENT
+   Statement moment + signature rule + refined column grid + contact strip + elegant bottom bar.
+   ============================================================ */
+.c-foot{background:#0E1512;color:#EAF2EC;position:relative;overflow:hidden;isolation:isolate}
+/* Ambient orb wash — Convene sage + blue palette, soft */
+.c-foot::before{content:"";position:absolute;inset:-10%;background:radial-gradient(35% 55% at 8% 12%,rgba(0,173,74,.18),transparent 60%),radial-gradient(38% 60% at 92% 88%,rgba(63,94,124,.22),transparent 60%),radial-gradient(28% 45% at 55% 45%,rgba(154,224,187,.06),transparent 65%);pointer-events:none;z-index:0;filter:blur(20px)}
+/* Diaphanous wordmark as background art */
+.c-foot::after{content:"CONVENE";position:absolute;left:50%;bottom:-2.2rem;transform:translateX(-50%);font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(9rem,22vw,20rem);letter-spacing:-.05em;color:rgba(255,255,255,.024);pointer-events:none;line-height:1;white-space:nowrap;z-index:0}
+.c-foot-inner{max-width:var(--maxw);margin-inline:auto;padding:clamp(4rem,7vw,5.5rem) 1.5rem 0;position:relative;z-index:2}
+
+/* Statement moment (top) */
+.c-foot-statement{display:grid;grid-template-columns:1.5fr 1fr;gap:3rem;align-items:end;padding-bottom:3.5rem}
+@media(max-width:820px){.c-foot-statement{grid-template-columns:1fr;gap:1.6rem}}
+.c-foot-statement h2{font-family:"Bricolage Grotesque";font-weight:600;font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.08;letter-spacing:-.03em;color:#fff;margin:0;max-width:22ch}
+.c-foot-statement h2 .it{font-family:"Fraunces",serif;font-style:italic;font-weight:500;background:linear-gradient(100deg,var(--sage-glow),var(--blue-glow),var(--sage-glow));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:cfShimmer 8s linear infinite}
+@keyframes cfShimmer{to{background-position:220% 0}}
+.c-foot-statement-side{color:#B7C2BE;font-size:1rem;line-height:1.6;max-width:36ch;justify-self:end}
+@media(max-width:820px){.c-foot-statement-side{justify-self:start}}
+
+/* Signature rule — thin gradient stroke */
+.c-foot-rule{height:1px;background:linear-gradient(90deg,transparent,rgba(154,224,187,.4) 20%,rgba(143,182,214,.4) 80%,transparent);margin:0}
+
+/* Column grid */
+.c-foot-cols{display:grid;grid-template-columns:1.5fr repeat(3,1fr) 1.15fr;gap:2.6rem;padding:3.5rem 0 3rem}
+@media(max-width:960px){.c-foot-cols{grid-template-columns:1fr 1fr;gap:2rem}.c-foot-brand{grid-column:1 / -1}}
+@media(max-width:560px){.c-foot-cols{grid-template-columns:1fr}}
+
+.c-foot-brand{max-width:36ch}
+.c-foot-brand .c-foot-mark{display:inline-flex;align-items:center;text-decoration:none;padding:.25rem;border-radius:4px;margin-bottom:1.25rem}
+.c-foot-brand .c-foot-mark img{display:block;height:36px;width:auto;filter:brightness(0) invert(1)}
+.c-foot-brand .c-foot-mark:focus-visible{outline:3px solid var(--sage-glow);outline-offset:2px}
+.c-foot-brand .c-foot-tag{font-family:"Fraunces",serif;font-style:italic;font-weight:500;font-size:1.15rem;color:#fff;line-height:1.35;margin:0}
+.c-foot-brand .c-foot-body{color:#B7C2BE;font-size:.92rem;line-height:1.6;margin:.85rem 0 0}
+
+/* Column headers with a small colored accent dot */
+.c-foot-col h3,.c-foot-cta h3{position:relative;display:inline-flex;align-items:center;gap:.55rem;font-family:"Inter";font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#EAF2EC;margin:0 0 1.2rem}
+.c-foot-col h3::before,.c-foot-cta h3::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sage-glow);box-shadow:0 0 8px rgba(154,224,187,.6)}
+.c-foot-col:nth-child(3) h3::before{background:var(--blue-glow);box-shadow:0 0 8px rgba(143,182,214,.6)}
+.c-foot-col:nth-child(4) h3::before{background:linear-gradient(135deg,var(--sage-glow),var(--blue-glow))}
+.c-foot-col ul{list-style:none;margin:0;padding:0;display:grid;gap:.68rem}
+.c-foot-col a{color:#D0DCD5;text-decoration:none;font-size:.92rem;line-height:1.4;padding:.1rem 0;position:relative;display:inline-block;transition:color .18s var(--ease),padding-left .22s var(--ease)}
+.c-foot-col a::before{content:"→";position:absolute;left:-1.05em;top:0;opacity:0;transform:translateX(-4px);color:var(--sage-glow);font-size:.85em;line-height:1.5;transition:opacity .2s var(--ease),transform .22s var(--ease)}
+.c-foot-col a:hover,.c-foot-col a:focus-visible{color:#fff;padding-left:1.15em}
+.c-foot-col a:hover::before,.c-foot-col a:focus-visible::before{opacity:1;transform:translateX(0)}
+.c-foot-col a:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px;border-radius:2px}
+
+/* CTA column — glass card treatment */
+.c-foot-cta .c-foot-cta-title{font-family:"Bricolage Grotesque";font-weight:600;font-size:1.25rem;line-height:1.2;color:#fff;margin:0 0 1.15rem;letter-spacing:-.02em}
+.c-foot-cta a.c-foot-btn{position:relative;display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.15rem;background:rgba(255,255,255,.06);backdrop-filter:blur(10px) saturate(140%);-webkit-backdrop-filter:blur(10px) saturate(140%);border:1px solid rgba(255,255,255,.18);border-radius:8px;color:#fff;font-weight:600;font-size:.9rem;text-decoration:none;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.2);transition:background .2s var(--ease),border-color .2s var(--ease),transform .18s var(--ease)}
+.c-foot-cta a.c-foot-btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.32),transparent);transform:skewX(-22deg);transition:left .7s var(--ease);pointer-events:none}
+.c-foot-cta a.c-foot-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(154,224,187,.5);transform:translateY(-1px)}
+.c-foot-cta a.c-foot-btn:hover::after{left:130%}
+.c-foot-cta a.c-foot-btn:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px}
+.c-foot-cta a.c-foot-btn .arr{position:relative;z-index:1;transition:transform .2s var(--ease)}
+.c-foot-cta a.c-foot-btn:hover .arr{transform:translate(3px,-3px)}
+
+/* Contact / offices strip */
+.c-foot-contact{display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:center;padding:2rem 0;border-top:1px solid rgba(255,255,255,.08);color:#8FA298;font-size:.86rem}
+@media(max-width:820px){.c-foot-contact{grid-template-columns:1fr;gap:.75rem;text-align:left}}
+.c-foot-offices{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;font-family:"Inter";font-weight:500}
+.c-foot-offices .c-foot-city{color:#EAF2EC;position:relative}
+.c-foot-offices .c-foot-sep{color:#4A5F55}
+.c-foot-tz{font-family:"Fraunces";font-style:italic;color:#B7C2BE}
+.c-foot-mail{color:#EAF2EC;text-decoration:none;font-weight:500;padding:.15rem 0;border-bottom:1px solid transparent;transition:border-color .2s var(--ease),color .2s var(--ease)}
+.c-foot-mail:hover{color:#fff;border-bottom-color:var(--sage-glow)}
+.c-foot-mail:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px;border-radius:2px}
+
+/* Bottom bar */
+.c-foot-bottom{padding:1.4rem 0 1.6rem;display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-between;font-size:.78rem;color:#6E7F76;border-top:1px solid rgba(255,255,255,.06)}
+.c-foot-bottom .c-foot-signature{font-family:"Fraunces";font-style:italic;background:linear-gradient(100deg,var(--sage-glow),var(--blue-glow));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:500}
+.c-foot-bottom a{color:#6E7F76;text-decoration:none;padding:.15rem 0;transition:color .2s var(--ease)}
+.c-foot-bottom a:hover{color:var(--sage-glow)}
+.c-foot-bottom a:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px;border-radius:2px}
+.c-foot-bottom .c-foot-links{display:flex;gap:1.4rem;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="c-topbar" role="complementary" aria-label="Programs and quick actions">
+  <div class="c-topbar-inner">
+    <ul class="c-topbar-links">
+      <li><a href="convene-nonprofits.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Convene for Impact</a></li>
+      <li><a href="convene-program-technical-cofounder.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Technical Co-Founder Program</a></li>
+    </ul>
+    <a class="c-topbar-cta" target="_blank" rel="noopener" href="https://calendly.com/jyamada-convene-tech/30min">
+      Book a call
+      <svg class="arr" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg>
+      <span class="sr-only">(opens Calendly scheduling in a new tab)</span>
+    </a>
+  </div>
+</div>
+<nav class="c-nav" id="cNav" aria-label="Primary">
+  <div class="c-nav-inner">
+    <a class="c-logo" href="convene-homepage.html" aria-label="Convene home">
+      <img src="https://www.convene-tech.com/wp-content/uploads/2020/05/logo.png" alt="Convene" width="140" height="34">
+    </a>
+
+    <button class="c-nav-toggle" id="cNavToggle" aria-expanded="false" aria-controls="cNavMenu">
+      <span class="sr-only">Menu</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F1F1F" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
+    <ul class="c-nav-menu" id="cNavMenu">
+      <li><a href="convene-about.html">About</a></li>
+
+      <li>
+        <button type="button" class="c-nav-btn" aria-expanded="false" aria-controls="ddServices">
+          Services
+          <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg>
+        </button>
+        <ul class="c-dropdown" id="ddServices" hidden>
+          <li><a href="convene-servicenow.html">ServiceNow<span class="d-desc">Enterprise workflows, governed end to end</span></a></li>
+          <li><a href="convene-salesforce.html">Salesforce<span class="d-desc">Roadmap and advisory for growth</span></a></li>
+          <li><a href="convene-ai.html">AI &amp; Intelligent Automation<span class="d-desc">Practical AI grounded in your data</span></a></li>
+          <li><a href="convene-custom-development.html">Custom Application Development<span class="d-desc">Build, modernize, and scale software</span></a></li>
+          <li><a href="convene-vciso.html">vCISO Services<span class="d-desc">Executive cybersecurity leadership</span></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <button type="button" class="c-nav-btn" aria-expanded="false" aria-controls="ddHow">
+          How we work
+          <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg>
+        </button>
+        <ul class="c-dropdown" id="ddHow" hidden>
+          <li><a href="convene-delivery-model.html">Delivery Model<span class="d-desc">Global talent, right-placed</span></a></li>
+          <li><a href="convene-agile-distributed-teams.html">Distributed Teams<span class="d-desc">A day in the life of a Convene sprint</span></a></li>
+          <li><a href="convene-nonprofits.html">Convene for Impact<span class="d-desc">Our work with mission-driven organizations</span></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <button type="button" class="c-nav-btn" aria-expanded="false" aria-controls="ddCases">
+          Case Studies
+          <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg>
+        </button>
+        <ul class="c-dropdown" id="ddCases" hidden>
+          <li><a href="convene-casestudy-intice.html">intice<span class="d-desc">Technical co-founder &middot; Custom Development</span></a></li>
+          <li><a href="convene-casestudy-playcity.html">PlayCity<span class="d-desc">Two business lines, one ServiceNow platform</span></a></li>
+          <li><a href="convene-casestudy-yu-workforce.html">YU Workforce Development<span class="d-desc">Three Salesforce programs unified</span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+<main>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap');
+.ag1{
+--char:#1F1F1F;--slate:#3F3F3F;--muted:#565654;--sage:#00AD4A;--sage-deep:#00773A;--sage-glow:#8AD3AC;--blue:#5B7A99;--blue-deep:#3F5E7C;--blue-glow:#8FB6D6;
+--paper:#F4F4F2;--card:#FFFFFF;--line:#E6E6E1;--maxw:1160px;--ease:cubic-bezier(.2,.7,.2,1);
+font-family:"Inter",system-ui,sans-serif;color:var(--char);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden
+}
+.ag1 *{box-sizing:border-box}
+.ag1 h1,.ag1 h2,.ag1 h3,.ag1 h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;line-height:1.05;letter-spacing:-.03em;margin:0}
+.ag1 .it{font-family:"Fraunces",serif;font-style:italic;font-weight:600;color:var(--sage-deep)}
+.ag1 p{margin:0}
+.ag1 a{color:var(--sage-deep);text-decoration:none}
+.ag1 svg{display:block}
+.ag1 .wrap{width:min(100% - 2.5rem,var(--maxw));margin-inline:auto;position:relative;z-index:4}
+
+.ag1 .rhythm-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.ag1 .rhythm-bg svg{width:100%;height:100%;display:block}
+.ag1 .eyebrow{display:inline-flex;align-items:center;gap:.65rem;font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-deep)}
+.ag1 .eyebrow::before{content:"";width:26px;height:2px;background:currentColor}
+.ag1 .on-dark .eyebrow{color:var(--sage-glow)}
+
+.ag1 .btn{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:1rem;padding:.95rem 1.6rem;border-radius:4px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease)}
+.ag1 .btn .arr{transition:transform .25s var(--ease)}.ag1 .btn:hover .arr{transform:translateX(5px)}
+.ag1 .btn-sage{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(0,122,54,.96),rgba(0,84,42,.97));backdrop-filter:blur(12px) saturate(130%);-webkit-backdrop-filter:blur(12px) saturate(130%);border:1px solid rgba(154,224,187,.5);color:#fff;box-shadow:0 10px 26px rgba(0,119,58,.35),inset 0 1px 0 rgba(255,255,255,.2),inset 0 -12px 16px -10px rgba(0,0,0,.3)}
+.ag1 .btn-sage::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%);pointer-events:none}
+.ag1 .btn-sage::after{content:"";position:absolute;top:0;left:-65%;width:35%;height:100%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-20deg);transition:left .7s var(--ease);pointer-events:none}
+.ag1 .btn-sage:hover{background:linear-gradient(135deg,rgba(0,132,58,.97),rgba(0,90,45,.98));box-shadow:0 14px 34px rgba(0,173,74,.45),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -12px 16px -10px rgba(0,0,0,.25);transform:translateY(-2px)}
+.ag1 .btn-sage:hover::after{left:130%}
+.ag1 .btn-ghost{background:rgba(255,255,255,.6);color:var(--char);border-color:rgba(35,41,43,.18)}.ag1 .btn-ghost:hover{border-color:var(--char)}
+
+.ag1 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.ag1 .reveal.in{opacity:1;transform:none}
+.ag1 .reveal[data-d="1"]{transition-delay:.08s}.ag1 .reveal[data-d="2"]{transition-delay:.16s}
+
+/* HERO — asymmetric two-column, small live sprint-status widget, distinct composition */
+.ag1 .hero{position:relative;padding:6.5rem 0 4rem;background:#F4F4F2;border-bottom:1px solid var(--line);overflow:hidden;box-shadow:0 40px 60px -35px rgba(20,40,30,.2);z-index:5}
+.ag1 .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,119,58,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,119,58,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(70% 100% at 80% 20%,#000,transparent 75%);z-index:0}
+.ag1 .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(2rem,5vw,3.5rem);align-items:center;position:relative;z-index:2}
+@media(max-width:900px){.ag1 .hero-grid{grid-template-columns:1fr}}
+.ag1 .hero h1{font-size:clamp(2.6rem,5.6vw,4.2rem)}
+.ag1 .hero .lead{margin-top:1.4rem;font-size:clamp(1.05rem,1.4vw,1.22rem);color:var(--slate);max-width:48ch;line-height:1.6}
+.ag1 .hero-cta{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:2rem}
+.ag1 .hstats{display:flex;flex-wrap:wrap;gap:clamp(1.4rem,4vw,2.6rem);margin-top:2.3rem;padding-top:1.6rem;border-top:1px solid rgba(35,41,43,.14)}
+.ag1 .hstats .v{font-family:"Inter";font-size:1.5rem;font-weight:800;letter-spacing:-.01em;color:var(--char);font-feature-settings:"tnum"}
+.ag1 .hstats .l{font-size:.8rem;color:var(--muted)}
+.ag1 .hwidget{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.7rem;box-shadow:0 26px 60px rgba(20,40,30,.08)}
+.ag1 .hwidget .hw-h{font-family:"Inter";font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:1.1rem}
+.ag1 .hw-row{display:flex;align-items:center;gap:.7rem;padding:.6rem 0;border-bottom:1px dashed var(--line);font-size:.9rem}
+.ag1 .hw-row:last-child{border-bottom:0}
+.ag1 .hw-dot{width:8px;height:8px;border-radius:50%;background:var(--sage);flex-shrink:0}
+.ag1 .hw-row span:last-child{margin-left:auto;font-family:"Inter";font-weight:700;color:var(--muted);font-size:.78rem}
+
+.ag1 .geo{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.5}
+.ag1 .geo svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:118%;height:auto;min-height:104%}
+@media(max-width:900px){.ag1 .geo{display:none}}
+.ag1 .geo .grat line{stroke:rgba(31,31,31,.05);stroke-width:1}
+.ag1 .geo .land circle{fill:rgba(63,94,124,.28)}
+.ag1 .geo .arc{fill:none;stroke:rgba(0,119,58,.5);stroke-width:1.4;stroke-linecap:round}
+.ag1 .geo .sig{fill:var(--sage);offset-rotate:0deg;animation:agTravel 4.5s linear infinite}
+@keyframes agTravel{to{offset-distance:100%}}
+.ag1 .geo-veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(244,244,242,.72) 12%,rgba(244,244,242,.34) 45%,rgba(244,244,242,0) 72%)}
+
+.ag1 .orb-field{position:absolute;inset:-10%;z-index:0;filter:blur(52px);pointer-events:none}
+.ag1 .orb-field i{position:absolute;border-radius:50%;mix-blend-mode:multiply;opacity:.55}
+.ag1 .orb-field .o1{width:34vw;height:34vw;left:-4%;top:-14%;background:radial-gradient(circle,#63CE95,transparent 68%);animation:ag1orb1 22s ease-in-out infinite alternate}
+.ag1 .orb-field .o2{width:30vw;height:30vw;right:0%;bottom:-18%;background:radial-gradient(circle,#7CAEDA,transparent 68%);animation:ag1orb2 26s ease-in-out infinite alternate}
+@keyframes ag1orb1{to{transform:translate(8%,6%) scale(1.15)}}
+@keyframes ag1orb2{to{transform:translate(-7%,-8%) scale(1.12)}}
+.ag1 .grad-border{position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--sage),var(--blue-glow),var(--sage),transparent);background-size:220% 100%;animation:ag1borderflow 5s linear infinite;z-index:3}
+@keyframes ag1borderflow{to{background-position:220% 0}}
+
+.ag1 .sec{padding:clamp(4rem,9vw,7rem) 0;position:relative;overflow:hidden}
+
+/* Section textures — subtle, differentiated. Each section gets a distinct feel so the page reads as a rhythm rather than a flat scroll. */
+/* Rhythm — background composition (grid + squiggles + traditional alarm clock) lives in .rhythm-bg SVG */
+.ag1 #rhythm{position:relative;overflow:hidden}
+.ag1 #rhythm .wrap{position:relative;z-index:2}
+
+/* Principles — diagonal hairline pattern, soft */
+.ag1 #principles::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,rgba(0,119,58,.045) 0 1px,transparent 1px 24px);opacity:.7;pointer-events:none;z-index:0}
+.ag1 #principles::after{content:"";position:absolute;inset:0;background:radial-gradient(55% 60% at 10% 40%,rgba(78,203,130,.06),transparent 60%),radial-gradient(50% 55% at 95% 90%,rgba(63,94,124,.06),transparent 60%);pointer-events:none;z-index:0}
+.ag1 #principles .wrap{position:relative;z-index:2}
+
+/* Practices — vertical hatching, very subtle */
+.ag1 #practices::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(63,94,124,.05) 0 1px,transparent 1px 32px);opacity:.7;pointer-events:none;z-index:0}
+.ag1 #practices::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 55% at 85% 15%,rgba(0,173,74,.06),transparent 60%);pointer-events:none;z-index:0}
+.ag1 #practices .wrap{position:relative;z-index:2}
+
+/* Statement (dark) — noise-esque dot field for depth */
+.ag1 .statement{position:relative}
+.ag1 .statement::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(154,224,187,.10) 1px,transparent 1px);background-size:34px 34px;opacity:.6;pointer-events:none;z-index:0}
+.ag1 .statement .wrap{position:relative;z-index:2}
+
+/* CTA — soft blob wash so the ask reads as a rest, not a wall */
+.ag1 .cta{position:relative;overflow:hidden}
+.ag1 .cta::before{content:"";position:absolute;inset:0;background:radial-gradient(40% 70% at 20% 30%,rgba(0,173,74,.10),transparent 60%),radial-gradient(45% 65% at 85% 80%,rgba(63,94,124,.10),transparent 60%);pointer-events:none;z-index:0}
+.ag1 .cta::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,119,58,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,119,58,.05) 1px,transparent 1px);background-size:38px 38px;mask-image:radial-gradient(65% 100% at 50% 100%,#000,transparent 70%);opacity:.7;pointer-events:none;z-index:0}
+.ag1 .cta .wrap{position:relative;z-index:2}
+.ag1 .head{max-width:62ch;margin-bottom:2.8rem}
+.ag1 #principles .head,.ag1 #practices .head{background:linear-gradient(135deg,#ffffff,#DCEEE3);border-radius:0;box-shadow:0 8px 22px rgba(20,40,30,.1);padding:1.3rem 1.6rem;border-style:solid;border-width:0 0 0 4px;border-image:linear-gradient(180deg,var(--sage-glow),var(--sage-deep)) 1}
+.ag1 #principles{position:relative}
+.ag1 #principles::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,119,58,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,119,58,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(80% 90% at 50% 60%,#000,transparent 80%);z-index:0}
+.ag1 .head h2{font-size:clamp(2rem,4.4vw,3.1rem)}
+.ag1 .head p{color:var(--muted);font-size:1.1rem;margin-top:1rem}
+
+/* time-zone overlap — replaces the generic sprint-calendar diagram */
+.ag1 .tz-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(1.8rem,4vw,2.8rem);box-shadow:0 24px 60px rgba(20,40,30,.07)}
+.ag1 .tz-head{margin-bottom:2rem}
+.ag1 .tz-title{font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(1.3rem,2.4vw,1.7rem);color:var(--char)}
+.ag1 .tz-sub{color:var(--muted);margin-top:.5rem;font-size:.98rem}
+.ag1 .tz-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.8rem 0}
+@media(max-width:760px){.ag1 .tz-row{grid-template-columns:1fr 1fr}}
+.ag1 .tz-cell{text-align:center;padding:0 .5rem}
+.ag1 .tz-loc{font-family:"Inter";font-size:.82rem;font-weight:600;color:var(--muted)}
+.ag1 .tz-time{font-family:"Inter";font-weight:800;font-size:2rem;color:var(--char);margin-top:.5rem;font-feature-settings:"tnum"}
+.ag1 .tz-time span{font-size:.9rem;font-weight:700;color:var(--muted);margin-left:.15rem}
+.ag1 .tz-tag{display:inline-block;margin-top:.7rem;font-family:"Inter";font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.ag1 .tz-tag.live{color:var(--sage-deep)}
+.ag1 .tz-tag.async{color:var(--blue-deep)}
+.ag1 .tz-note{color:var(--muted);font-size:.92rem;margin-top:1.4rem;max-width:60ch}
+
+/* principles — numbered, typographic, no card/pill chrome */
+.ag1 .prin-list{border-top:1px solid var(--line);max-width:820px}
+.ag1 .prin-row{display:grid;grid-template-columns:auto 1fr;gap:1.6rem;padding:1.8rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.ag1 .prin-num{font-family:"Inter";font-weight:800;font-size:1.4rem;color:var(--sage-deep);opacity:.8}
+.ag1 .prin-row h3{font-size:1.25rem}
+.ag1 .prin-row p{color:var(--muted);margin-top:.5rem;font-size:1rem;max-width:64ch}
+
+/* STATEMENT */
+.ag1 .statement{position:relative;background:var(--char);color:#fff;overflow:hidden}
+.ag1 .statement::before{content:"";position:absolute;inset:0;background:radial-gradient(42% 70% at 82% 8%,rgba(78,203,130,.26),transparent 60%),radial-gradient(42% 70% at 8% 100%,rgba(91,122,153,.24),transparent 60%)}
+.ag1 .statement .wrap{padding:clamp(3.2rem,7vw,4.6rem) 0}
+.ag1 .statement .eyebrow{margin-bottom:1.3rem;color:var(--sage-glow)}
+.ag1 .statement h2{font-size:clamp(1.8rem,4.2vw,2.9rem);max-width:24ch}
+.ag1 .statement p{margin-top:1.1rem;color:#C3CECA;font-size:1.05rem;max-width:56ch}
+.ag1 .statement h2 .gtext{font-family:"Fraunces",serif;font-style:italic;font-weight:600;background:linear-gradient(100deg,var(--sage-glow),#B6E8CC,var(--blue-glow),var(--sage-glow));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ag1sweep 6s linear infinite}
+@keyframes ag1sweep{to{background-position:220% center}}
+
+/* tooling / practices — plain two-column list, no icon badges */
+.ag1 .practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:900px}
+@media(max-width:760px){.ag1 .practice-grid{grid-template-columns:1fr}}
+.ag1 .practice-grid h4{font-size:1.05rem;margin-bottom:.5rem}
+.ag1 .practice-grid p{color:var(--muted);font-size:.98rem;line-height:1.6}
+
+/* CTA */
+.ag1 .cta{position:relative;overflow:hidden;text-align:left;background:#EAF0EC;box-shadow:0 -40px 60px -35px rgba(20,40,30,.18);z-index:5}
+.ag1 .cta .wrap{padding:clamp(4rem,9vw,6.5rem) 0}
+.ag1 .cta h2{font-size:clamp(2rem,4.8vw,3.3rem)}
+.ag1 .cta p{color:var(--muted);font-size:1.1rem;margin-top:1.1rem;max-width:54ch}
+.ag1 .cta .btn{margin-top:1.8rem}
+
+@media(prefers-reduced-motion:reduce){
+.ag1 *{animation:none!important;transition:none!important}
+.ag1 .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+
+<div class="ag1">
+<main>
+
+  <section class="hero" id="top">
+    <div class="orb-field" aria-hidden="true"><i class="o1"></i><i class="o2"></i></div>
+    <div class="geo" aria-hidden="true"><svg viewBox="0 0 540 254">
+  <defs><filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3"/></filter></defs>
+  <g class="grat"><line x1="24.0" y1="31.5" x2="24.0" y2="229.8"/><line x1="64.5" y1="31.5" x2="64.5" y2="229.8"/><line x1="105.0" y1="31.5" x2="105.0" y2="229.8"/><line x1="145.5" y1="31.5" x2="145.5" y2="229.8"/><line x1="186.0" y1="31.5" x2="186.0" y2="229.8"/><line x1="226.5" y1="31.5" x2="226.5" y2="229.8"/><line x1="267.0" y1="31.5" x2="267.0" y2="229.8"/><line x1="307.5" y1="31.5" x2="307.5" y2="229.8"/><line x1="348.0" y1="31.5" x2="348.0" y2="229.8"/><line x1="388.5" y1="31.5" x2="388.5" y2="229.8"/><line x1="429.0" y1="31.5" x2="429.0" y2="229.8"/><line x1="469.5" y1="31.5" x2="469.5" y2="229.8"/><line x1="510.0" y1="31.5" x2="510.0" y2="229.8"/><line x1="18.0" y1="37.5" x2="516.0" y2="37.5"/><line x1="18.0" y1="78.0" x2="516.0" y2="78.0"/><line x1="18.0" y1="118.5" x2="516.0" y2="118.5"/><line x1="18.0" y1="159.0" x2="516.0" y2="159.0"/><line x1="18.0" y1="199.5" x2="516.0" y2="199.5"/></g>
+  <g class="land"><circle cx="24.0" cy="55.0" r="1.35"/><circle cx="24.0" cy="167.4" r="1.35"/><circle cx="27.5" cy="55.0" r="1.35"/><circle cx="45.1" cy="62.1" r="1.35"/><circle cx="48.6" cy="51.5" r="1.35"/><circle cx="48.6" cy="55.0" r="1.35"/><circle cx="48.6" cy="62.1" r="1.35"/><circle cx="48.6" cy="65.6" r="1.35"/><circle cx="52.1" cy="51.5" r="1.35"/><circle cx="52.1" cy="55.0" r="1.35"/><circle cx="52.1" cy="58.6" r="1.35"/><circle cx="52.1" cy="62.1" r="1.35"/><circle cx="52.1" cy="65.6" r="1.35"/><circle cx="52.1" cy="69.1" r="1.35"/><circle cx="55.6" cy="51.5" r="1.35"/><circle cx="55.6" cy="55.0" r="1.35"/><circle cx="55.6" cy="58.6" r="1.35"/><circle cx="55.6" cy="62.1" r="1.35"/><circle cx="55.6" cy="65.6" r="1.35"/><circle cx="59.1" cy="51.5" r="1.35"/><circle cx="59.1" cy="55.0" r="1.35"/><circle cx="59.1" cy="58.6" r="1.35"/><circle cx="59.1" cy="62.1" r="1.35"/><circle cx="59.1" cy="65.6" r="1.35"/><circle cx="62.6" cy="51.5" r="1.35"/><circle cx="62.6" cy="55.0" r="1.35"/><circle cx="62.6" cy="58.6" r="1.35"/><circle cx="62.6" cy="62.1" r="1.35"/><circle cx="66.1" cy="51.5" r="1.35"/><circle cx="66.1" cy="55.0" r="1.35"/><circle cx="66.1" cy="58.6" r="1.35"/><circle cx="66.1" cy="62.1" r="1.35"/><circle cx="69.6" cy="51.5" r="1.35"/><circle cx="69.6" cy="55.0" r="1.35"/><circle cx="69.6" cy="58.6" r="1.35"/><circle cx="69.6" cy="62.1" r="1.35"/><circle cx="73.1" cy="51.5" r="1.35"/><circle cx="73.1" cy="55.0" r="1.35"/><circle cx="73.1" cy="58.6" r="1.35"/><circle cx="73.1" cy="62.1" r="1.35"/><circle cx="76.6" cy="51.5" r="1.35"/><circle cx="76.6" cy="55.0" r="1.35"/><circle cx="76.6" cy="58.6" r="1.35"/><circle cx="76.6" cy="62.1" r="1.35"/><circle cx="80.2" cy="55.0" r="1.35"/><circle cx="80.2" cy="58.6" r="1.35"/><circle cx="80.2" cy="62.1" r="1.35"/><circle cx="80.2" cy="65.6" r="1.35"/><circle cx="83.7" cy="55.0" r="1.35"/><circle cx="83.7" cy="58.6" r="1.35"/><circle cx="83.7" cy="62.1" r="1.35"/><circle cx="83.7" cy="65.6" r="1.35"/><circle cx="87.2" cy="55.0" r="1.35"/><circle cx="87.2" cy="58.6" r="1.35"/><circle cx="87.2" cy="62.1" r="1.35"/><circle cx="87.2" cy="65.6" r="1.35"/><circle cx="87.2" cy="72.6" r="1.35"/><circle cx="90.7" cy="51.5" r="1.35"/><circle cx="90.7" cy="55.0" r="1.35"/><circle cx="90.7" cy="58.6" r="1.35"/><circle cx="90.7" cy="62.1" r="1.35"/><circle cx="90.7" cy="65.6" r="1.35"/><circle cx="90.7" cy="69.1" r="1.35"/><circle cx="94.2" cy="51.5" r="1.35"/><circle cx="94.2" cy="55.0" r="1.35"/><circle cx="94.2" cy="58.6" r="1.35"/><circle cx="94.2" cy="62.1" r="1.35"/><circle cx="94.2" cy="65.6" r="1.35"/><circle cx="94.2" cy="69.1" r="1.35"/><circle cx="94.2" cy="72.6" r="1.35"/><circle cx="97.7" cy="48.0" r="1.35"/><circle cx="97.7" cy="51.5" r="1.35"/><circle cx="97.7" cy="55.0" r="1.35"/><circle cx="97.7" cy="58.6" r="1.35"/><circle cx="97.7" cy="62.1" r="1.35"/><circle cx="97.7" cy="65.6" r="1.35"/><circle cx="97.7" cy="69.1" r="1.35"/><circle cx="97.7" cy="72.6" r="1.35"/><circle cx="97.7" cy="76.1" r="1.35"/><circle cx="97.7" cy="79.6" r="1.35"/><circle cx="101.2" cy="48.0" r="1.35"/><circle cx="101.2" cy="51.5" r="1.35"/><circle cx="101.2" cy="55.0" r="1.35"/><circle cx="101.2" cy="58.6" r="1.35"/><circle cx="101.2" cy="62.1" r="1.35"/><circle cx="101.2" cy="65.6" r="1.35"/><circle cx="101.2" cy="69.1" r="1.35"/><circle cx="101.2" cy="72.6" r="1.35"/><circle cx="101.2" cy="76.1" r="1.35"/><circle cx="101.2" cy="83.1" r="1.35"/><circle cx="101.2" cy="86.6" r="1.35"/><circle cx="101.2" cy="90.1" r="1.35"/><circle cx="101.2" cy="93.7" r="1.35"/><circle cx="104.7" cy="48.0" r="1.35"/><circle cx="104.7" cy="55.0" r="1.35"/><circle cx="104.7" cy="58.6" r="1.35"/><circle cx="104.7" cy="62.1" r="1.35"/><circle cx="104.7" cy="65.6" r="1.35"/><circle cx="104.7" cy="69.1" r="1.35"/><circle cx="104.7" cy="72.6" r="1.35"/><circle cx="104.7" cy="76.1" r="1.35"/><circle cx="104.7" cy="79.6" r="1.35"/><circle cx="104.7" cy="83.1" r="1.35"/><circle cx="104.7" cy="86.6" r="1.35"/><circle cx="104.7" cy="90.1" r="1.35"/><circle cx="104.7" cy="93.7" r="1.35"/><circle cx="104.7" cy="97.2" r="1.35"/><circle cx="108.2" cy="41.0" r="1.35"/><circle cx="108.2" cy="48.0" r="1.35"/><circle cx="108.2" cy="55.0" r="1.35"/><circle cx="108.2" cy="58.6" r="1.35"/><circle cx="108.2" cy="62.1" r="1.35"/><circle cx="108.2" cy="65.6" r="1.35"/><circle cx="108.2" cy="69.1" r="1.35"/><circle cx="108.2" cy="72.6" r="1.35"/><circle cx="108.2" cy="76.1" r="1.35"/><circle cx="108.2" cy="79.6" r="1.35"/><circle cx="108.2" cy="83.1" r="1.35"/><circle cx="108.2" cy="86.6" r="1.35"/><circle cx="108.2" cy="90.1" r="1.35"/><circle cx="108.2" cy="93.7" r="1.35"/><circle cx="108.2" cy="97.2" r="1.35"/><circle cx="111.7" cy="48.0" r="1.35"/><circle cx="111.7" cy="51.5" r="1.35"/><circle cx="111.7" cy="55.0" r="1.35"/><circle cx="111.7" cy="58.6" r="1.35"/><circle cx="111.7" cy="62.1" r="1.35"/><circle cx="111.7" cy="65.6" r="1.35"/><circle cx="111.7" cy="69.1" r="1.35"/><circle cx="111.7" cy="72.6" r="1.35"/><circle cx="111.7" cy="76.1" r="1.35"/><circle cx="111.7" cy="79.6" r="1.35"/><circle cx="111.7" cy="83.1" r="1.35"/><circle cx="111.7" cy="86.6" r="1.35"/><circle cx="111.7" cy="90.1" r="1.35"/><circle cx="111.7" cy="93.7" r="1.35"/><circle cx="111.7" cy="97.2" r="1.35"/><circle cx="111.7" cy="100.7" r="1.35"/><circle cx="111.7" cy="104.2" r="1.35"/><circle cx="115.3" cy="44.5" r="1.35"/><circle cx="115.3" cy="48.0" r="1.35"/><circle cx="115.3" cy="51.5" r="1.35"/><circle cx="115.3" cy="55.0" r="1.35"/><circle cx="115.3" cy="58.6" r="1.35"/><circle cx="115.3" cy="62.1" r="1.35"/><circle cx="115.3" cy="65.6" r="1.35"/><circle cx="115.3" cy="69.1" r="1.35"/><circle cx="115.3" cy="72.6" r="1.35"/><circle cx="115.3" cy="76.1" r="1.35"/><circle cx="115.3" cy="79.6" r="1.35"/><circle cx="115.3" cy="83.1" r="1.35"/><circle cx="115.3" cy="86.6" r="1.35"/><circle cx="115.3" cy="90.1" r="1.35"/><circle cx="115.3" cy="93.7" r="1.35"/><circle cx="115.3" cy="97.2" r="1.35"/><circle cx="115.3" cy="100.7" r="1.35"/><circle cx="115.3" cy="104.2" r="1.35"/><circle cx="118.8" cy="48.0" r="1.35"/><circle cx="118.8" cy="51.5" r="1.35"/><circle cx="118.8" cy="55.0" r="1.35"/><circle cx="118.8" cy="58.6" r="1.35"/><circle cx="118.8" cy="62.1" r="1.35"/><circle cx="118.8" cy="65.6" r="1.35"/><circle cx="118.8" cy="69.1" r="1.35"/><circle cx="118.8" cy="72.6" r="1.35"/><circle cx="118.8" cy="76.1" r="1.35"/><circle cx="118.8" cy="79.6" r="1.35"/><circle cx="118.8" cy="83.1" r="1.35"/><circle cx="118.8" cy="86.6" r="1.35"/><circle cx="118.8" cy="90.1" r="1.35"/><circle cx="118.8" cy="93.7" r="1.35"/><circle cx="118.8" cy="97.2" r="1.35"/><circle cx="118.8" cy="100.7" r="1.35"/><circle cx="118.8" cy="104.2" r="1.35"/><circle cx="118.8" cy="107.7" r="1.35"/><circle cx="122.3" cy="48.0" r="1.35"/><circle cx="122.3" cy="51.5" r="1.35"/><circle cx="122.3" cy="55.0" r="1.35"/><circle cx="122.3" cy="58.6" r="1.35"/><circle cx="122.3" cy="62.1" r="1.35"/><circle cx="122.3" cy="65.6" r="1.35"/><circle cx="122.3" cy="69.1" r="1.35"/><circle cx="122.3" cy="72.6" r="1.35"/><circle cx="122.3" cy="76.1" r="1.35"/><circle cx="122.3" cy="79.6" r="1.35"/><circle cx="122.3" cy="83.1" r="1.35"/><circle cx="122.3" cy="86.6" r="1.35"/><circle cx="122.3" cy="90.1" r="1.35"/><circle cx="122.3" cy="93.7" r="1.35"/><circle cx="122.3" cy="97.2" r="1.35"/><circle cx="122.3" cy="100.7" r="1.35"/><circle cx="122.3" cy="104.2" r="1.35"/><circle cx="122.3" cy="107.7" r="1.35"/><circle cx="122.3" cy="111.2" r="1.35"/><circle cx="125.8" cy="51.5" r="1.35"/><circle cx="125.8" cy="55.0" r="1.35"/><circle cx="125.8" cy="58.6" r="1.35"/><circle cx="125.8" cy="62.1" r="1.35"/><circle cx="125.8" cy="65.6" r="1.35"/><circle cx="125.8" cy="69.1" r="1.35"/><circle cx="125.8" cy="72.6" r="1.35"/><circle cx="125.8" cy="76.1" r="1.35"/><circle cx="125.8" cy="79.6" r="1.35"/><circle cx="125.8" cy="83.1" r="1.35"/><circle cx="125.8" cy="86.6" r="1.35"/><circle cx="125.8" cy="90.1" r="1.35"/><circle cx="125.8" cy="93.7" r="1.35"/><circle cx="125.8" cy="97.2" r="1.35"/><circle cx="125.8" cy="100.7" r="1.35"/><circle cx="125.8" cy="104.2" r="1.35"/><circle cx="125.8" cy="107.7" r="1.35"/><circle cx="125.8" cy="111.2" r="1.35"/><circle cx="125.8" cy="114.7" r="1.35"/><circle cx="125.8" cy="118.2" r="1.35"/><circle cx="129.3" cy="51.5" r="1.35"/><circle cx="129.3" cy="55.0" r="1.35"/><circle cx="129.3" cy="58.6" r="1.35"/><circle cx="129.3" cy="62.1" r="1.35"/><circle cx="129.3" cy="65.6" r="1.35"/><circle cx="129.3" cy="69.1" r="1.35"/><circle cx="129.3" cy="72.6" r="1.35"/><circle cx="129.3" cy="76.1" r="1.35"/><circle cx="129.3" cy="79.6" r="1.35"/><circle cx="129.3" cy="83.1" r="1.35"/><circle cx="129.3" cy="86.6" r="1.35"/><circle cx="129.3" cy="90.1" r="1.35"/><circle cx="129.3" cy="93.7" r="1.35"/><circle cx="129.3" cy="97.2" r="1.35"/><circle cx="129.3" cy="100.7" r="1.35"/><circle cx="129.3" cy="104.2" r="1.35"/><circle cx="129.3" cy="107.7" r="1.35"/><circle cx="129.3" cy="111.2" r="1.35"/><circle cx="129.3" cy="114.7" r="1.35"/><circle cx="129.3" cy="118.2" r="1.35"/><circle cx="132.8" cy="48.0" r="1.35"/><circle cx="132.8" cy="55.0" r="1.35"/><circle cx="132.8" cy="58.6" r="1.35"/><circle cx="132.8" cy="62.1" r="1.35"/><circle cx="132.8" cy="65.6" r="1.35"/><circle cx="132.8" cy="69.1" r="1.35"/><circle cx="132.8" cy="72.6" r="1.35"/><circle cx="132.8" cy="76.1" r="1.35"/><circle cx="132.8" cy="79.6" r="1.35"/><circle cx="132.8" cy="83.1" r="1.35"/><circle cx="132.8" cy="86.6" r="1.35"/><circle cx="132.8" cy="90.1" r="1.35"/><circle cx="132.8" cy="93.7" r="1.35"/><circle cx="132.8" cy="97.2" r="1.35"/><circle cx="132.8" cy="100.7" r="1.35"/><circle cx="132.8" cy="104.2" r="1.35"/><circle cx="132.8" cy="107.7" r="1.35"/><circle cx="132.8" cy="111.2" r="1.35"/><circle cx="132.8" cy="114.7" r="1.35"/><circle cx="132.8" cy="118.2" r="1.35"/><circle cx="132.8" cy="121.7" r="1.35"/><circle cx="136.3" cy="48.0" r="1.35"/><circle cx="136.3" cy="51.5" r="1.35"/><circle cx="136.3" cy="55.0" r="1.35"/><circle cx="136.3" cy="58.6" r="1.35"/><circle cx="136.3" cy="62.1" r="1.35"/><circle cx="136.3" cy="65.6" r="1.35"/><circle cx="136.3" cy="69.1" r="1.35"/><circle cx="136.3" cy="72.6" r="1.35"/><circle cx="136.3" cy="76.1" r="1.35"/><circle cx="136.3" cy="79.6" r="1.35"/><circle cx="136.3" cy="83.1" r="1.35"/><circle cx="136.3" cy="86.6" r="1.35"/><circle cx="136.3" cy="90.1" r="1.35"/><circle cx="136.3" cy="93.7" r="1.35"/><circle cx="136.3" cy="97.2" r="1.35"/><circle cx="136.3" cy="100.7" r="1.35"/><circle cx="136.3" cy="104.2" r="1.35"/><circle cx="136.3" cy="121.7" r="1.35"/><circle cx="139.8" cy="37.5" r="1.35"/><circle cx="139.8" cy="44.5" r="1.35"/><circle cx="139.8" cy="48.0" r="1.35"/><circle cx="139.8" cy="51.5" r="1.35"/><circle cx="139.8" cy="55.0" r="1.35"/><circle cx="139.8" cy="58.6" r="1.35"/><circle cx="139.8" cy="62.1" r="1.35"/><circle cx="139.8" cy="69.1" r="1.35"/><circle cx="139.8" cy="72.6" r="1.35"/><circle cx="139.8" cy="76.1" r="1.35"/><circle cx="139.8" cy="79.6" r="1.35"/><circle cx="139.8" cy="83.1" r="1.35"/><circle cx="139.8" cy="86.6" r="1.35"/><circle cx="139.8" cy="90.1" r="1.35"/><circle cx="139.8" cy="93.7" r="1.35"/><circle cx="139.8" cy="97.2" r="1.35"/><circle cx="139.8" cy="100.7" r="1.35"/><circle cx="139.8" cy="104.2" r="1.35"/><circle cx="139.8" cy="121.7" r="1.35"/><circle cx="143.3" cy="37.5" r="1.35"/><circle cx="143.3" cy="44.5" r="1.35"/><circle cx="143.3" cy="51.5" r="1.35"/><circle cx="143.3" cy="55.0" r="1.35"/><circle cx="143.3" cy="58.6" r="1.35"/><circle cx="143.3" cy="69.1" r="1.35"/><circle cx="143.3" cy="72.6" r="1.35"/><circle cx="143.3" cy="76.1" r="1.35"/><circle cx="143.3" cy="79.6" r="1.35"/><circle cx="143.3" cy="83.1" r="1.35"/><circle cx="143.3" cy="86.6" r="1.35"/><circle cx="143.3" cy="90.1" r="1.35"/><circle cx="143.3" cy="93.7" r="1.35"/><circle cx="143.3" cy="97.2" r="1.35"/><circle cx="143.3" cy="100.7" r="1.35"/><circle cx="143.3" cy="104.2" r="1.35"/><circle cx="143.3" cy="121.7" r="1.35"/><circle cx="143.3" cy="125.2" r="1.35"/><circle cx="146.8" cy="37.5" r="1.35"/><circle cx="146.8" cy="44.5" r="1.35"/><circle cx="146.8" cy="48.0" r="1.35"/><circle cx="146.8" cy="55.0" r="1.35"/><circle cx="146.8" cy="58.6" r="1.35"/><circle cx="146.8" cy="69.1" r="1.35"/><circle cx="146.8" cy="72.6" r="1.35"/><circle cx="146.8" cy="76.1" r="1.35"/><circle cx="146.8" cy="79.6" r="1.35"/><circle cx="146.8" cy="83.1" r="1.35"/><circle cx="146.8" cy="86.6" r="1.35"/><circle cx="146.8" cy="90.1" r="1.35"/><circle cx="146.8" cy="93.7" r="1.35"/><circle cx="146.8" cy="97.2" r="1.35"/><circle cx="146.8" cy="100.7" r="1.35"/><circle cx="146.8" cy="104.2" r="1.35"/><circle cx="146.8" cy="118.2" r="1.35"/><circle cx="146.8" cy="121.7" r="1.35"/><circle cx="146.8" cy="125.2" r="1.35"/><circle cx="150.4" cy="37.5" r="1.35"/><circle cx="150.4" cy="41.0" r="1.35"/><circle cx="150.4" cy="44.5" r="1.35"/><circle cx="150.4" cy="48.0" r="1.35"/><circle cx="150.4" cy="55.0" r="1.35"/><circle cx="150.4" cy="72.6" r="1.35"/><circle cx="150.4" cy="76.1" r="1.35"/><circle cx="150.4" cy="79.6" r="1.35"/><circle cx="150.4" cy="83.1" r="1.35"/><circle cx="150.4" cy="86.6" r="1.35"/><circle cx="150.4" cy="90.1" r="1.35"/><circle cx="150.4" cy="93.7" r="1.35"/><circle cx="150.4" cy="97.2" r="1.35"/><circle cx="150.4" cy="100.7" r="1.35"/><circle cx="150.4" cy="104.2" r="1.35"/><circle cx="150.4" cy="125.2" r="1.35"/><circle cx="150.4" cy="128.8" r="1.35"/><circle cx="153.9" cy="37.5" r="1.35"/><circle cx="153.9" cy="41.0" r="1.35"/><circle cx="153.9" cy="44.5" r="1.35"/><circle cx="153.9" cy="48.0" r="1.35"/><circle cx="153.9" cy="51.5" r="1.35"/><circle cx="153.9" cy="55.0" r="1.35"/><circle cx="153.9" cy="58.6" r="1.35"/><circle cx="153.9" cy="72.6" r="1.35"/><circle cx="153.9" cy="76.1" r="1.35"/><circle cx="153.9" cy="79.6" r="1.35"/><circle cx="153.9" cy="83.1" r="1.35"/><circle cx="153.9" cy="86.6" r="1.35"/><circle cx="153.9" cy="90.1" r="1.35"/><circle cx="153.9" cy="93.7" r="1.35"/><circle cx="153.9" cy="97.2" r="1.35"/><circle cx="153.9" cy="100.7" r="1.35"/><circle cx="153.9" cy="104.2" r="1.35"/><circle cx="153.9" cy="125.2" r="1.35"/><circle cx="153.9" cy="128.8" r="1.35"/><circle cx="153.9" cy="132.3" r="1.35"/><circle cx="157.4" cy="37.5" r="1.35"/><circle cx="157.4" cy="41.0" r="1.35"/><circle cx="157.4" cy="44.5" r="1.35"/><circle cx="157.4" cy="48.0" r="1.35"/><circle cx="157.4" cy="76.1" r="1.35"/><circle cx="157.4" cy="79.6" r="1.35"/><circle cx="157.4" cy="83.1" r="1.35"/><circle cx="157.4" cy="86.6" r="1.35"/><circle cx="157.4" cy="90.1" r="1.35"/><circle cx="157.4" cy="93.7" r="1.35"/><circle cx="157.4" cy="97.2" r="1.35"/><circle cx="157.4" cy="100.7" r="1.35"/><circle cx="157.4" cy="107.7" r="1.35"/><circle cx="157.4" cy="111.2" r="1.35"/><circle cx="157.4" cy="114.7" r="1.35"/><circle cx="160.9" cy="37.5" r="1.35"/><circle cx="160.9" cy="48.0" r="1.35"/><circle cx="160.9" cy="72.6" r="1.35"/><circle cx="160.9" cy="76.1" r="1.35"/><circle cx="160.9" cy="79.6" r="1.35"/><circle cx="160.9" cy="83.1" r="1.35"/><circle cx="160.9" cy="86.6" r="1.35"/><circle cx="160.9" cy="90.1" r="1.35"/><circle cx="160.9" cy="93.7" r="1.35"/><circle cx="160.9" cy="97.2" r="1.35"/><circle cx="160.9" cy="142.8" r="1.35"/><circle cx="160.9" cy="146.3" r="1.35"/><circle cx="160.9" cy="149.8" r="1.35"/><circle cx="160.9" cy="153.3" r="1.35"/><circle cx="160.9" cy="156.8" r="1.35"/><circle cx="164.4" cy="37.5" r="1.35"/><circle cx="164.4" cy="48.0" r="1.35"/><circle cx="164.4" cy="51.5" r="1.35"/><circle cx="164.4" cy="58.6" r="1.35"/><circle cx="164.4" cy="62.1" r="1.35"/><circle cx="164.4" cy="65.6" r="1.35"/><circle cx="164.4" cy="69.1" r="1.35"/><circle cx="164.4" cy="72.6" r="1.35"/><circle cx="164.4" cy="76.1" r="1.35"/><circle cx="164.4" cy="79.6" r="1.35"/><circle cx="164.4" cy="83.1" r="1.35"/><circle cx="164.4" cy="86.6" r="1.35"/><circle cx="164.4" cy="90.1" r="1.35"/><circle cx="164.4" cy="93.7" r="1.35"/><circle cx="164.4" cy="97.2" r="1.35"/><circle cx="164.4" cy="118.2" r="1.35"/><circle cx="164.4" cy="135.8" r="1.35"/><circle cx="164.4" cy="139.3" r="1.35"/><circle cx="164.4" cy="142.8" r="1.35"/><circle cx="164.4" cy="146.3" r="1.35"/><circle cx="164.4" cy="149.8" r="1.35"/><circle cx="164.4" cy="153.3" r="1.35"/><circle cx="164.4" cy="156.8" r="1.35"/><circle cx="164.4" cy="160.3" r="1.35"/><circle cx="164.4" cy="163.9" r="1.35"/><circle cx="167.9" cy="37.5" r="1.35"/><circle cx="167.9" cy="51.5" r="1.35"/><circle cx="167.9" cy="58.6" r="1.35"/><circle cx="167.9" cy="62.1" r="1.35"/><circle cx="167.9" cy="65.6" r="1.35"/><circle cx="167.9" cy="69.1" r="1.35"/><circle cx="167.9" cy="72.6" r="1.35"/><circle cx="167.9" cy="76.1" r="1.35"/><circle cx="167.9" cy="79.6" r="1.35"/><circle cx="167.9" cy="83.1" r="1.35"/><circle cx="167.9" cy="86.6" r="1.35"/><circle cx="167.9" cy="132.3" r="1.35"/><circle cx="167.9" cy="135.8" r="1.35"/><circle cx="167.9" cy="139.3" r="1.35"/><circle cx="167.9" cy="142.8" r="1.35"/><circle cx="167.9" cy="146.3" r="1.35"/><circle cx="167.9" cy="149.8" r="1.35"/><circle cx="167.9" cy="153.3" r="1.35"/><circle cx="167.9" cy="156.8" r="1.35"/><circle cx="167.9" cy="160.3" r="1.35"/><circle cx="167.9" cy="163.9" r="1.35"/><circle cx="167.9" cy="167.4" r="1.35"/><circle cx="167.9" cy="199.0" r="1.35"/><circle cx="167.9" cy="206.0" r="1.35"/><circle cx="167.9" cy="209.5" r="1.35"/><circle cx="167.9" cy="213.0" r="1.35"/><circle cx="167.9" cy="216.5" r="1.35"/><circle cx="171.4" cy="37.5" r="1.35"/><circle cx="171.4" cy="51.5" r="1.35"/><circle cx="171.4" cy="55.0" r="1.35"/><circle cx="171.4" cy="58.6" r="1.35"/><circle cx="171.4" cy="65.6" r="1.35"/><circle cx="171.4" cy="69.1" r="1.35"/><circle cx="171.4" cy="72.6" r="1.35"/><circle cx="171.4" cy="76.1" r="1.35"/><circle cx="171.4" cy="79.6" r="1.35"/><circle cx="171.4" cy="83.1" r="1.35"/><circle cx="171.4" cy="86.6" r="1.35"/><circle cx="171.4" cy="132.3" r="1.35"/><circle cx="171.4" cy="135.8" r="1.35"/><circle cx="171.4" cy="139.3" r="1.35"/><circle cx="171.4" cy="142.8" r="1.35"/><circle cx="171.4" cy="146.3" r="1.35"/><circle cx="171.4" cy="149.8" r="1.35"/><circle cx="171.4" cy="153.3" r="1.35"/><circle cx="171.4" cy="156.8" r="1.35"/><circle cx="171.4" cy="160.3" r="1.35"/><circle cx="171.4" cy="163.9" r="1.35"/><circle cx="171.4" cy="167.4" r="1.35"/><circle cx="171.4" cy="181.4" r="1.35"/><circle cx="171.4" cy="184.9" r="1.35"/><circle cx="171.4" cy="188.4" r="1.35"/><circle cx="171.4" cy="191.9" r="1.35"/><circle cx="171.4" cy="195.5" r="1.35"/><circle cx="171.4" cy="199.0" r="1.35"/><circle cx="171.4" cy="202.5" r="1.35"/><circle cx="171.4" cy="206.0" r="1.35"/><circle cx="171.4" cy="209.5" r="1.35"/><circle cx="171.4" cy="213.0" r="1.35"/><circle cx="171.4" cy="216.5" r="1.35"/><circle cx="174.9" cy="51.5" r="1.35"/><circle cx="174.9" cy="55.0" r="1.35"/><circle cx="174.9" cy="58.6" r="1.35"/><circle cx="174.9" cy="69.1" r="1.35"/><circle cx="174.9" cy="72.6" r="1.35"/><circle cx="174.9" cy="76.1" r="1.35"/><circle cx="174.9" cy="83.1" r="1.35"/><circle cx="174.9" cy="132.3" r="1.35"/><circle cx="174.9" cy="135.8" r="1.35"/><circle cx="174.9" cy="139.3" r="1.35"/><circle cx="174.9" cy="142.8" r="1.35"/><circle cx="174.9" cy="146.3" r="1.35"/><circle cx="174.9" cy="149.8" r="1.35"/><circle cx="174.9" cy="153.3" r="1.35"/><circle cx="174.9" cy="156.8" r="1.35"/><circle cx="174.9" cy="160.3" r="1.35"/><circle cx="174.9" cy="163.9" r="1.35"/><circle cx="174.9" cy="167.4" r="1.35"/><circle cx="174.9" cy="170.9" r="1.35"/><circle cx="174.9" cy="174.4" r="1.35"/><circle cx="174.9" cy="177.9" r="1.35"/><circle cx="174.9" cy="181.4" r="1.35"/><circle cx="174.9" cy="184.9" r="1.35"/><circle cx="174.9" cy="188.4" r="1.35"/><circle cx="174.9" cy="191.9" r="1.35"/><circle cx="174.9" cy="195.5" r="1.35"/><circle cx="174.9" cy="199.0" r="1.35"/><circle cx="174.9" cy="202.5" r="1.35"/><circle cx="174.9" cy="206.0" r="1.35"/><circle cx="174.9" cy="209.5" r="1.35"/><circle cx="174.9" cy="213.0" r="1.35"/><circle cx="174.9" cy="220.0" r="1.35"/><circle cx="178.4" cy="37.5" r="1.35"/><circle cx="178.4" cy="41.0" r="1.35"/><circle cx="178.4" cy="55.0" r="1.35"/><circle cx="178.4" cy="58.6" r="1.35"/><circle cx="178.4" cy="65.6" r="1.35"/><circle cx="178.4" cy="69.1" r="1.35"/><circle cx="178.4" cy="72.6" r="1.35"/><circle cx="178.4" cy="76.1" r="1.35"/><circle cx="178.4" cy="79.6" r="1.35"/><circle cx="178.4" cy="83.1" r="1.35"/><circle cx="178.4" cy="86.6" r="1.35"/><circle cx="178.4" cy="132.3" r="1.35"/><circle cx="178.4" cy="135.8" r="1.35"/><circle cx="178.4" cy="139.3" r="1.35"/><circle cx="178.4" cy="142.8" r="1.35"/><circle cx="178.4" cy="146.3" r="1.35"/><circle cx="178.4" cy="149.8" r="1.35"/><circle cx="178.4" cy="153.3" r="1.35"/><circle cx="178.4" cy="156.8" r="1.35"/><circle cx="178.4" cy="160.3" r="1.35"/><circle cx="178.4" cy="163.9" r="1.35"/><circle cx="178.4" cy="167.4" r="1.35"/><circle cx="178.4" cy="170.9" r="1.35"/><circle cx="178.4" cy="174.4" r="1.35"/><circle cx="178.4" cy="177.9" r="1.35"/><circle cx="178.4" cy="181.4" r="1.35"/><circle cx="178.4" cy="184.9" r="1.35"/><circle cx="178.4" cy="188.4" r="1.35"/><circle cx="178.4" cy="191.9" r="1.35"/><circle cx="178.4" cy="195.5" r="1.35"/><circle cx="178.4" cy="199.0" r="1.35"/><circle cx="178.4" cy="202.5" r="1.35"/><circle cx="178.4" cy="206.0" r="1.35"/><circle cx="178.4" cy="220.0" r="1.35"/><circle cx="181.9" cy="37.5" r="1.35"/><circle cx="181.9" cy="41.0" r="1.35"/><circle cx="181.9" cy="69.1" r="1.35"/><circle cx="181.9" cy="72.6" r="1.35"/><circle cx="181.9" cy="76.1" r="1.35"/><circle cx="181.9" cy="83.1" r="1.35"/><circle cx="181.9" cy="132.3" r="1.35"/><circle cx="181.9" cy="135.8" r="1.35"/><circle cx="181.9" cy="139.3" r="1.35"/><circle cx="181.9" cy="142.8" r="1.35"/><circle cx="181.9" cy="146.3" r="1.35"/><circle cx="181.9" cy="149.8" r="1.35"/><circle cx="181.9" cy="153.3" r="1.35"/><circle cx="181.9" cy="156.8" r="1.35"/><circle cx="181.9" cy="160.3" r="1.35"/><circle cx="181.9" cy="163.9" r="1.35"/><circle cx="181.9" cy="167.4" r="1.35"/><circle cx="181.9" cy="170.9" r="1.35"/><circle cx="181.9" cy="174.4" r="1.35"/><circle cx="181.9" cy="177.9" r="1.35"/><circle cx="181.9" cy="181.4" r="1.35"/><circle cx="181.9" cy="184.9" r="1.35"/><circle cx="181.9" cy="188.4" r="1.35"/><circle cx="181.9" cy="191.9" r="1.35"/><circle cx="181.9" cy="195.5" r="1.35"/><circle cx="181.9" cy="199.0" r="1.35"/><circle cx="185.5" cy="37.5" r="1.35"/><circle cx="185.5" cy="41.0" r="1.35"/><circle cx="185.5" cy="72.6" r="1.35"/><circle cx="185.5" cy="76.1" r="1.35"/><circle cx="185.5" cy="83.1" r="1.35"/><circle cx="185.5" cy="135.8" r="1.35"/><circle cx="185.5" cy="139.3" r="1.35"/><circle cx="185.5" cy="142.8" r="1.35"/><circle cx="185.5" cy="146.3" r="1.35"/><circle cx="185.5" cy="149.8" r="1.35"/><circle cx="185.5" cy="153.3" r="1.35"/><circle cx="185.5" cy="156.8" r="1.35"/><circle cx="185.5" cy="160.3" r="1.35"/><circle cx="185.5" cy="163.9" r="1.35"/><circle cx="185.5" cy="167.4" r="1.35"/><circle cx="185.5" cy="170.9" r="1.35"/><circle cx="185.5" cy="174.4" r="1.35"/><circle cx="185.5" cy="177.9" r="1.35"/><circle cx="185.5" cy="181.4" r="1.35"/><circle cx="185.5" cy="184.9" r="1.35"/><circle cx="185.5" cy="188.4" r="1.35"/><circle cx="185.5" cy="191.9" r="1.35"/><circle cx="185.5" cy="195.5" r="1.35"/><circle cx="189.0" cy="37.5" r="1.35"/><circle cx="189.0" cy="41.0" r="1.35"/><circle cx="189.0" cy="72.6" r="1.35"/><circle cx="189.0" cy="76.1" r="1.35"/><circle cx="189.0" cy="79.6" r="1.35"/><circle cx="189.0" cy="139.3" r="1.35"/><circle cx="189.0" cy="142.8" r="1.35"/><circle cx="189.0" cy="146.3" r="1.35"/><circle cx="189.0" cy="149.8" r="1.35"/><circle cx="189.0" cy="153.3" r="1.35"/><circle cx="189.0" cy="156.8" r="1.35"/><circle cx="189.0" cy="160.3" r="1.35"/><circle cx="189.0" cy="163.9" r="1.35"/><circle cx="189.0" cy="167.4" r="1.35"/><circle cx="189.0" cy="170.9" r="1.35"/><circle cx="189.0" cy="174.4" r="1.35"/><circle cx="189.0" cy="177.9" r="1.35"/><circle cx="189.0" cy="181.4" r="1.35"/><circle cx="189.0" cy="184.9" r="1.35"/><circle cx="189.0" cy="188.4" r="1.35"/><circle cx="189.0" cy="191.9" r="1.35"/><circle cx="189.0" cy="195.5" r="1.35"/><circle cx="192.5" cy="37.5" r="1.35"/><circle cx="192.5" cy="41.0" r="1.35"/><circle cx="192.5" cy="44.5" r="1.35"/><circle cx="192.5" cy="79.6" r="1.35"/><circle cx="192.5" cy="139.3" r="1.35"/><circle cx="192.5" cy="142.8" r="1.35"/><circle cx="192.5" cy="146.3" r="1.35"/><circle cx="192.5" cy="149.8" r="1.35"/><circle cx="192.5" cy="153.3" r="1.35"/><circle cx="192.5" cy="156.8" r="1.35"/><circle cx="192.5" cy="160.3" r="1.35"/><circle cx="192.5" cy="163.9" r="1.35"/><circle cx="192.5" cy="167.4" r="1.35"/><circle cx="192.5" cy="170.9" r="1.35"/><circle cx="192.5" cy="174.4" r="1.35"/><circle cx="192.5" cy="177.9" r="1.35"/><circle cx="192.5" cy="181.4" r="1.35"/><circle cx="192.5" cy="184.9" r="1.35"/><circle cx="192.5" cy="188.4" r="1.35"/><circle cx="192.5" cy="191.9" r="1.35"/><circle cx="196.0" cy="37.5" r="1.35"/><circle cx="196.0" cy="41.0" r="1.35"/><circle cx="196.0" cy="44.5" r="1.35"/><circle cx="196.0" cy="48.0" r="1.35"/><circle cx="196.0" cy="51.5" r="1.35"/><circle cx="196.0" cy="55.0" r="1.35"/><circle cx="196.0" cy="139.3" r="1.35"/><circle cx="196.0" cy="142.8" r="1.35"/><circle cx="196.0" cy="146.3" r="1.35"/><circle cx="196.0" cy="149.8" r="1.35"/><circle cx="196.0" cy="153.3" r="1.35"/><circle cx="196.0" cy="156.8" r="1.35"/><circle cx="196.0" cy="160.3" r="1.35"/><circle cx="196.0" cy="163.9" r="1.35"/><circle cx="196.0" cy="167.4" r="1.35"/><circle cx="196.0" cy="170.9" r="1.35"/><circle cx="196.0" cy="174.4" r="1.35"/><circle cx="196.0" cy="177.9" r="1.35"/><circle cx="196.0" cy="181.4" r="1.35"/><circle cx="196.0" cy="184.9" r="1.35"/><circle cx="196.0" cy="188.4" r="1.35"/><circle cx="199.5" cy="37.5" r="1.35"/><circle cx="199.5" cy="41.0" r="1.35"/><circle cx="199.5" cy="44.5" r="1.35"/><circle cx="199.5" cy="48.0" r="1.35"/><circle cx="199.5" cy="51.5" r="1.35"/><circle cx="199.5" cy="55.0" r="1.35"/><circle cx="199.5" cy="58.6" r="1.35"/><circle cx="199.5" cy="146.3" r="1.35"/><circle cx="199.5" cy="149.8" r="1.35"/><circle cx="199.5" cy="153.3" r="1.35"/><circle cx="199.5" cy="156.8" r="1.35"/><circle cx="199.5" cy="160.3" r="1.35"/><circle cx="199.5" cy="163.9" r="1.35"/><circle cx="199.5" cy="167.4" r="1.35"/><circle cx="199.5" cy="170.9" r="1.35"/><circle cx="199.5" cy="174.4" r="1.35"/><circle cx="199.5" cy="177.9" r="1.35"/><circle cx="199.5" cy="181.4" r="1.35"/><circle cx="199.5" cy="184.9" r="1.35"/><circle cx="203.0" cy="37.5" r="1.35"/><circle cx="203.0" cy="41.0" r="1.35"/><circle cx="203.0" cy="44.5" r="1.35"/><circle cx="203.0" cy="48.0" r="1.35"/><circle cx="203.0" cy="51.5" r="1.35"/><circle cx="203.0" cy="55.0" r="1.35"/><circle cx="203.0" cy="58.6" r="1.35"/><circle cx="203.0" cy="62.1" r="1.35"/><circle cx="203.0" cy="149.8" r="1.35"/><circle cx="203.0" cy="153.3" r="1.35"/><circle cx="203.0" cy="156.8" r="1.35"/><circle cx="203.0" cy="160.3" r="1.35"/><circle cx="203.0" cy="163.9" r="1.35"/><circle cx="203.0" cy="167.4" r="1.35"/><circle cx="203.0" cy="170.9" r="1.35"/><circle cx="203.0" cy="174.4" r="1.35"/><circle cx="203.0" cy="177.9" r="1.35"/><circle cx="206.5" cy="37.5" r="1.35"/><circle cx="206.5" cy="41.0" r="1.35"/><circle cx="206.5" cy="44.5" r="1.35"/><circle cx="206.5" cy="48.0" r="1.35"/><circle cx="206.5" cy="51.5" r="1.35"/><circle cx="206.5" cy="55.0" r="1.35"/><circle cx="206.5" cy="58.6" r="1.35"/><circle cx="206.5" cy="62.1" r="1.35"/><circle cx="206.5" cy="149.8" r="1.35"/><circle cx="206.5" cy="153.3" r="1.35"/><circle cx="206.5" cy="156.8" r="1.35"/><circle cx="206.5" cy="160.3" r="1.35"/><circle cx="206.5" cy="163.9" r="1.35"/><circle cx="206.5" cy="167.4" r="1.35"/><circle cx="206.5" cy="170.9" r="1.35"/><circle cx="206.5" cy="174.4" r="1.35"/><circle cx="210.0" cy="37.5" r="1.35"/><circle cx="210.0" cy="41.0" r="1.35"/><circle cx="210.0" cy="44.5" r="1.35"/><circle cx="210.0" cy="48.0" r="1.35"/><circle cx="210.0" cy="51.5" r="1.35"/><circle cx="210.0" cy="55.0" r="1.35"/><circle cx="210.0" cy="58.6" r="1.35"/><circle cx="210.0" cy="149.8" r="1.35"/><circle cx="210.0" cy="153.3" r="1.35"/><circle cx="210.0" cy="156.8" r="1.35"/><circle cx="210.0" cy="160.3" r="1.35"/><circle cx="210.0" cy="163.9" r="1.35"/><circle cx="210.0" cy="167.4" r="1.35"/><circle cx="210.0" cy="170.9" r="1.35"/><circle cx="210.0" cy="174.4" r="1.35"/><circle cx="213.5" cy="37.5" r="1.35"/><circle cx="213.5" cy="41.0" r="1.35"/><circle cx="213.5" cy="44.5" r="1.35"/><circle cx="213.5" cy="48.0" r="1.35"/><circle cx="213.5" cy="51.5" r="1.35"/><circle cx="213.5" cy="55.0" r="1.35"/><circle cx="213.5" cy="149.8" r="1.35"/><circle cx="213.5" cy="153.3" r="1.35"/><circle cx="213.5" cy="156.8" r="1.35"/><circle cx="213.5" cy="160.3" r="1.35"/><circle cx="213.5" cy="163.9" r="1.35"/><circle cx="213.5" cy="167.4" r="1.35"/><circle cx="217.0" cy="37.5" r="1.35"/><circle cx="217.0" cy="41.0" r="1.35"/><circle cx="217.0" cy="44.5" r="1.35"/><circle cx="217.0" cy="48.0" r="1.35"/><circle cx="217.0" cy="51.5" r="1.35"/><circle cx="217.0" cy="55.0" r="1.35"/><circle cx="217.0" cy="153.3" r="1.35"/><circle cx="217.0" cy="156.8" r="1.35"/><circle cx="220.6" cy="37.5" r="1.35"/><circle cx="220.6" cy="41.0" r="1.35"/><circle cx="220.6" cy="44.5" r="1.35"/><circle cx="220.6" cy="48.0" r="1.35"/><circle cx="220.6" cy="51.5" r="1.35"/><circle cx="220.6" cy="55.0" r="1.35"/><circle cx="224.1" cy="37.5" r="1.35"/><circle cx="224.1" cy="41.0" r="1.35"/><circle cx="224.1" cy="44.5" r="1.35"/><circle cx="224.1" cy="48.0" r="1.35"/><circle cx="224.1" cy="51.5" r="1.35"/><circle cx="227.6" cy="37.5" r="1.35"/><circle cx="227.6" cy="41.0" r="1.35"/><circle cx="227.6" cy="44.5" r="1.35"/><circle cx="227.6" cy="48.0" r="1.35"/><circle cx="227.6" cy="51.5" r="1.35"/><circle cx="231.1" cy="37.5" r="1.35"/><circle cx="231.1" cy="41.0" r="1.35"/><circle cx="231.1" cy="44.5" r="1.35"/><circle cx="231.1" cy="48.0" r="1.35"/><circle cx="231.1" cy="51.5" r="1.35"/><circle cx="234.6" cy="37.5" r="1.35"/><circle cx="234.6" cy="41.0" r="1.35"/><circle cx="234.6" cy="44.5" r="1.35"/><circle cx="234.6" cy="51.5" r="1.35"/><circle cx="238.1" cy="37.5" r="1.35"/><circle cx="238.1" cy="41.0" r="1.35"/><circle cx="238.1" cy="44.5" r="1.35"/><circle cx="238.1" cy="58.6" r="1.35"/><circle cx="241.6" cy="37.5" r="1.35"/><circle cx="241.6" cy="58.6" r="1.35"/><circle cx="245.1" cy="58.6" r="1.35"/><circle cx="245.1" cy="114.7" r="1.35"/><circle cx="245.1" cy="118.2" r="1.35"/><circle cx="245.1" cy="121.7" r="1.35"/><circle cx="245.1" cy="125.2" r="1.35"/><circle cx="245.1" cy="128.8" r="1.35"/><circle cx="248.6" cy="111.2" r="1.35"/><circle cx="248.6" cy="114.7" r="1.35"/><circle cx="248.6" cy="118.2" r="1.35"/><circle cx="248.6" cy="121.7" r="1.35"/><circle cx="248.6" cy="125.2" r="1.35"/><circle cx="248.6" cy="128.8" r="1.35"/><circle cx="248.6" cy="132.3" r="1.35"/><circle cx="252.1" cy="107.7" r="1.35"/><circle cx="252.1" cy="111.2" r="1.35"/><circle cx="252.1" cy="114.7" r="1.35"/><circle cx="252.1" cy="118.2" r="1.35"/><circle cx="252.1" cy="121.7" r="1.35"/><circle cx="252.1" cy="125.2" r="1.35"/><circle cx="252.1" cy="128.8" r="1.35"/><circle cx="252.1" cy="132.3" r="1.35"/><circle cx="252.1" cy="135.8" r="1.35"/><circle cx="255.7" cy="72.6" r="1.35"/><circle cx="255.7" cy="90.1" r="1.35"/><circle cx="255.7" cy="93.7" r="1.35"/><circle cx="255.7" cy="100.7" r="1.35"/><circle cx="255.7" cy="104.2" r="1.35"/><circle cx="255.7" cy="107.7" r="1.35"/><circle cx="255.7" cy="111.2" r="1.35"/><circle cx="255.7" cy="114.7" r="1.35"/><circle cx="255.7" cy="118.2" r="1.35"/><circle cx="255.7" cy="121.7" r="1.35"/><circle cx="255.7" cy="125.2" r="1.35"/><circle cx="255.7" cy="128.8" r="1.35"/><circle cx="255.7" cy="132.3" r="1.35"/><circle cx="255.7" cy="135.8" r="1.35"/><circle cx="255.7" cy="139.3" r="1.35"/><circle cx="259.2" cy="69.1" r="1.35"/><circle cx="259.2" cy="90.1" r="1.35"/><circle cx="259.2" cy="93.7" r="1.35"/><circle cx="259.2" cy="100.7" r="1.35"/><circle cx="259.2" cy="104.2" r="1.35"/><circle cx="259.2" cy="107.7" r="1.35"/><circle cx="259.2" cy="111.2" r="1.35"/><circle cx="259.2" cy="114.7" r="1.35"/><circle cx="259.2" cy="118.2" r="1.35"/><circle cx="259.2" cy="121.7" r="1.35"/><circle cx="259.2" cy="125.2" r="1.35"/><circle cx="259.2" cy="128.8" r="1.35"/><circle cx="259.2" cy="132.3" r="1.35"/><circle cx="259.2" cy="135.8" r="1.35"/><circle cx="262.7" cy="69.1" r="1.35"/><circle cx="262.7" cy="76.1" r="1.35"/><circle cx="262.7" cy="79.6" r="1.35"/><circle cx="262.7" cy="90.1" r="1.35"/><circle cx="262.7" cy="93.7" r="1.35"/><circle cx="262.7" cy="100.7" r="1.35"/><circle cx="262.7" cy="104.2" r="1.35"/><circle cx="262.7" cy="107.7" r="1.35"/><circle cx="262.7" cy="111.2" r="1.35"/><circle cx="262.7" cy="114.7" r="1.35"/><circle cx="262.7" cy="118.2" r="1.35"/><circle cx="262.7" cy="121.7" r="1.35"/><circle cx="262.7" cy="125.2" r="1.35"/><circle cx="262.7" cy="128.8" r="1.35"/><circle cx="262.7" cy="132.3" r="1.35"/><circle cx="262.7" cy="135.8" r="1.35"/><circle cx="266.2" cy="72.6" r="1.35"/><circle cx="266.2" cy="76.1" r="1.35"/><circle cx="266.2" cy="79.6" r="1.35"/><circle cx="266.2" cy="83.1" r="1.35"/><circle cx="266.2" cy="86.6" r="1.35"/><circle cx="266.2" cy="90.1" r="1.35"/><circle cx="266.2" cy="93.7" r="1.35"/><circle cx="266.2" cy="97.2" r="1.35"/><circle cx="266.2" cy="100.7" r="1.35"/><circle cx="266.2" cy="104.2" r="1.35"/><circle cx="266.2" cy="107.7" r="1.35"/><circle cx="266.2" cy="111.2" r="1.35"/><circle cx="266.2" cy="114.7" r="1.35"/><circle cx="266.2" cy="118.2" r="1.35"/><circle cx="266.2" cy="121.7" r="1.35"/><circle cx="266.2" cy="125.2" r="1.35"/><circle cx="266.2" cy="128.8" r="1.35"/><circle cx="266.2" cy="132.3" r="1.35"/><circle cx="266.2" cy="135.8" r="1.35"/><circle cx="269.7" cy="79.6" r="1.35"/><circle cx="269.7" cy="83.1" r="1.35"/><circle cx="269.7" cy="86.6" r="1.35"/><circle cx="269.7" cy="97.2" r="1.35"/><circle cx="269.7" cy="100.7" r="1.35"/><circle cx="269.7" cy="104.2" r="1.35"/><circle cx="269.7" cy="107.7" r="1.35"/><circle cx="269.7" cy="111.2" r="1.35"/><circle cx="269.7" cy="114.7" r="1.35"/><circle cx="269.7" cy="118.2" r="1.35"/><circle cx="269.7" cy="121.7" r="1.35"/><circle cx="269.7" cy="125.2" r="1.35"/><circle cx="269.7" cy="128.8" r="1.35"/><circle cx="269.7" cy="132.3" r="1.35"/><circle cx="269.7" cy="135.8" r="1.35"/><circle cx="273.2" cy="76.1" r="1.35"/><circle cx="273.2" cy="79.6" r="1.35"/><circle cx="273.2" cy="83.1" r="1.35"/><circle cx="273.2" cy="86.6" r="1.35"/><circle cx="273.2" cy="97.2" r="1.35"/><circle cx="273.2" cy="100.7" r="1.35"/><circle cx="273.2" cy="104.2" r="1.35"/><circle cx="273.2" cy="107.7" r="1.35"/><circle cx="273.2" cy="111.2" r="1.35"/><circle cx="273.2" cy="114.7" r="1.35"/><circle cx="273.2" cy="118.2" r="1.35"/><circle cx="273.2" cy="121.7" r="1.35"/><circle cx="273.2" cy="125.2" r="1.35"/><circle cx="273.2" cy="128.8" r="1.35"/><circle cx="273.2" cy="132.3" r="1.35"/><circle cx="273.2" cy="135.8" r="1.35"/><circle cx="276.7" cy="62.1" r="1.35"/><circle cx="276.7" cy="65.6" r="1.35"/><circle cx="276.7" cy="76.1" r="1.35"/><circle cx="276.7" cy="79.6" r="1.35"/><circle cx="276.7" cy="83.1" r="1.35"/><circle cx="276.7" cy="86.6" r="1.35"/><circle cx="276.7" cy="97.2" r="1.35"/><circle cx="276.7" cy="100.7" r="1.35"/><circle cx="276.7" cy="104.2" r="1.35"/><circle cx="276.7" cy="107.7" r="1.35"/><circle cx="276.7" cy="111.2" r="1.35"/><circle cx="276.7" cy="114.7" r="1.35"/><circle cx="276.7" cy="118.2" r="1.35"/><circle cx="276.7" cy="121.7" r="1.35"/><circle cx="276.7" cy="125.2" r="1.35"/><circle cx="276.7" cy="128.8" r="1.35"/><circle cx="276.7" cy="132.3" r="1.35"/><circle cx="276.7" cy="135.8" r="1.35"/><circle cx="276.7" cy="139.3" r="1.35"/><circle cx="280.2" cy="62.1" r="1.35"/><circle cx="280.2" cy="65.6" r="1.35"/><circle cx="280.2" cy="69.1" r="1.35"/><circle cx="280.2" cy="72.6" r="1.35"/><circle cx="280.2" cy="76.1" r="1.35"/><circle cx="280.2" cy="79.6" r="1.35"/><circle cx="280.2" cy="83.1" r="1.35"/><circle cx="280.2" cy="97.2" r="1.35"/><circle cx="280.2" cy="100.7" r="1.35"/><circle cx="280.2" cy="104.2" r="1.35"/><circle cx="280.2" cy="107.7" r="1.35"/><circle cx="280.2" cy="111.2" r="1.35"/><circle cx="280.2" cy="114.7" r="1.35"/><circle cx="280.2" cy="118.2" r="1.35"/><circle cx="280.2" cy="121.7" r="1.35"/><circle cx="280.2" cy="125.2" r="1.35"/><circle cx="280.2" cy="128.8" r="1.35"/><circle cx="280.2" cy="132.3" r="1.35"/><circle cx="280.2" cy="135.8" r="1.35"/><circle cx="280.2" cy="139.3" r="1.35"/><circle cx="280.2" cy="142.8" r="1.35"/><circle cx="280.2" cy="146.3" r="1.35"/><circle cx="283.7" cy="58.6" r="1.35"/><circle cx="283.7" cy="62.1" r="1.35"/><circle cx="283.7" cy="65.6" r="1.35"/><circle cx="283.7" cy="72.6" r="1.35"/><circle cx="283.7" cy="76.1" r="1.35"/><circle cx="283.7" cy="79.6" r="1.35"/><circle cx="283.7" cy="83.1" r="1.35"/><circle cx="283.7" cy="86.6" r="1.35"/><circle cx="283.7" cy="104.2" r="1.35"/><circle cx="283.7" cy="107.7" r="1.35"/><circle cx="283.7" cy="111.2" r="1.35"/><circle cx="283.7" cy="114.7" r="1.35"/><circle cx="283.7" cy="118.2" r="1.35"/><circle cx="283.7" cy="121.7" r="1.35"/><circle cx="283.7" cy="125.2" r="1.35"/><circle cx="283.7" cy="128.8" r="1.35"/><circle cx="283.7" cy="132.3" r="1.35"/><circle cx="283.7" cy="135.8" r="1.35"/><circle cx="283.7" cy="139.3" r="1.35"/><circle cx="283.7" cy="142.8" r="1.35"/><circle cx="283.7" cy="146.3" r="1.35"/><circle cx="283.7" cy="149.8" r="1.35"/><circle cx="283.7" cy="153.3" r="1.35"/><circle cx="283.7" cy="167.4" r="1.35"/><circle cx="287.2" cy="41.0" r="1.35"/><circle cx="287.2" cy="55.0" r="1.35"/><circle cx="287.2" cy="58.6" r="1.35"/><circle cx="287.2" cy="62.1" r="1.35"/><circle cx="287.2" cy="65.6" r="1.35"/><circle cx="287.2" cy="69.1" r="1.35"/><circle cx="287.2" cy="72.6" r="1.35"/><circle cx="287.2" cy="76.1" r="1.35"/><circle cx="287.2" cy="79.6" r="1.35"/><circle cx="287.2" cy="83.1" r="1.35"/><circle cx="287.2" cy="90.1" r="1.35"/><circle cx="287.2" cy="104.2" r="1.35"/><circle cx="287.2" cy="107.7" r="1.35"/><circle cx="287.2" cy="111.2" r="1.35"/><circle cx="287.2" cy="114.7" r="1.35"/><circle cx="287.2" cy="118.2" r="1.35"/><circle cx="287.2" cy="121.7" r="1.35"/><circle cx="287.2" cy="125.2" r="1.35"/><circle cx="287.2" cy="128.8" r="1.35"/><circle cx="287.2" cy="132.3" r="1.35"/><circle cx="287.2" cy="135.8" r="1.35"/><circle cx="287.2" cy="139.3" r="1.35"/><circle cx="287.2" cy="142.8" r="1.35"/><circle cx="287.2" cy="146.3" r="1.35"/><circle cx="287.2" cy="149.8" r="1.35"/><circle cx="287.2" cy="153.3" r="1.35"/><circle cx="287.2" cy="156.8" r="1.35"/><circle cx="287.2" cy="160.3" r="1.35"/><circle cx="287.2" cy="163.9" r="1.35"/><circle cx="287.2" cy="167.4" r="1.35"/><circle cx="287.2" cy="170.9" r="1.35"/><circle cx="287.2" cy="174.4" r="1.35"/><circle cx="287.2" cy="177.9" r="1.35"/><circle cx="290.8" cy="55.0" r="1.35"/><circle cx="290.8" cy="58.6" r="1.35"/><circle cx="290.8" cy="65.6" r="1.35"/><circle cx="290.8" cy="72.6" r="1.35"/><circle cx="290.8" cy="76.1" r="1.35"/><circle cx="290.8" cy="79.6" r="1.35"/><circle cx="290.8" cy="83.1" r="1.35"/><circle cx="290.8" cy="86.6" r="1.35"/><circle cx="290.8" cy="104.2" r="1.35"/><circle cx="290.8" cy="107.7" r="1.35"/><circle cx="290.8" cy="111.2" r="1.35"/><circle cx="290.8" cy="114.7" r="1.35"/><circle cx="290.8" cy="118.2" r="1.35"/><circle cx="290.8" cy="121.7" r="1.35"/><circle cx="290.8" cy="125.2" r="1.35"/><circle cx="290.8" cy="128.8" r="1.35"/><circle cx="290.8" cy="132.3" r="1.35"/><circle cx="290.8" cy="135.8" r="1.35"/><circle cx="290.8" cy="139.3" r="1.35"/><circle cx="290.8" cy="142.8" r="1.35"/><circle cx="290.8" cy="146.3" r="1.35"/><circle cx="290.8" cy="149.8" r="1.35"/><circle cx="290.8" cy="153.3" r="1.35"/><circle cx="290.8" cy="156.8" r="1.35"/><circle cx="290.8" cy="160.3" r="1.35"/><circle cx="290.8" cy="163.9" r="1.35"/><circle cx="290.8" cy="167.4" r="1.35"/><circle cx="290.8" cy="170.9" r="1.35"/><circle cx="290.8" cy="174.4" r="1.35"/><circle cx="290.8" cy="177.9" r="1.35"/><circle cx="290.8" cy="181.4" r="1.35"/><circle cx="290.8" cy="184.9" r="1.35"/><circle cx="294.3" cy="37.5" r="1.35"/><circle cx="294.3" cy="51.5" r="1.35"/><circle cx="294.3" cy="55.0" r="1.35"/><circle cx="294.3" cy="58.6" r="1.35"/><circle cx="294.3" cy="72.6" r="1.35"/><circle cx="294.3" cy="76.1" r="1.35"/><circle cx="294.3" cy="79.6" r="1.35"/><circle cx="294.3" cy="83.1" r="1.35"/><circle cx="294.3" cy="86.6" r="1.35"/><circle cx="294.3" cy="90.1" r="1.35"/><circle cx="294.3" cy="104.2" r="1.35"/><circle cx="294.3" cy="107.7" r="1.35"/><circle cx="294.3" cy="111.2" r="1.35"/><circle cx="294.3" cy="114.7" r="1.35"/><circle cx="294.3" cy="118.2" r="1.35"/><circle cx="294.3" cy="121.7" r="1.35"/><circle cx="294.3" cy="125.2" r="1.35"/><circle cx="294.3" cy="128.8" r="1.35"/><circle cx="294.3" cy="132.3" r="1.35"/><circle cx="294.3" cy="135.8" r="1.35"/><circle cx="294.3" cy="139.3" r="1.35"/><circle cx="294.3" cy="142.8" r="1.35"/><circle cx="294.3" cy="146.3" r="1.35"/><circle cx="294.3" cy="149.8" r="1.35"/><circle cx="294.3" cy="153.3" r="1.35"/><circle cx="294.3" cy="156.8" r="1.35"/><circle cx="294.3" cy="160.3" r="1.35"/><circle cx="294.3" cy="163.9" r="1.35"/><circle cx="294.3" cy="167.4" r="1.35"/><circle cx="294.3" cy="170.9" r="1.35"/><circle cx="294.3" cy="174.4" r="1.35"/><circle cx="294.3" cy="177.9" r="1.35"/><circle cx="294.3" cy="181.4" r="1.35"/><circle cx="294.3" cy="184.9" r="1.35"/><circle cx="294.3" cy="188.4" r="1.35"/><circle cx="294.3" cy="191.9" r="1.35"/><circle cx="297.8" cy="37.5" r="1.35"/><circle cx="297.8" cy="51.5" r="1.35"/><circle cx="297.8" cy="55.0" r="1.35"/><circle cx="297.8" cy="62.1" r="1.35"/><circle cx="297.8" cy="69.1" r="1.35"/><circle cx="297.8" cy="72.6" r="1.35"/><circle cx="297.8" cy="76.1" r="1.35"/><circle cx="297.8" cy="79.6" r="1.35"/><circle cx="297.8" cy="83.1" r="1.35"/><circle cx="297.8" cy="86.6" r="1.35"/><circle cx="297.8" cy="90.1" r="1.35"/><circle cx="297.8" cy="93.7" r="1.35"/><circle cx="297.8" cy="104.2" r="1.35"/><circle cx="297.8" cy="107.7" r="1.35"/><circle cx="297.8" cy="111.2" r="1.35"/><circle cx="297.8" cy="114.7" r="1.35"/><circle cx="297.8" cy="118.2" r="1.35"/><circle cx="297.8" cy="121.7" r="1.35"/><circle cx="297.8" cy="125.2" r="1.35"/><circle cx="297.8" cy="128.8" r="1.35"/><circle cx="297.8" cy="132.3" r="1.35"/><circle cx="297.8" cy="135.8" r="1.35"/><circle cx="297.8" cy="139.3" r="1.35"/><circle cx="297.8" cy="142.8" r="1.35"/><circle cx="297.8" cy="146.3" r="1.35"/><circle cx="297.8" cy="149.8" r="1.35"/><circle cx="297.8" cy="153.3" r="1.35"/><circle cx="297.8" cy="156.8" r="1.35"/><circle cx="297.8" cy="160.3" r="1.35"/><circle cx="297.8" cy="163.9" r="1.35"/><circle cx="297.8" cy="167.4" r="1.35"/><circle cx="297.8" cy="170.9" r="1.35"/><circle cx="297.8" cy="174.4" r="1.35"/><circle cx="297.8" cy="177.9" r="1.35"/><circle cx="297.8" cy="181.4" r="1.35"/><circle cx="297.8" cy="184.9" r="1.35"/><circle cx="297.8" cy="188.4" r="1.35"/><circle cx="301.3" cy="37.5" r="1.35"/><circle cx="301.3" cy="51.5" r="1.35"/><circle cx="301.3" cy="55.0" r="1.35"/><circle cx="301.3" cy="58.6" r="1.35"/><circle cx="301.3" cy="62.1" r="1.35"/><circle cx="301.3" cy="65.6" r="1.35"/><circle cx="301.3" cy="69.1" r="1.35"/><circle cx="301.3" cy="72.6" r="1.35"/><circle cx="301.3" cy="76.1" r="1.35"/><circle cx="301.3" cy="79.6" r="1.35"/><circle cx="301.3" cy="83.1" r="1.35"/><circle cx="301.3" cy="86.6" r="1.35"/><circle cx="301.3" cy="90.1" r="1.35"/><circle cx="301.3" cy="104.2" r="1.35"/><circle cx="301.3" cy="107.7" r="1.35"/><circle cx="301.3" cy="111.2" r="1.35"/><circle cx="301.3" cy="114.7" r="1.35"/><circle cx="301.3" cy="118.2" r="1.35"/><circle cx="301.3" cy="121.7" r="1.35"/><circle cx="301.3" cy="125.2" r="1.35"/><circle cx="301.3" cy="128.8" r="1.35"/><circle cx="301.3" cy="132.3" r="1.35"/><circle cx="301.3" cy="135.8" r="1.35"/><circle cx="301.3" cy="139.3" r="1.35"/><circle cx="301.3" cy="142.8" r="1.35"/><circle cx="301.3" cy="146.3" r="1.35"/><circle cx="301.3" cy="149.8" r="1.35"/><circle cx="301.3" cy="153.3" r="1.35"/><circle cx="301.3" cy="156.8" r="1.35"/><circle cx="301.3" cy="160.3" r="1.35"/><circle cx="301.3" cy="163.9" r="1.35"/><circle cx="301.3" cy="167.4" r="1.35"/><circle cx="301.3" cy="170.9" r="1.35"/><circle cx="301.3" cy="174.4" r="1.35"/><circle cx="301.3" cy="177.9" r="1.35"/><circle cx="301.3" cy="181.4" r="1.35"/><circle cx="301.3" cy="184.9" r="1.35"/><circle cx="301.3" cy="188.4" r="1.35"/><circle cx="304.8" cy="51.5" r="1.35"/><circle cx="304.8" cy="55.0" r="1.35"/><circle cx="304.8" cy="58.6" r="1.35"/><circle cx="304.8" cy="62.1" r="1.35"/><circle cx="304.8" cy="65.6" r="1.35"/><circle cx="304.8" cy="69.1" r="1.35"/><circle cx="304.8" cy="72.6" r="1.35"/><circle cx="304.8" cy="76.1" r="1.35"/><circle cx="304.8" cy="79.6" r="1.35"/><circle cx="304.8" cy="83.1" r="1.35"/><circle cx="304.8" cy="86.6" r="1.35"/><circle cx="304.8" cy="93.7" r="1.35"/><circle cx="304.8" cy="104.2" r="1.35"/><circle cx="304.8" cy="107.7" r="1.35"/><circle cx="304.8" cy="111.2" r="1.35"/><circle cx="304.8" cy="114.7" r="1.35"/><circle cx="304.8" cy="118.2" r="1.35"/><circle cx="304.8" cy="121.7" r="1.35"/><circle cx="304.8" cy="125.2" r="1.35"/><circle cx="304.8" cy="128.8" r="1.35"/><circle cx="304.8" cy="132.3" r="1.35"/><circle cx="304.8" cy="135.8" r="1.35"/><circle cx="304.8" cy="139.3" r="1.35"/><circle cx="304.8" cy="142.8" r="1.35"/><circle cx="304.8" cy="146.3" r="1.35"/><circle cx="304.8" cy="149.8" r="1.35"/><circle cx="304.8" cy="153.3" r="1.35"/><circle cx="304.8" cy="156.8" r="1.35"/><circle cx="304.8" cy="160.3" r="1.35"/><circle cx="304.8" cy="163.9" r="1.35"/><circle cx="304.8" cy="167.4" r="1.35"/><circle cx="304.8" cy="170.9" r="1.35"/><circle cx="304.8" cy="174.4" r="1.35"/><circle cx="304.8" cy="177.9" r="1.35"/><circle cx="304.8" cy="181.4" r="1.35"/><circle cx="304.8" cy="184.9" r="1.35"/><circle cx="304.8" cy="188.4" r="1.35"/><circle cx="308.3" cy="51.5" r="1.35"/><circle cx="308.3" cy="55.0" r="1.35"/><circle cx="308.3" cy="58.6" r="1.35"/><circle cx="308.3" cy="62.1" r="1.35"/><circle cx="308.3" cy="65.6" r="1.35"/><circle cx="308.3" cy="69.1" r="1.35"/><circle cx="308.3" cy="72.6" r="1.35"/><circle cx="308.3" cy="76.1" r="1.35"/><circle cx="308.3" cy="79.6" r="1.35"/><circle cx="308.3" cy="90.1" r="1.35"/><circle cx="308.3" cy="93.7" r="1.35"/><circle cx="308.3" cy="104.2" r="1.35"/><circle cx="308.3" cy="107.7" r="1.35"/><circle cx="308.3" cy="111.2" r="1.35"/><circle cx="308.3" cy="114.7" r="1.35"/><circle cx="308.3" cy="118.2" r="1.35"/><circle cx="308.3" cy="121.7" r="1.35"/><circle cx="308.3" cy="125.2" r="1.35"/><circle cx="308.3" cy="128.8" r="1.35"/><circle cx="308.3" cy="132.3" r="1.35"/><circle cx="308.3" cy="135.8" r="1.35"/><circle cx="308.3" cy="139.3" r="1.35"/><circle cx="308.3" cy="142.8" r="1.35"/><circle cx="308.3" cy="146.3" r="1.35"/><circle cx="308.3" cy="149.8" r="1.35"/><circle cx="308.3" cy="153.3" r="1.35"/><circle cx="308.3" cy="156.8" r="1.35"/><circle cx="308.3" cy="160.3" r="1.35"/><circle cx="308.3" cy="163.9" r="1.35"/><circle cx="308.3" cy="167.4" r="1.35"/><circle cx="308.3" cy="170.9" r="1.35"/><circle cx="308.3" cy="174.4" r="1.35"/><circle cx="308.3" cy="177.9" r="1.35"/><circle cx="308.3" cy="181.4" r="1.35"/><circle cx="308.3" cy="184.9" r="1.35"/><circle cx="311.8" cy="55.0" r="1.35"/><circle cx="311.8" cy="58.6" r="1.35"/><circle cx="311.8" cy="62.1" r="1.35"/><circle cx="311.8" cy="65.6" r="1.35"/><circle cx="311.8" cy="69.1" r="1.35"/><circle cx="311.8" cy="72.6" r="1.35"/><circle cx="311.8" cy="76.1" r="1.35"/><circle cx="311.8" cy="79.6" r="1.35"/><circle cx="311.8" cy="83.1" r="1.35"/><circle cx="311.8" cy="90.1" r="1.35"/><circle cx="311.8" cy="93.7" r="1.35"/><circle cx="311.8" cy="104.2" r="1.35"/><circle cx="311.8" cy="111.2" r="1.35"/><circle cx="311.8" cy="114.7" r="1.35"/><circle cx="311.8" cy="118.2" r="1.35"/><circle cx="311.8" cy="121.7" r="1.35"/><circle cx="311.8" cy="125.2" r="1.35"/><circle cx="311.8" cy="128.8" r="1.35"/><circle cx="311.8" cy="132.3" r="1.35"/><circle cx="311.8" cy="135.8" r="1.35"/><circle cx="311.8" cy="139.3" r="1.35"/><circle cx="311.8" cy="142.8" r="1.35"/><circle cx="311.8" cy="146.3" r="1.35"/><circle cx="311.8" cy="149.8" r="1.35"/><circle cx="311.8" cy="153.3" r="1.35"/><circle cx="311.8" cy="156.8" r="1.35"/><circle cx="311.8" cy="160.3" r="1.35"/><circle cx="311.8" cy="163.9" r="1.35"/><circle cx="311.8" cy="167.4" r="1.35"/><circle cx="311.8" cy="170.9" r="1.35"/><circle cx="311.8" cy="174.4" r="1.35"/><circle cx="311.8" cy="177.9" r="1.35"/><circle cx="315.3" cy="55.0" r="1.35"/><circle cx="315.3" cy="62.1" r="1.35"/><circle cx="315.3" cy="65.6" r="1.35"/><circle cx="315.3" cy="69.1" r="1.35"/><circle cx="315.3" cy="72.6" r="1.35"/><circle cx="315.3" cy="76.1" r="1.35"/><circle cx="315.3" cy="79.6" r="1.35"/><circle cx="315.3" cy="90.1" r="1.35"/><circle cx="315.3" cy="93.7" r="1.35"/><circle cx="315.3" cy="100.7" r="1.35"/><circle cx="315.3" cy="104.2" r="1.35"/><circle cx="315.3" cy="107.7" r="1.35"/><circle cx="315.3" cy="114.7" r="1.35"/><circle cx="315.3" cy="118.2" r="1.35"/><circle cx="315.3" cy="121.7" r="1.35"/><circle cx="315.3" cy="125.2" r="1.35"/><circle cx="315.3" cy="128.8" r="1.35"/><circle cx="315.3" cy="132.3" r="1.35"/><circle cx="315.3" cy="135.8" r="1.35"/><circle cx="315.3" cy="139.3" r="1.35"/><circle cx="315.3" cy="142.8" r="1.35"/><circle cx="315.3" cy="146.3" r="1.35"/><circle cx="315.3" cy="149.8" r="1.35"/><circle cx="315.3" cy="153.3" r="1.35"/><circle cx="315.3" cy="156.8" r="1.35"/><circle cx="315.3" cy="160.3" r="1.35"/><circle cx="315.3" cy="163.9" r="1.35"/><circle cx="315.3" cy="167.4" r="1.35"/><circle cx="315.3" cy="170.9" r="1.35"/><circle cx="318.8" cy="55.0" r="1.35"/><circle cx="318.8" cy="58.6" r="1.35"/><circle cx="318.8" cy="62.1" r="1.35"/><circle cx="318.8" cy="65.6" r="1.35"/><circle cx="318.8" cy="69.1" r="1.35"/><circle cx="318.8" cy="72.6" r="1.35"/><circle cx="318.8" cy="76.1" r="1.35"/><circle cx="318.8" cy="79.6" r="1.35"/><circle cx="318.8" cy="83.1" r="1.35"/><circle cx="318.8" cy="93.7" r="1.35"/><circle cx="318.8" cy="97.2" r="1.35"/><circle cx="318.8" cy="100.7" r="1.35"/><circle cx="318.8" cy="104.2" r="1.35"/><circle cx="318.8" cy="107.7" r="1.35"/><circle cx="318.8" cy="111.2" r="1.35"/><circle cx="318.8" cy="121.7" r="1.35"/><circle cx="318.8" cy="125.2" r="1.35"/><circle cx="318.8" cy="128.8" r="1.35"/><circle cx="318.8" cy="132.3" r="1.35"/><circle cx="318.8" cy="135.8" r="1.35"/><circle cx="318.8" cy="139.3" r="1.35"/><circle cx="318.8" cy="142.8" r="1.35"/><circle cx="318.8" cy="146.3" r="1.35"/><circle cx="318.8" cy="149.8" r="1.35"/><circle cx="318.8" cy="153.3" r="1.35"/><circle cx="318.8" cy="156.8" r="1.35"/><circle cx="318.8" cy="160.3" r="1.35"/><circle cx="318.8" cy="163.9" r="1.35"/><circle cx="318.8" cy="167.4" r="1.35"/><circle cx="322.3" cy="55.0" r="1.35"/><circle cx="322.3" cy="58.6" r="1.35"/><circle cx="322.3" cy="62.1" r="1.35"/><circle cx="322.3" cy="65.6" r="1.35"/><circle cx="322.3" cy="69.1" r="1.35"/><circle cx="322.3" cy="72.6" r="1.35"/><circle cx="322.3" cy="76.1" r="1.35"/><circle cx="322.3" cy="79.6" r="1.35"/><circle cx="322.3" cy="83.1" r="1.35"/><circle cx="322.3" cy="86.6" r="1.35"/><circle cx="322.3" cy="90.1" r="1.35"/><circle cx="322.3" cy="93.7" r="1.35"/><circle cx="322.3" cy="97.2" r="1.35"/><circle cx="322.3" cy="100.7" r="1.35"/><circle cx="322.3" cy="104.2" r="1.35"/><circle cx="322.3" cy="107.7" r="1.35"/><circle cx="322.3" cy="111.2" r="1.35"/><circle cx="322.3" cy="114.7" r="1.35"/><circle cx="322.3" cy="118.2" r="1.35"/><circle cx="322.3" cy="128.8" r="1.35"/><circle cx="322.3" cy="132.3" r="1.35"/><circle cx="322.3" cy="135.8" r="1.35"/><circle cx="322.3" cy="139.3" r="1.35"/><circle cx="322.3" cy="142.8" r="1.35"/><circle cx="322.3" cy="146.3" r="1.35"/><circle cx="325.9" cy="58.6" r="1.35"/><circle cx="325.9" cy="62.1" r="1.35"/><circle cx="325.9" cy="65.6" r="1.35"/><circle cx="325.9" cy="69.1" r="1.35"/><circle cx="325.9" cy="72.6" r="1.35"/><circle cx="325.9" cy="76.1" r="1.35"/><circle cx="325.9" cy="79.6" r="1.35"/><circle cx="325.9" cy="83.1" r="1.35"/><circle cx="325.9" cy="86.6" r="1.35"/><circle cx="325.9" cy="90.1" r="1.35"/><circle cx="325.9" cy="93.7" r="1.35"/><circle cx="325.9" cy="97.2" r="1.35"/><circle cx="325.9" cy="100.7" r="1.35"/><circle cx="325.9" cy="104.2" r="1.35"/><circle cx="325.9" cy="107.7" r="1.35"/><circle cx="325.9" cy="111.2" r="1.35"/><circle cx="325.9" cy="114.7" r="1.35"/><circle cx="325.9" cy="118.2" r="1.35"/><circle cx="325.9" cy="121.7" r="1.35"/><circle cx="325.9" cy="125.2" r="1.35"/><circle cx="325.9" cy="132.3" r="1.35"/><circle cx="325.9" cy="135.8" r="1.35"/><circle cx="325.9" cy="139.3" r="1.35"/><circle cx="325.9" cy="142.8" r="1.35"/><circle cx="325.9" cy="174.4" r="1.35"/><circle cx="329.4" cy="58.6" r="1.35"/><circle cx="329.4" cy="62.1" r="1.35"/><circle cx="329.4" cy="65.6" r="1.35"/><circle cx="329.4" cy="69.1" r="1.35"/><circle cx="329.4" cy="72.6" r="1.35"/><circle cx="329.4" cy="76.1" r="1.35"/><circle cx="329.4" cy="79.6" r="1.35"/><circle cx="329.4" cy="83.1" r="1.35"/><circle cx="329.4" cy="86.6" r="1.35"/><circle cx="329.4" cy="90.1" r="1.35"/><circle cx="329.4" cy="93.7" r="1.35"/><circle cx="329.4" cy="97.2" r="1.35"/><circle cx="329.4" cy="100.7" r="1.35"/><circle cx="329.4" cy="104.2" r="1.35"/><circle cx="329.4" cy="107.7" r="1.35"/><circle cx="329.4" cy="111.2" r="1.35"/><circle cx="329.4" cy="114.7" r="1.35"/><circle cx="329.4" cy="118.2" r="1.35"/><circle cx="329.4" cy="121.7" r="1.35"/><circle cx="329.4" cy="125.2" r="1.35"/><circle cx="329.4" cy="132.3" r="1.35"/><circle cx="329.4" cy="135.8" r="1.35"/><circle cx="329.4" cy="139.3" r="1.35"/><circle cx="329.4" cy="167.4" r="1.35"/><circle cx="329.4" cy="170.9" r="1.35"/><circle cx="329.4" cy="174.4" r="1.35"/><circle cx="329.4" cy="177.9" r="1.35"/><circle cx="332.9" cy="55.0" r="1.35"/><circle cx="332.9" cy="58.6" r="1.35"/><circle cx="332.9" cy="62.1" r="1.35"/><circle cx="332.9" cy="65.6" r="1.35"/><circle cx="332.9" cy="69.1" r="1.35"/><circle cx="332.9" cy="72.6" r="1.35"/><circle cx="332.9" cy="76.1" r="1.35"/><circle cx="332.9" cy="79.6" r="1.35"/><circle cx="332.9" cy="83.1" r="1.35"/><circle cx="332.9" cy="90.1" r="1.35"/><circle cx="332.9" cy="93.7" r="1.35"/><circle cx="332.9" cy="97.2" r="1.35"/><circle cx="332.9" cy="100.7" r="1.35"/><circle cx="332.9" cy="104.2" r="1.35"/><circle cx="332.9" cy="111.2" r="1.35"/><circle cx="332.9" cy="114.7" r="1.35"/><circle cx="332.9" cy="118.2" r="1.35"/><circle cx="332.9" cy="121.7" r="1.35"/><circle cx="332.9" cy="125.2" r="1.35"/><circle cx="332.9" cy="132.3" r="1.35"/><circle cx="332.9" cy="135.8" r="1.35"/><circle cx="332.9" cy="163.9" r="1.35"/><circle cx="332.9" cy="167.4" r="1.35"/><circle cx="332.9" cy="170.9" r="1.35"/><circle cx="336.4" cy="55.0" r="1.35"/><circle cx="336.4" cy="58.6" r="1.35"/><circle cx="336.4" cy="62.1" r="1.35"/><circle cx="336.4" cy="65.6" r="1.35"/><circle cx="336.4" cy="69.1" r="1.35"/><circle cx="336.4" cy="72.6" r="1.35"/><circle cx="336.4" cy="76.1" r="1.35"/><circle cx="336.4" cy="79.6" r="1.35"/><circle cx="336.4" cy="86.6" r="1.35"/><circle cx="336.4" cy="97.2" r="1.35"/><circle cx="336.4" cy="100.7" r="1.35"/><circle cx="336.4" cy="104.2" r="1.35"/><circle cx="336.4" cy="111.2" r="1.35"/><circle cx="336.4" cy="114.7" r="1.35"/><circle cx="336.4" cy="118.2" r="1.35"/><circle cx="336.4" cy="121.7" r="1.35"/><circle cx="339.9" cy="48.0" r="1.35"/><circle cx="339.9" cy="55.0" r="1.35"/><circle cx="339.9" cy="58.6" r="1.35"/><circle cx="339.9" cy="62.1" r="1.35"/><circle cx="339.9" cy="65.6" r="1.35"/><circle cx="339.9" cy="69.1" r="1.35"/><circle cx="339.9" cy="72.6" r="1.35"/><circle cx="339.9" cy="76.1" r="1.35"/><circle cx="339.9" cy="79.6" r="1.35"/><circle cx="339.9" cy="83.1" r="1.35"/><circle cx="339.9" cy="86.6" r="1.35"/><circle cx="339.9" cy="93.7" r="1.35"/><circle cx="339.9" cy="97.2" r="1.35"/><circle cx="339.9" cy="100.7" r="1.35"/><circle cx="339.9" cy="104.2" r="1.35"/><circle cx="339.9" cy="107.7" r="1.35"/><circle cx="339.9" cy="114.7" r="1.35"/><circle cx="339.9" cy="118.2" r="1.35"/><circle cx="339.9" cy="121.7" r="1.35"/><circle cx="343.4" cy="44.5" r="1.35"/><circle cx="343.4" cy="55.0" r="1.35"/><circle cx="343.4" cy="58.6" r="1.35"/><circle cx="343.4" cy="62.1" r="1.35"/><circle cx="343.4" cy="65.6" r="1.35"/><circle cx="343.4" cy="69.1" r="1.35"/><circle cx="343.4" cy="72.6" r="1.35"/><circle cx="343.4" cy="76.1" r="1.35"/><circle cx="343.4" cy="79.6" r="1.35"/><circle cx="343.4" cy="83.1" r="1.35"/><circle cx="343.4" cy="86.6" r="1.35"/><circle cx="343.4" cy="90.1" r="1.35"/><circle cx="343.4" cy="93.7" r="1.35"/><circle cx="343.4" cy="97.2" r="1.35"/><circle cx="343.4" cy="100.7" r="1.35"/><circle cx="343.4" cy="104.2" r="1.35"/><circle cx="343.4" cy="107.7" r="1.35"/><circle cx="343.4" cy="114.7" r="1.35"/><circle cx="343.4" cy="118.2" r="1.35"/><circle cx="346.9" cy="44.5" r="1.35"/><circle cx="346.9" cy="55.0" r="1.35"/><circle cx="346.9" cy="58.6" r="1.35"/><circle cx="346.9" cy="62.1" r="1.35"/><circle cx="346.9" cy="65.6" r="1.35"/><circle cx="346.9" cy="69.1" r="1.35"/><circle cx="346.9" cy="72.6" r="1.35"/><circle cx="346.9" cy="76.1" r="1.35"/><circle cx="346.9" cy="79.6" r="1.35"/><circle cx="346.9" cy="83.1" r="1.35"/><circle cx="346.9" cy="86.6" r="1.35"/><circle cx="346.9" cy="90.1" r="1.35"/><circle cx="346.9" cy="93.7" r="1.35"/><circle cx="346.9" cy="97.2" r="1.35"/><circle cx="346.9" cy="100.7" r="1.35"/><circle cx="346.9" cy="104.2" r="1.35"/><circle cx="346.9" cy="107.7" r="1.35"/><circle cx="346.9" cy="114.7" r="1.35"/><circle cx="350.4" cy="51.5" r="1.35"/><circle cx="350.4" cy="55.0" r="1.35"/><circle cx="350.4" cy="58.6" r="1.35"/><circle cx="350.4" cy="62.1" r="1.35"/><circle cx="350.4" cy="65.6" r="1.35"/><circle cx="350.4" cy="69.1" r="1.35"/><circle cx="350.4" cy="72.6" r="1.35"/><circle cx="350.4" cy="76.1" r="1.35"/><circle cx="350.4" cy="79.6" r="1.35"/><circle cx="350.4" cy="83.1" r="1.35"/><circle cx="350.4" cy="86.6" r="1.35"/><circle cx="350.4" cy="90.1" r="1.35"/><circle cx="350.4" cy="93.7" r="1.35"/><circle cx="350.4" cy="97.2" r="1.35"/><circle cx="350.4" cy="100.7" r="1.35"/><circle cx="350.4" cy="104.2" r="1.35"/><circle cx="350.4" cy="107.7" r="1.35"/><circle cx="350.4" cy="111.2" r="1.35"/><circle cx="353.9" cy="55.0" r="1.35"/><circle cx="353.9" cy="58.6" r="1.35"/><circle cx="353.9" cy="62.1" r="1.35"/><circle cx="353.9" cy="65.6" r="1.35"/><circle cx="353.9" cy="69.1" r="1.35"/><circle cx="353.9" cy="72.6" r="1.35"/><circle cx="353.9" cy="76.1" r="1.35"/><circle cx="353.9" cy="79.6" r="1.35"/><circle cx="353.9" cy="83.1" r="1.35"/><circle cx="353.9" cy="86.6" r="1.35"/><circle cx="353.9" cy="90.1" r="1.35"/><circle cx="353.9" cy="93.7" r="1.35"/><circle cx="353.9" cy="97.2" r="1.35"/><circle cx="353.9" cy="100.7" r="1.35"/><circle cx="353.9" cy="104.2" r="1.35"/><circle cx="353.9" cy="107.7" r="1.35"/><circle cx="353.9" cy="111.2" r="1.35"/><circle cx="357.4" cy="55.0" r="1.35"/><circle cx="357.4" cy="58.6" r="1.35"/><circle cx="357.4" cy="62.1" r="1.35"/><circle cx="357.4" cy="65.6" r="1.35"/><circle cx="357.4" cy="69.1" r="1.35"/><circle cx="357.4" cy="72.6" r="1.35"/><circle cx="357.4" cy="76.1" r="1.35"/><circle cx="357.4" cy="79.6" r="1.35"/><circle cx="357.4" cy="83.1" r="1.35"/><circle cx="357.4" cy="86.6" r="1.35"/><circle cx="357.4" cy="90.1" r="1.35"/><circle cx="357.4" cy="93.7" r="1.35"/><circle cx="357.4" cy="97.2" r="1.35"/><circle cx="357.4" cy="100.7" r="1.35"/><circle cx="357.4" cy="104.2" r="1.35"/><circle cx="357.4" cy="107.7" r="1.35"/><circle cx="357.4" cy="111.2" r="1.35"/><circle cx="361.0" cy="48.0" r="1.35"/><circle cx="361.0" cy="51.5" r="1.35"/><circle cx="361.0" cy="55.0" r="1.35"/><circle cx="361.0" cy="58.6" r="1.35"/><circle cx="361.0" cy="62.1" r="1.35"/><circle cx="361.0" cy="65.6" r="1.35"/><circle cx="361.0" cy="69.1" r="1.35"/><circle cx="361.0" cy="72.6" r="1.35"/><circle cx="361.0" cy="76.1" r="1.35"/><circle cx="361.0" cy="79.6" r="1.35"/><circle cx="361.0" cy="83.1" r="1.35"/><circle cx="361.0" cy="86.6" r="1.35"/><circle cx="361.0" cy="90.1" r="1.35"/><circle cx="361.0" cy="93.7" r="1.35"/><circle cx="361.0" cy="97.2" r="1.35"/><circle cx="361.0" cy="100.7" r="1.35"/><circle cx="361.0" cy="104.2" r="1.35"/><circle cx="361.0" cy="107.7" r="1.35"/><circle cx="361.0" cy="111.2" r="1.35"/><circle cx="361.0" cy="114.7" r="1.35"/><circle cx="364.5" cy="48.0" r="1.35"/><circle cx="364.5" cy="51.5" r="1.35"/><circle cx="364.5" cy="55.0" r="1.35"/><circle cx="364.5" cy="58.6" r="1.35"/><circle cx="364.5" cy="62.1" r="1.35"/><circle cx="364.5" cy="65.6" r="1.35"/><circle cx="364.5" cy="69.1" r="1.35"/><circle cx="364.5" cy="72.6" r="1.35"/><circle cx="364.5" cy="76.1" r="1.35"/><circle cx="364.5" cy="79.6" r="1.35"/><circle cx="364.5" cy="83.1" r="1.35"/><circle cx="364.5" cy="86.6" r="1.35"/><circle cx="364.5" cy="90.1" r="1.35"/><circle cx="364.5" cy="93.7" r="1.35"/><circle cx="364.5" cy="97.2" r="1.35"/><circle cx="364.5" cy="100.7" r="1.35"/><circle cx="364.5" cy="104.2" r="1.35"/><circle cx="364.5" cy="107.7" r="1.35"/><circle cx="364.5" cy="111.2" r="1.35"/><circle cx="364.5" cy="114.7" r="1.35"/><circle cx="368.0" cy="51.5" r="1.35"/><circle cx="368.0" cy="55.0" r="1.35"/><circle cx="368.0" cy="58.6" r="1.35"/><circle cx="368.0" cy="62.1" r="1.35"/><circle cx="368.0" cy="65.6" r="1.35"/><circle cx="368.0" cy="69.1" r="1.35"/><circle cx="368.0" cy="72.6" r="1.35"/><circle cx="368.0" cy="76.1" r="1.35"/><circle cx="368.0" cy="79.6" r="1.35"/><circle cx="368.0" cy="83.1" r="1.35"/><circle cx="368.0" cy="86.6" r="1.35"/><circle cx="368.0" cy="90.1" r="1.35"/><circle cx="368.0" cy="93.7" r="1.35"/><circle cx="368.0" cy="97.2" r="1.35"/><circle cx="368.0" cy="100.7" r="1.35"/><circle cx="368.0" cy="104.2" r="1.35"/><circle cx="368.0" cy="107.7" r="1.35"/><circle cx="368.0" cy="111.2" r="1.35"/><circle cx="368.0" cy="114.7" r="1.35"/><circle cx="368.0" cy="118.2" r="1.35"/><circle cx="368.0" cy="121.7" r="1.35"/><circle cx="368.0" cy="125.2" r="1.35"/><circle cx="371.5" cy="48.0" r="1.35"/><circle cx="371.5" cy="51.5" r="1.35"/><circle cx="371.5" cy="55.0" r="1.35"/><circle cx="371.5" cy="58.6" r="1.35"/><circle cx="371.5" cy="62.1" r="1.35"/><circle cx="371.5" cy="65.6" r="1.35"/><circle cx="371.5" cy="69.1" r="1.35"/><circle cx="371.5" cy="72.6" r="1.35"/><circle cx="371.5" cy="76.1" r="1.35"/><circle cx="371.5" cy="79.6" r="1.35"/><circle cx="371.5" cy="83.1" r="1.35"/><circle cx="371.5" cy="86.6" r="1.35"/><circle cx="371.5" cy="90.1" r="1.35"/><circle cx="371.5" cy="93.7" r="1.35"/><circle cx="371.5" cy="97.2" r="1.35"/><circle cx="371.5" cy="100.7" r="1.35"/><circle cx="371.5" cy="104.2" r="1.35"/><circle cx="371.5" cy="107.7" r="1.35"/><circle cx="371.5" cy="111.2" r="1.35"/><circle cx="371.5" cy="114.7" r="1.35"/><circle cx="371.5" cy="118.2" r="1.35"/><circle cx="371.5" cy="121.7" r="1.35"/><circle cx="371.5" cy="125.2" r="1.35"/><circle cx="371.5" cy="128.8" r="1.35"/><circle cx="371.5" cy="132.3" r="1.35"/><circle cx="375.0" cy="48.0" r="1.35"/><circle cx="375.0" cy="51.5" r="1.35"/><circle cx="375.0" cy="55.0" r="1.35"/><circle cx="375.0" cy="58.6" r="1.35"/><circle cx="375.0" cy="62.1" r="1.35"/><circle cx="375.0" cy="65.6" r="1.35"/><circle cx="375.0" cy="69.1" r="1.35"/><circle cx="375.0" cy="72.6" r="1.35"/><circle cx="375.0" cy="76.1" r="1.35"/><circle cx="375.0" cy="79.6" r="1.35"/><circle cx="375.0" cy="83.1" r="1.35"/><circle cx="375.0" cy="86.6" r="1.35"/><circle cx="375.0" cy="90.1" r="1.35"/><circle cx="375.0" cy="93.7" r="1.35"/><circle cx="375.0" cy="97.2" r="1.35"/><circle cx="375.0" cy="100.7" r="1.35"/><circle cx="375.0" cy="104.2" r="1.35"/><circle cx="375.0" cy="107.7" r="1.35"/><circle cx="375.0" cy="111.2" r="1.35"/><circle cx="375.0" cy="114.7" r="1.35"/><circle cx="375.0" cy="118.2" r="1.35"/><circle cx="375.0" cy="121.7" r="1.35"/><circle cx="375.0" cy="125.2" r="1.35"/><circle cx="375.0" cy="128.8" r="1.35"/><circle cx="375.0" cy="135.8" r="1.35"/><circle cx="378.5" cy="48.0" r="1.35"/><circle cx="378.5" cy="51.5" r="1.35"/><circle cx="378.5" cy="55.0" r="1.35"/><circle cx="378.5" cy="58.6" r="1.35"/><circle cx="378.5" cy="62.1" r="1.35"/><circle cx="378.5" cy="65.6" r="1.35"/><circle cx="378.5" cy="69.1" r="1.35"/><circle cx="378.5" cy="72.6" r="1.35"/><circle cx="378.5" cy="76.1" r="1.35"/><circle cx="378.5" cy="79.6" r="1.35"/><circle cx="378.5" cy="83.1" r="1.35"/><circle cx="378.5" cy="86.6" r="1.35"/><circle cx="378.5" cy="90.1" r="1.35"/><circle cx="378.5" cy="93.7" r="1.35"/><circle cx="378.5" cy="97.2" r="1.35"/><circle cx="378.5" cy="100.7" r="1.35"/><circle cx="378.5" cy="104.2" r="1.35"/><circle cx="378.5" cy="107.7" r="1.35"/><circle cx="378.5" cy="111.2" r="1.35"/><circle cx="378.5" cy="114.7" r="1.35"/><circle cx="378.5" cy="118.2" r="1.35"/><circle cx="378.5" cy="121.7" r="1.35"/><circle cx="382.0" cy="48.0" r="1.35"/><circle cx="382.0" cy="51.5" r="1.35"/><circle cx="382.0" cy="55.0" r="1.35"/><circle cx="382.0" cy="58.6" r="1.35"/><circle cx="382.0" cy="62.1" r="1.35"/><circle cx="382.0" cy="65.6" r="1.35"/><circle cx="382.0" cy="69.1" r="1.35"/><circle cx="382.0" cy="72.6" r="1.35"/><circle cx="382.0" cy="76.1" r="1.35"/><circle cx="382.0" cy="79.6" r="1.35"/><circle cx="382.0" cy="83.1" r="1.35"/><circle cx="382.0" cy="86.6" r="1.35"/><circle cx="382.0" cy="90.1" r="1.35"/><circle cx="382.0" cy="93.7" r="1.35"/><circle cx="382.0" cy="97.2" r="1.35"/><circle cx="382.0" cy="100.7" r="1.35"/><circle cx="382.0" cy="104.2" r="1.35"/><circle cx="382.0" cy="107.7" r="1.35"/><circle cx="382.0" cy="111.2" r="1.35"/><circle cx="382.0" cy="114.7" r="1.35"/><circle cx="382.0" cy="118.2" r="1.35"/><circle cx="385.5" cy="44.5" r="1.35"/><circle cx="385.5" cy="48.0" r="1.35"/><circle cx="385.5" cy="51.5" r="1.35"/><circle cx="385.5" cy="55.0" r="1.35"/><circle cx="385.5" cy="58.6" r="1.35"/><circle cx="385.5" cy="62.1" r="1.35"/><circle cx="385.5" cy="65.6" r="1.35"/><circle cx="385.5" cy="69.1" r="1.35"/><circle cx="385.5" cy="72.6" r="1.35"/><circle cx="385.5" cy="76.1" r="1.35"/><circle cx="385.5" cy="79.6" r="1.35"/><circle cx="385.5" cy="83.1" r="1.35"/><circle cx="385.5" cy="86.6" r="1.35"/><circle cx="385.5" cy="90.1" r="1.35"/><circle cx="385.5" cy="93.7" r="1.35"/><circle cx="385.5" cy="97.2" r="1.35"/><circle cx="385.5" cy="100.7" r="1.35"/><circle cx="385.5" cy="104.2" r="1.35"/><circle cx="385.5" cy="107.7" r="1.35"/><circle cx="385.5" cy="111.2" r="1.35"/><circle cx="385.5" cy="114.7" r="1.35"/><circle cx="389.0" cy="44.5" r="1.35"/><circle cx="389.0" cy="48.0" r="1.35"/><circle cx="389.0" cy="51.5" r="1.35"/><circle cx="389.0" cy="55.0" r="1.35"/><circle cx="389.0" cy="58.6" r="1.35"/><circle cx="389.0" cy="62.1" r="1.35"/><circle cx="389.0" cy="65.6" r="1.35"/><circle cx="389.0" cy="69.1" r="1.35"/><circle cx="389.0" cy="72.6" r="1.35"/><circle cx="389.0" cy="76.1" r="1.35"/><circle cx="389.0" cy="79.6" r="1.35"/><circle cx="389.0" cy="83.1" r="1.35"/><circle cx="389.0" cy="86.6" r="1.35"/><circle cx="389.0" cy="90.1" r="1.35"/><circle cx="389.0" cy="93.7" r="1.35"/><circle cx="389.0" cy="97.2" r="1.35"/><circle cx="389.0" cy="100.7" r="1.35"/><circle cx="389.0" cy="104.2" r="1.35"/><circle cx="389.0" cy="107.7" r="1.35"/><circle cx="389.0" cy="111.2" r="1.35"/><circle cx="389.0" cy="114.7" r="1.35"/><circle cx="392.5" cy="37.5" r="1.35"/><circle cx="392.5" cy="44.5" r="1.35"/><circle cx="392.5" cy="48.0" r="1.35"/><circle cx="392.5" cy="51.5" r="1.35"/><circle cx="392.5" cy="55.0" r="1.35"/><circle cx="392.5" cy="58.6" r="1.35"/><circle cx="392.5" cy="62.1" r="1.35"/><circle cx="392.5" cy="65.6" r="1.35"/><circle cx="392.5" cy="69.1" r="1.35"/><circle cx="392.5" cy="72.6" r="1.35"/><circle cx="392.5" cy="76.1" r="1.35"/><circle cx="392.5" cy="79.6" r="1.35"/><circle cx="392.5" cy="83.1" r="1.35"/><circle cx="392.5" cy="86.6" r="1.35"/><circle cx="392.5" cy="90.1" r="1.35"/><circle cx="392.5" cy="93.7" r="1.35"/><circle cx="392.5" cy="97.2" r="1.35"/><circle cx="392.5" cy="100.7" r="1.35"/><circle cx="392.5" cy="104.2" r="1.35"/><circle cx="392.5" cy="107.7" r="1.35"/><circle cx="392.5" cy="111.2" r="1.35"/><circle cx="392.5" cy="114.7" r="1.35"/><circle cx="392.5" cy="118.2" r="1.35"/><circle cx="396.1" cy="37.5" r="1.35"/><circle cx="396.1" cy="44.5" r="1.35"/><circle cx="396.1" cy="48.0" r="1.35"/><circle cx="396.1" cy="51.5" r="1.35"/><circle cx="396.1" cy="55.0" r="1.35"/><circle cx="396.1" cy="58.6" r="1.35"/><circle cx="396.1" cy="62.1" r="1.35"/><circle cx="396.1" cy="65.6" r="1.35"/><circle cx="396.1" cy="69.1" r="1.35"/><circle cx="396.1" cy="72.6" r="1.35"/><circle cx="396.1" cy="76.1" r="1.35"/><circle cx="396.1" cy="79.6" r="1.35"/><circle cx="396.1" cy="83.1" r="1.35"/><circle cx="396.1" cy="86.6" r="1.35"/><circle cx="396.1" cy="90.1" r="1.35"/><circle cx="396.1" cy="93.7" r="1.35"/><circle cx="396.1" cy="97.2" r="1.35"/><circle cx="396.1" cy="100.7" r="1.35"/><circle cx="396.1" cy="104.2" r="1.35"/><circle cx="396.1" cy="107.7" r="1.35"/><circle cx="396.1" cy="111.2" r="1.35"/><circle cx="396.1" cy="114.7" r="1.35"/><circle cx="396.1" cy="118.2" r="1.35"/><circle cx="396.1" cy="121.7" r="1.35"/><circle cx="399.6" cy="37.5" r="1.35"/><circle cx="399.6" cy="44.5" r="1.35"/><circle cx="399.6" cy="48.0" r="1.35"/><circle cx="399.6" cy="51.5" r="1.35"/><circle cx="399.6" cy="55.0" r="1.35"/><circle cx="399.6" cy="58.6" r="1.35"/><circle cx="399.6" cy="62.1" r="1.35"/><circle cx="399.6" cy="65.6" r="1.35"/><circle cx="399.6" cy="69.1" r="1.35"/><circle cx="399.6" cy="72.6" r="1.35"/><circle cx="399.6" cy="76.1" r="1.35"/><circle cx="399.6" cy="79.6" r="1.35"/><circle cx="399.6" cy="83.1" r="1.35"/><circle cx="399.6" cy="86.6" r="1.35"/><circle cx="399.6" cy="90.1" r="1.35"/><circle cx="399.6" cy="93.7" r="1.35"/><circle cx="399.6" cy="97.2" r="1.35"/><circle cx="399.6" cy="100.7" r="1.35"/><circle cx="399.6" cy="104.2" r="1.35"/><circle cx="399.6" cy="107.7" r="1.35"/><circle cx="399.6" cy="111.2" r="1.35"/><circle cx="399.6" cy="114.7" r="1.35"/><circle cx="399.6" cy="118.2" r="1.35"/><circle cx="399.6" cy="121.7" r="1.35"/><circle cx="399.6" cy="125.2" r="1.35"/><circle cx="403.1" cy="44.5" r="1.35"/><circle cx="403.1" cy="48.0" r="1.35"/><circle cx="403.1" cy="51.5" r="1.35"/><circle cx="403.1" cy="55.0" r="1.35"/><circle cx="403.1" cy="58.6" r="1.35"/><circle cx="403.1" cy="62.1" r="1.35"/><circle cx="403.1" cy="65.6" r="1.35"/><circle cx="403.1" cy="69.1" r="1.35"/><circle cx="403.1" cy="72.6" r="1.35"/><circle cx="403.1" cy="76.1" r="1.35"/><circle cx="403.1" cy="79.6" r="1.35"/><circle cx="403.1" cy="83.1" r="1.35"/><circle cx="403.1" cy="86.6" r="1.35"/><circle cx="403.1" cy="90.1" r="1.35"/><circle cx="403.1" cy="93.7" r="1.35"/><circle cx="403.1" cy="97.2" r="1.35"/><circle cx="403.1" cy="100.7" r="1.35"/><circle cx="403.1" cy="104.2" r="1.35"/><circle cx="403.1" cy="107.7" r="1.35"/><circle cx="403.1" cy="111.2" r="1.35"/><circle cx="403.1" cy="114.7" r="1.35"/><circle cx="403.1" cy="118.2" r="1.35"/><circle cx="403.1" cy="121.7" r="1.35"/><circle cx="403.1" cy="125.2" r="1.35"/><circle cx="403.1" cy="139.3" r="1.35"/><circle cx="403.1" cy="142.8" r="1.35"/><circle cx="403.1" cy="146.3" r="1.35"/><circle cx="406.6" cy="41.0" r="1.35"/><circle cx="406.6" cy="44.5" r="1.35"/><circle cx="406.6" cy="48.0" r="1.35"/><circle cx="406.6" cy="51.5" r="1.35"/><circle cx="406.6" cy="55.0" r="1.35"/><circle cx="406.6" cy="58.6" r="1.35"/><circle cx="406.6" cy="62.1" r="1.35"/><circle cx="406.6" cy="65.6" r="1.35"/><circle cx="406.6" cy="69.1" r="1.35"/><circle cx="406.6" cy="72.6" r="1.35"/><circle cx="406.6" cy="76.1" r="1.35"/><circle cx="406.6" cy="79.6" r="1.35"/><circle cx="406.6" cy="83.1" r="1.35"/><circle cx="406.6" cy="86.6" r="1.35"/><circle cx="406.6" cy="90.1" r="1.35"/><circle cx="406.6" cy="93.7" r="1.35"/><circle cx="406.6" cy="97.2" r="1.35"/><circle cx="406.6" cy="100.7" r="1.35"/><circle cx="406.6" cy="104.2" r="1.35"/><circle cx="406.6" cy="107.7" r="1.35"/><circle cx="406.6" cy="111.2" r="1.35"/><circle cx="406.6" cy="114.7" r="1.35"/><circle cx="406.6" cy="118.2" r="1.35"/><circle cx="406.6" cy="121.7" r="1.35"/><circle cx="406.6" cy="125.2" r="1.35"/><circle cx="406.6" cy="128.8" r="1.35"/><circle cx="406.6" cy="139.3" r="1.35"/><circle cx="406.6" cy="142.8" r="1.35"/><circle cx="406.6" cy="146.3" r="1.35"/><circle cx="406.6" cy="149.8" r="1.35"/><circle cx="410.1" cy="44.5" r="1.35"/><circle cx="410.1" cy="48.0" r="1.35"/><circle cx="410.1" cy="51.5" r="1.35"/><circle cx="410.1" cy="55.0" r="1.35"/><circle cx="410.1" cy="58.6" r="1.35"/><circle cx="410.1" cy="62.1" r="1.35"/><circle cx="410.1" cy="65.6" r="1.35"/><circle cx="410.1" cy="69.1" r="1.35"/><circle cx="410.1" cy="72.6" r="1.35"/><circle cx="410.1" cy="76.1" r="1.35"/><circle cx="410.1" cy="79.6" r="1.35"/><circle cx="410.1" cy="83.1" r="1.35"/><circle cx="410.1" cy="86.6" r="1.35"/><circle cx="410.1" cy="90.1" r="1.35"/><circle cx="410.1" cy="93.7" r="1.35"/><circle cx="410.1" cy="97.2" r="1.35"/><circle cx="410.1" cy="100.7" r="1.35"/><circle cx="410.1" cy="104.2" r="1.35"/><circle cx="410.1" cy="107.7" r="1.35"/><circle cx="410.1" cy="111.2" r="1.35"/><circle cx="410.1" cy="114.7" r="1.35"/><circle cx="410.1" cy="118.2" r="1.35"/><circle cx="410.1" cy="121.7" r="1.35"/><circle cx="410.1" cy="125.2" r="1.35"/><circle cx="410.1" cy="128.8" r="1.35"/><circle cx="410.1" cy="132.3" r="1.35"/><circle cx="410.1" cy="149.8" r="1.35"/><circle cx="413.6" cy="44.5" r="1.35"/><circle cx="413.6" cy="48.0" r="1.35"/><circle cx="413.6" cy="51.5" r="1.35"/><circle cx="413.6" cy="55.0" r="1.35"/><circle cx="413.6" cy="58.6" r="1.35"/><circle cx="413.6" cy="62.1" r="1.35"/><circle cx="413.6" cy="65.6" r="1.35"/><circle cx="413.6" cy="69.1" r="1.35"/><circle cx="413.6" cy="72.6" r="1.35"/><circle cx="413.6" cy="76.1" r="1.35"/><circle cx="413.6" cy="79.6" r="1.35"/><circle cx="413.6" cy="83.1" r="1.35"/><circle cx="413.6" cy="86.6" r="1.35"/><circle cx="413.6" cy="90.1" r="1.35"/><circle cx="413.6" cy="93.7" r="1.35"/><circle cx="413.6" cy="97.2" r="1.35"/><circle cx="413.6" cy="100.7" r="1.35"/><circle cx="413.6" cy="104.2" r="1.35"/><circle cx="413.6" cy="107.7" r="1.35"/><circle cx="413.6" cy="111.2" r="1.35"/><circle cx="413.6" cy="114.7" r="1.35"/><circle cx="413.6" cy="125.2" r="1.35"/><circle cx="413.6" cy="128.8" r="1.35"/><circle cx="417.1" cy="44.5" r="1.35"/><circle cx="417.1" cy="48.0" r="1.35"/><circle cx="417.1" cy="51.5" r="1.35"/><circle cx="417.1" cy="55.0" r="1.35"/><circle cx="417.1" cy="58.6" r="1.35"/><circle cx="417.1" cy="62.1" r="1.35"/><circle cx="417.1" cy="65.6" r="1.35"/><circle cx="417.1" cy="69.1" r="1.35"/><circle cx="417.1" cy="72.6" r="1.35"/><circle cx="417.1" cy="76.1" r="1.35"/><circle cx="417.1" cy="79.6" r="1.35"/><circle cx="417.1" cy="83.1" r="1.35"/><circle cx="417.1" cy="86.6" r="1.35"/><circle cx="417.1" cy="90.1" r="1.35"/><circle cx="417.1" cy="93.7" r="1.35"/><circle cx="417.1" cy="97.2" r="1.35"/><circle cx="417.1" cy="100.7" r="1.35"/><circle cx="417.1" cy="104.2" r="1.35"/><circle cx="417.1" cy="107.7" r="1.35"/><circle cx="417.1" cy="111.2" r="1.35"/><circle cx="417.1" cy="114.7" r="1.35"/><circle cx="417.1" cy="146.3" r="1.35"/><circle cx="420.6" cy="48.0" r="1.35"/><circle cx="420.6" cy="51.5" r="1.35"/><circle cx="420.6" cy="55.0" r="1.35"/><circle cx="420.6" cy="58.6" r="1.35"/><circle cx="420.6" cy="62.1" r="1.35"/><circle cx="420.6" cy="65.6" r="1.35"/><circle cx="420.6" cy="69.1" r="1.35"/><circle cx="420.6" cy="72.6" r="1.35"/><circle cx="420.6" cy="76.1" r="1.35"/><circle cx="420.6" cy="79.6" r="1.35"/><circle cx="420.6" cy="83.1" r="1.35"/><circle cx="420.6" cy="86.6" r="1.35"/><circle cx="420.6" cy="90.1" r="1.35"/><circle cx="420.6" cy="93.7" r="1.35"/><circle cx="420.6" cy="97.2" r="1.35"/><circle cx="420.6" cy="100.7" r="1.35"/><circle cx="420.6" cy="104.2" r="1.35"/><circle cx="420.6" cy="107.7" r="1.35"/><circle cx="420.6" cy="111.2" r="1.35"/><circle cx="420.6" cy="114.7" r="1.35"/><circle cx="420.6" cy="142.8" r="1.35"/><circle cx="420.6" cy="146.3" r="1.35"/><circle cx="420.6" cy="149.8" r="1.35"/><circle cx="420.6" cy="156.8" r="1.35"/><circle cx="420.6" cy="177.9" r="1.35"/><circle cx="420.6" cy="181.4" r="1.35"/><circle cx="424.1" cy="48.0" r="1.35"/><circle cx="424.1" cy="51.5" r="1.35"/><circle cx="424.1" cy="55.0" r="1.35"/><circle cx="424.1" cy="58.6" r="1.35"/><circle cx="424.1" cy="62.1" r="1.35"/><circle cx="424.1" cy="65.6" r="1.35"/><circle cx="424.1" cy="69.1" r="1.35"/><circle cx="424.1" cy="72.6" r="1.35"/><circle cx="424.1" cy="76.1" r="1.35"/><circle cx="424.1" cy="79.6" r="1.35"/><circle cx="424.1" cy="83.1" r="1.35"/><circle cx="424.1" cy="86.6" r="1.35"/><circle cx="424.1" cy="90.1" r="1.35"/><circle cx="424.1" cy="93.7" r="1.35"/><circle cx="424.1" cy="97.2" r="1.35"/><circle cx="424.1" cy="100.7" r="1.35"/><circle cx="424.1" cy="104.2" r="1.35"/><circle cx="424.1" cy="107.7" r="1.35"/><circle cx="424.1" cy="111.2" r="1.35"/><circle cx="424.1" cy="139.3" r="1.35"/><circle cx="424.1" cy="142.8" r="1.35"/><circle cx="424.1" cy="146.3" r="1.35"/><circle cx="424.1" cy="174.4" r="1.35"/><circle cx="424.1" cy="177.9" r="1.35"/><circle cx="424.1" cy="181.4" r="1.35"/><circle cx="424.1" cy="184.9" r="1.35"/><circle cx="424.1" cy="188.4" r="1.35"/><circle cx="424.1" cy="191.9" r="1.35"/><circle cx="427.6" cy="48.0" r="1.35"/><circle cx="427.6" cy="51.5" r="1.35"/><circle cx="427.6" cy="55.0" r="1.35"/><circle cx="427.6" cy="58.6" r="1.35"/><circle cx="427.6" cy="62.1" r="1.35"/><circle cx="427.6" cy="65.6" r="1.35"/><circle cx="427.6" cy="69.1" r="1.35"/><circle cx="427.6" cy="72.6" r="1.35"/><circle cx="427.6" cy="76.1" r="1.35"/><circle cx="427.6" cy="79.6" r="1.35"/><circle cx="427.6" cy="83.1" r="1.35"/><circle cx="427.6" cy="86.6" r="1.35"/><circle cx="427.6" cy="90.1" r="1.35"/><circle cx="427.6" cy="97.2" r="1.35"/><circle cx="427.6" cy="100.7" r="1.35"/><circle cx="427.6" cy="104.2" r="1.35"/><circle cx="427.6" cy="107.7" r="1.35"/><circle cx="427.6" cy="111.2" r="1.35"/><circle cx="427.6" cy="149.8" r="1.35"/><circle cx="427.6" cy="174.4" r="1.35"/><circle cx="427.6" cy="177.9" r="1.35"/><circle cx="427.6" cy="181.4" r="1.35"/><circle cx="427.6" cy="184.9" r="1.35"/><circle cx="427.6" cy="188.4" r="1.35"/><circle cx="427.6" cy="191.9" r="1.35"/><circle cx="431.2" cy="48.0" r="1.35"/><circle cx="431.2" cy="51.5" r="1.35"/><circle cx="431.2" cy="55.0" r="1.35"/><circle cx="431.2" cy="58.6" r="1.35"/><circle cx="431.2" cy="62.1" r="1.35"/><circle cx="431.2" cy="65.6" r="1.35"/><circle cx="431.2" cy="69.1" r="1.35"/><circle cx="431.2" cy="72.6" r="1.35"/><circle cx="431.2" cy="76.1" r="1.35"/><circle cx="431.2" cy="79.6" r="1.35"/><circle cx="431.2" cy="83.1" r="1.35"/><circle cx="431.2" cy="86.6" r="1.35"/><circle cx="431.2" cy="90.1" r="1.35"/><circle cx="431.2" cy="121.7" r="1.35"/><circle cx="431.2" cy="149.8" r="1.35"/><circle cx="431.2" cy="174.4" r="1.35"/><circle cx="431.2" cy="177.9" r="1.35"/><circle cx="431.2" cy="181.4" r="1.35"/><circle cx="431.2" cy="184.9" r="1.35"/><circle cx="431.2" cy="188.4" r="1.35"/><circle cx="434.7" cy="48.0" r="1.35"/><circle cx="434.7" cy="51.5" r="1.35"/><circle cx="434.7" cy="55.0" r="1.35"/><circle cx="434.7" cy="58.6" r="1.35"/><circle cx="434.7" cy="62.1" r="1.35"/><circle cx="434.7" cy="65.6" r="1.35"/><circle cx="434.7" cy="69.1" r="1.35"/><circle cx="434.7" cy="72.6" r="1.35"/><circle cx="434.7" cy="76.1" r="1.35"/><circle cx="434.7" cy="79.6" r="1.35"/><circle cx="434.7" cy="83.1" r="1.35"/><circle cx="434.7" cy="86.6" r="1.35"/><circle cx="434.7" cy="90.1" r="1.35"/><circle cx="434.7" cy="135.8" r="1.35"/><circle cx="434.7" cy="170.9" r="1.35"/><circle cx="434.7" cy="174.4" r="1.35"/><circle cx="434.7" cy="177.9" r="1.35"/><circle cx="434.7" cy="181.4" r="1.35"/><circle cx="434.7" cy="184.9" r="1.35"/><circle cx="434.7" cy="188.4" r="1.35"/><circle cx="438.2" cy="48.0" r="1.35"/><circle cx="438.2" cy="51.5" r="1.35"/><circle cx="438.2" cy="55.0" r="1.35"/><circle cx="438.2" cy="58.6" r="1.35"/><circle cx="438.2" cy="62.1" r="1.35"/><circle cx="438.2" cy="65.6" r="1.35"/><circle cx="438.2" cy="69.1" r="1.35"/><circle cx="438.2" cy="72.6" r="1.35"/><circle cx="438.2" cy="76.1" r="1.35"/><circle cx="438.2" cy="79.6" r="1.35"/><circle cx="438.2" cy="83.1" r="1.35"/><circle cx="438.2" cy="86.6" r="1.35"/><circle cx="438.2" cy="90.1" r="1.35"/><circle cx="438.2" cy="93.7" r="1.35"/><circle cx="438.2" cy="97.2" r="1.35"/><circle cx="438.2" cy="149.8" r="1.35"/><circle cx="438.2" cy="156.8" r="1.35"/><circle cx="438.2" cy="167.4" r="1.35"/><circle cx="438.2" cy="170.9" r="1.35"/><circle cx="438.2" cy="174.4" r="1.35"/><circle cx="438.2" cy="177.9" r="1.35"/><circle cx="438.2" cy="181.4" r="1.35"/><circle cx="438.2" cy="184.9" r="1.35"/><circle cx="438.2" cy="188.4" r="1.35"/><circle cx="441.7" cy="51.5" r="1.35"/><circle cx="441.7" cy="55.0" r="1.35"/><circle cx="441.7" cy="58.6" r="1.35"/><circle cx="441.7" cy="62.1" r="1.35"/><circle cx="441.7" cy="65.6" r="1.35"/><circle cx="441.7" cy="69.1" r="1.35"/><circle cx="441.7" cy="72.6" r="1.35"/><circle cx="441.7" cy="76.1" r="1.35"/><circle cx="441.7" cy="79.6" r="1.35"/><circle cx="441.7" cy="83.1" r="1.35"/><circle cx="441.7" cy="86.6" r="1.35"/><circle cx="441.7" cy="90.1" r="1.35"/><circle cx="441.7" cy="97.2" r="1.35"/><circle cx="441.7" cy="149.8" r="1.35"/><circle cx="441.7" cy="167.4" r="1.35"/><circle cx="441.7" cy="170.9" r="1.35"/><circle cx="441.7" cy="174.4" r="1.35"/><circle cx="441.7" cy="177.9" r="1.35"/><circle cx="441.7" cy="181.4" r="1.35"/><circle cx="441.7" cy="184.9" r="1.35"/><circle cx="445.2" cy="51.5" r="1.35"/><circle cx="445.2" cy="55.0" r="1.35"/><circle cx="445.2" cy="58.6" r="1.35"/><circle cx="445.2" cy="62.1" r="1.35"/><circle cx="445.2" cy="65.6" r="1.35"/><circle cx="445.2" cy="69.1" r="1.35"/><circle cx="445.2" cy="72.6" r="1.35"/><circle cx="445.2" cy="76.1" r="1.35"/><circle cx="445.2" cy="79.6" r="1.35"/><circle cx="445.2" cy="83.1" r="1.35"/><circle cx="445.2" cy="86.6" r="1.35"/><circle cx="445.2" cy="163.9" r="1.35"/><circle cx="445.2" cy="167.4" r="1.35"/><circle cx="445.2" cy="170.9" r="1.35"/><circle cx="445.2" cy="174.4" r="1.35"/><circle cx="445.2" cy="177.9" r="1.35"/><circle cx="445.2" cy="181.4" r="1.35"/><circle cx="445.2" cy="184.9" r="1.35"/><circle cx="445.2" cy="188.4" r="1.35"/><circle cx="448.7" cy="51.5" r="1.35"/><circle cx="448.7" cy="55.0" r="1.35"/><circle cx="448.7" cy="58.6" r="1.35"/><circle cx="448.7" cy="62.1" r="1.35"/><circle cx="448.7" cy="65.6" r="1.35"/><circle cx="448.7" cy="69.1" r="1.35"/><circle cx="448.7" cy="72.6" r="1.35"/><circle cx="448.7" cy="76.1" r="1.35"/><circle cx="448.7" cy="79.6" r="1.35"/><circle cx="448.7" cy="83.1" r="1.35"/><circle cx="448.7" cy="86.6" r="1.35"/><circle cx="448.7" cy="149.8" r="1.35"/><circle cx="448.7" cy="153.3" r="1.35"/><circle cx="448.7" cy="163.9" r="1.35"/><circle cx="448.7" cy="167.4" r="1.35"/><circle cx="448.7" cy="170.9" r="1.35"/><circle cx="448.7" cy="174.4" r="1.35"/><circle cx="448.7" cy="177.9" r="1.35"/><circle cx="448.7" cy="181.4" r="1.35"/><circle cx="448.7" cy="184.9" r="1.35"/><circle cx="448.7" cy="188.4" r="1.35"/><circle cx="452.2" cy="51.5" r="1.35"/><circle cx="452.2" cy="55.0" r="1.35"/><circle cx="452.2" cy="58.6" r="1.35"/><circle cx="452.2" cy="62.1" r="1.35"/><circle cx="452.2" cy="65.6" r="1.35"/><circle cx="452.2" cy="69.1" r="1.35"/><circle cx="452.2" cy="76.1" r="1.35"/><circle cx="452.2" cy="79.6" r="1.35"/><circle cx="452.2" cy="83.1" r="1.35"/><circle cx="452.2" cy="97.2" r="1.35"/><circle cx="452.2" cy="149.8" r="1.35"/><circle cx="452.2" cy="167.4" r="1.35"/><circle cx="452.2" cy="170.9" r="1.35"/><circle cx="452.2" cy="174.4" r="1.35"/><circle cx="452.2" cy="177.9" r="1.35"/><circle cx="452.2" cy="181.4" r="1.35"/><circle cx="452.2" cy="184.9" r="1.35"/><circle cx="452.2" cy="188.4" r="1.35"/><circle cx="455.7" cy="44.5" r="1.35"/><circle cx="455.7" cy="48.0" r="1.35"/><circle cx="455.7" cy="51.5" r="1.35"/><circle cx="455.7" cy="55.0" r="1.35"/><circle cx="455.7" cy="58.6" r="1.35"/><circle cx="455.7" cy="62.1" r="1.35"/><circle cx="455.7" cy="65.6" r="1.35"/><circle cx="455.7" cy="72.6" r="1.35"/><circle cx="455.7" cy="76.1" r="1.35"/><circle cx="455.7" cy="79.6" r="1.35"/><circle cx="455.7" cy="93.7" r="1.35"/><circle cx="455.7" cy="97.2" r="1.35"/><circle cx="455.7" cy="149.8" r="1.35"/><circle cx="455.7" cy="153.3" r="1.35"/><circle cx="455.7" cy="170.9" r="1.35"/><circle cx="455.7" cy="174.4" r="1.35"/><circle cx="455.7" cy="177.9" r="1.35"/><circle cx="455.7" cy="181.4" r="1.35"/><circle cx="455.7" cy="184.9" r="1.35"/><circle cx="455.7" cy="188.4" r="1.35"/><circle cx="455.7" cy="191.9" r="1.35"/><circle cx="459.2" cy="48.0" r="1.35"/><circle cx="459.2" cy="51.5" r="1.35"/><circle cx="459.2" cy="55.0" r="1.35"/><circle cx="459.2" cy="58.6" r="1.35"/><circle cx="459.2" cy="62.1" r="1.35"/><circle cx="459.2" cy="65.6" r="1.35"/><circle cx="459.2" cy="76.1" r="1.35"/><circle cx="459.2" cy="79.6" r="1.35"/><circle cx="459.2" cy="86.6" r="1.35"/><circle cx="459.2" cy="149.8" r="1.35"/><circle cx="459.2" cy="153.3" r="1.35"/><circle cx="459.2" cy="156.8" r="1.35"/><circle cx="459.2" cy="160.3" r="1.35"/><circle cx="459.2" cy="163.9" r="1.35"/><circle cx="459.2" cy="167.4" r="1.35"/><circle cx="459.2" cy="170.9" r="1.35"/><circle cx="459.2" cy="174.4" r="1.35"/><circle cx="459.2" cy="177.9" r="1.35"/><circle cx="459.2" cy="181.4" r="1.35"/><circle cx="459.2" cy="184.9" r="1.35"/><circle cx="459.2" cy="188.4" r="1.35"/><circle cx="459.2" cy="191.9" r="1.35"/><circle cx="459.2" cy="195.5" r="1.35"/><circle cx="462.7" cy="48.0" r="1.35"/><circle cx="462.7" cy="51.5" r="1.35"/><circle cx="462.7" cy="55.0" r="1.35"/><circle cx="462.7" cy="58.6" r="1.35"/><circle cx="462.7" cy="62.1" r="1.35"/><circle cx="462.7" cy="86.6" r="1.35"/><circle cx="462.7" cy="153.3" r="1.35"/><circle cx="462.7" cy="167.4" r="1.35"/><circle cx="462.7" cy="170.9" r="1.35"/><circle cx="462.7" cy="174.4" r="1.35"/><circle cx="462.7" cy="177.9" r="1.35"/><circle cx="462.7" cy="181.4" r="1.35"/><circle cx="462.7" cy="184.9" r="1.35"/><circle cx="462.7" cy="188.4" r="1.35"/><circle cx="462.7" cy="191.9" r="1.35"/><circle cx="462.7" cy="195.5" r="1.35"/><circle cx="466.3" cy="48.0" r="1.35"/><circle cx="466.3" cy="51.5" r="1.35"/><circle cx="466.3" cy="55.0" r="1.35"/><circle cx="466.3" cy="58.6" r="1.35"/><circle cx="466.3" cy="62.1" r="1.35"/><circle cx="466.3" cy="156.8" r="1.35"/><circle cx="466.3" cy="174.4" r="1.35"/><circle cx="466.3" cy="177.9" r="1.35"/><circle cx="466.3" cy="181.4" r="1.35"/><circle cx="466.3" cy="184.9" r="1.35"/><circle cx="466.3" cy="188.4" r="1.35"/><circle cx="466.3" cy="191.9" r="1.35"/><circle cx="466.3" cy="195.5" r="1.35"/><circle cx="466.3" cy="202.5" r="1.35"/><circle cx="469.8" cy="51.5" r="1.35"/><circle cx="469.8" cy="55.0" r="1.35"/><circle cx="469.8" cy="58.6" r="1.35"/><circle cx="469.8" cy="62.1" r="1.35"/><circle cx="469.8" cy="153.3" r="1.35"/><circle cx="469.8" cy="177.9" r="1.35"/><circle cx="469.8" cy="181.4" r="1.35"/><circle cx="469.8" cy="184.9" r="1.35"/><circle cx="469.8" cy="188.4" r="1.35"/><circle cx="469.8" cy="191.9" r="1.35"/><circle cx="473.3" cy="51.5" r="1.35"/><circle cx="473.3" cy="55.0" r="1.35"/><circle cx="473.3" cy="58.6" r="1.35"/><circle cx="473.3" cy="62.1" r="1.35"/><circle cx="473.3" cy="65.6" r="1.35"/><circle cx="473.3" cy="181.4" r="1.35"/><circle cx="473.3" cy="184.9" r="1.35"/><circle cx="473.3" cy="188.4" r="1.35"/><circle cx="476.8" cy="51.5" r="1.35"/><circle cx="476.8" cy="55.0" r="1.35"/><circle cx="476.8" cy="58.6" r="1.35"/><circle cx="476.8" cy="62.1" r="1.35"/><circle cx="480.3" cy="51.5" r="1.35"/><circle cx="480.3" cy="55.0" r="1.35"/><circle cx="480.3" cy="58.6" r="1.35"/><circle cx="480.3" cy="62.1" r="1.35"/><circle cx="480.3" cy="69.1" r="1.35"/><circle cx="480.3" cy="72.6" r="1.35"/><circle cx="483.8" cy="55.0" r="1.35"/><circle cx="483.8" cy="58.6" r="1.35"/><circle cx="483.8" cy="62.1" r="1.35"/><circle cx="483.8" cy="65.6" r="1.35"/><circle cx="483.8" cy="69.1" r="1.35"/><circle cx="487.3" cy="51.5" r="1.35"/><circle cx="487.3" cy="55.0" r="1.35"/><circle cx="487.3" cy="58.6" r="1.35"/><circle cx="487.3" cy="65.6" r="1.35"/><circle cx="490.8" cy="55.0" r="1.35"/><circle cx="490.8" cy="58.6" r="1.35"/><circle cx="490.8" cy="62.1" r="1.35"/><circle cx="490.8" cy="174.4" r="1.35"/><circle cx="494.3" cy="55.0" r="1.35"/><circle cx="494.3" cy="58.6" r="1.35"/><circle cx="494.3" cy="62.1" r="1.35"/><circle cx="494.3" cy="206.0" r="1.35"/><circle cx="497.8" cy="51.5" r="1.35"/><circle cx="497.8" cy="55.0" r="1.35"/><circle cx="497.8" cy="58.6" r="1.35"/><circle cx="497.8" cy="62.1" r="1.35"/><circle cx="497.8" cy="206.0" r="1.35"/><circle cx="501.4" cy="51.5" r="1.35"/><circle cx="501.4" cy="55.0" r="1.35"/><circle cx="501.4" cy="58.6" r="1.35"/><circle cx="501.4" cy="62.1" r="1.35"/><circle cx="501.4" cy="202.5" r="1.35"/><circle cx="504.9" cy="51.5" r="1.35"/><circle cx="504.9" cy="55.0" r="1.35"/><circle cx="504.9" cy="58.6" r="1.35"/><circle cx="504.9" cy="199.0" r="1.35"/><circle cx="508.4" cy="55.0" r="1.35"/></g>
+  <path class="arc" d="M155.6 107.7 Q141.6 96.3 127.5 117.6"/><path class="arc" d="M155.6 107.7 Q248.6 53.8 341.7 111.5"/><path class="arc" d="M341.7 111.5 Q357.3 103.5 373.0 122.0"/><path class="arc" d="M127.5 117.6 Q250.3 70.7 373.0 122.0"/>
+  <circle class="sig" r="3.5" style="offset-path:path('M155.6 107.7 Q248.6 53.8 341.7 111.5')"/>
+  <circle class="sig" r="3.5" style="offset-path:path('M341.7 111.5 Q357.3 103.5 373.0 122.0');animation-delay:-1.4s"/>
+  <circle class="sig" r="3.5" style="offset-path:path('M155.6 107.7 Q141.6 96.3 127.5 117.6');animation-delay:-2.6s"/>
+  <circle class="sig" r="3.5" style="offset-path:path('M127.5 117.6 Q250.3 70.7 373.0 122.0');animation-delay:-3.6s"/>
+  
+  
+  
+  
+  <!-- Chennai (paired with Hyderabad) -->
+  
+  
+  
+  
+  
+  
+  <!-- labels -->
+  
+  
+  
+  
+</svg></div>
+    <div class="geo-veil" aria-hidden="true"></div>
+    <div class="grad-border" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <h1>How we work &mdash; <span class="gtext">distributed, coordinated, delivered.</span></h1>
+          <p class="lead">A day in the life of a Convene team: one sprint cadence, one backlog, and one accountable delivery manager across four time zones. Agile at a distance takes more discipline, not less structure.</p>
+          <div class="hero-cta">
+            <a class="btn btn-sage" href="#rhythm">See a day in the sprint <span class="arr">&rarr;</span></a>
+            <a target="_blank" rel="noopener" class="btn btn-ghost" href="https://calendly.com/jyamada-convene-tech/30min">Start a conversation</a>
+          </div>
+          <div class="hstats">
+            <div><div class="v">2 wk</div><div class="l">Standard sprint length</div></div>
+            <div><div class="v">4</div><div class="l">Time zones, one backlog</div></div>
+            <div><div class="v">1</div><div class="l">Delivery manager, always</div></div>
+          </div>
+        </div>
+        <div class="hwidget reveal" data-d="1">
+          <div class="hw-h">A typical day's schedule</div>
+          <div class="hw-row"><span class="hw-dot"></span><span>Daily standup</span><span>09:00 ET</span></div>
+          <div class="hw-row"><span class="hw-dot"></span><span>Backlog grooming</span><span>13:00 ET</span></div>
+          <div class="hw-row"><span class="hw-dot"></span><span>Async written update</span><span>Rolling</span></div>
+          <div class="hw-row"><span class="hw-dot"></span><span>Delivery manager check-in</span><span>17:00 ET</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="rhythm" style="background:linear-gradient(180deg,#DBE4DE,#E2E9E4 55%,#DCE4DF)">
+    <div class="rhythm-bg" aria-hidden="true">
+      <svg viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <pattern id="rgGrid" width="44" height="44" patternUnits="userSpaceOnUse">
+            <path d="M44 0H0V44" fill="none" stroke="rgba(0,119,58,.09)" stroke-width="1"/>
+          </pattern>
+          <style><![CDATA[
+            /* Only animation: the minute hand, slow */
+            .rgb-min{transform-origin:600px 470px;animation:rgbSweep 90s linear infinite}
+            @keyframes rgbSweep{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+            @media (prefers-reduced-motion:reduce){.rgb-min{animation:none}}
+          ]]></style>
+        </defs>
+
+        <!-- 1. Grid pattern — subtle sage -->
+        <rect width="1200" height="640" fill="url(#rgGrid)" opacity=".65"/>
+
+        <!-- 2. Flowing squiggly currents (from the earlier composition), low opacity so they're texture not focus -->
+        <g opacity=".22">
+          <path d="M-40 80  Q 260 30, 500 100  T 1240 130" fill="none" stroke="#00AD4A" stroke-width="1.4"/>
+          <path d="M-40 180 Q 380 260, 720 170 T 1240 220" fill="none" stroke="#3F5E7C" stroke-width="1.4"/>
+          <path d="M-40 340 Q 220 290, 460 360 T 1240 320" fill="none" stroke="#00773A" stroke-width="1.4"/>
+        </g>
+        <!-- Compositional dashes for weight -->
+        <path d="M-40 40  Q 500 500, 1240 340" fill="none" stroke="rgba(0,119,58,.15)" stroke-width="1" stroke-dasharray="2 10" opacity=".7"/>
+        <path d="M-40 460 Q 500 -60, 1240 60"  fill="none" stroke="rgba(63,94,124,.14)" stroke-width="1" stroke-dasharray="1 9" opacity=".7"/>
+
+        <!-- 3. Traditional alarm clock — full width scale, low opacity watermark.
+             Clock center at (600, 470) so top half of the face (from y=70 upward) shows prominently, with bells above. -->
+        <g opacity=".14" fill="none" stroke="#1F1F1F" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Left bell (larger) -->
+          <path d="M320 100 A 78 76 0 0 1 476 100 L 476 132 L 320 132 Z" stroke-width="3.5"/>
+          <!-- Left bell knob (little ringer at top) -->
+          <path d="M370 76 Q 373 62, 388 60" stroke-width="3"/>
+          <circle cx="388" cy="60" r="6" stroke-width="3"/>
+
+          <!-- Right bell -->
+          <path d="M724 100 A 78 76 0 0 1 880 100 L 880 132 L 724 132 Z" stroke-width="3.5"/>
+          <!-- Right bell knob -->
+          <path d="M830 76 Q 827 62, 812 60" stroke-width="3"/>
+          <circle cx="812" cy="60" r="6" stroke-width="3"/>
+
+          <!-- Handle/hanger arcing over between the bells -->
+          <path d="M478 106 Q 600 -10, 722 106" stroke-width="3.5"/>
+
+          <!-- Little central ringer/hammer between bells -->
+          <line x1="600" y1="140" x2="600" y2="164" stroke-width="4"/>
+          <circle cx="600" cy="172" r="6" stroke-width="3" fill="#1F1F1F"/>
+
+          <!-- Clock face outer ring -->
+          <circle cx="600" cy="470" r="320" stroke-width="4.5" fill="rgba(255,255,255,.35)"/>
+          <!-- Bezel inner line -->
+          <circle cx="600" cy="470" r="300" stroke-width="1.2"/>
+
+          <!-- Hour markers around the face (12 total) — majors at 12/3/6/9 -->
+          <g transform="translate(600,470)">
+            <!-- 12, 3, 6, 9 major -->
+            <line x1="0" y1="-300" x2="0" y2="-268" stroke-width="5"/>
+            <line transform="rotate(90)"  x1="0" y1="-300" x2="0" y2="-268" stroke-width="5"/>
+            <line transform="rotate(180)" x1="0" y1="-300" x2="0" y2="-268" stroke-width="5"/>
+            <line transform="rotate(270)" x1="0" y1="-300" x2="0" y2="-268" stroke-width="5"/>
+            <!-- minors: 1,2,4,5,7,8,10,11 -->
+            <line transform="rotate(30)"  x1="0" y1="-300" x2="0" y2="-278" stroke-width="2.4"/>
+            <line transform="rotate(60)"  x1="0" y1="-300" x2="0" y2="-278" stroke-width="2.4"/>
+            <line transform="rotate(120)" x1="0" y1="-300" x2="0" y2="-278" stroke-width="2.4"/>
+            <line transform="rotate(150)" x1="0" y1="-300" x2="0" y2="-278" stroke-width="2.4"/>
+            <line transform="rotate(210)" x1="0" y1="-300" x2="0" y2="-278" stroke-width="2.4"/>
+            <line transform="rotate(240)" x1="0" y1="-300" x2="0" y2="-278" stroke-width="2.4"/>
+            <line transform="rotate(300)" x1="0" y1="-300" x2="0" y2="-278" stroke-width="2.4"/>
+            <line transform="rotate(330)" x1="0" y1="-300" x2="0" y2="-278" stroke-width="2.4"/>
+          </g>
+
+          <!-- Hour hand (static — points at 10) -->
+          <line x1="600" y1="470" x2="500" y2="410" stroke-width="8"/>
+          <!-- Minute hand (animated slow — the only animation on the page bg) -->
+          <line class="rgb-min" x1="600" y1="470" x2="600" y2="230" stroke-width="6"/>
+          <!-- Center pivot -->
+          <circle cx="600" cy="470" r="14" fill="#1F1F1F"/>
+          <circle cx="600" cy="470" r="5" fill="#FFF"/>
+        </g>
+      </svg>
+    </div>
+    <div class="wrap">
+      <div class="head reveal">
+        <h2>The day keeps moving. <span class="gtext">So does the sprint.</span></h2>
+        <p>Standups, planning, and reviews don't change because the team is distributed. What changes is how deliberately we run them &mdash; and how the work never actually stops.</p>
+      </div>
+
+
+      <div class="tz-card reveal" data-d="2">
+        <div class="tz-head">
+          <div class="tz-title">One standup. 9:00 AM ET.</div>
+          <div class="tz-sub">Two locations join live. Two get the recap within the hour, so nobody's out of the loop.</div>
+        </div>
+        <div class="tz-row">
+          <div class="tz-cell">
+            <div class="tz-loc">Tampa, FL</div>
+            <div class="tz-time">9:00 <span>AM</span></div>
+            <div class="tz-tag live">Live</div>
+          </div>
+          <div class="tz-cell">
+            <div class="tz-loc">Guadalajara, MX</div>
+            <div class="tz-time">8:00 <span>AM</span></div>
+            <div class="tz-tag live">Live</div>
+          </div>
+          <div class="tz-cell">
+            <div class="tz-loc">Dubai, AE</div>
+            <div class="tz-time">6:00 <span>PM</span></div>
+            <div class="tz-tag async">Async recap</div>
+          </div>
+          <div class="tz-cell">
+            <div class="tz-loc">Hyderabad &amp; Chennai</div>
+            <div class="tz-time">7:30 <span>PM</span></div>
+            <div class="tz-tag async">Async recap</div>
+          </div>
+        </div>
+        <p class="tz-note">The recap goes out as a written summary and a short recording within the hour, tied to the same shared backlog everyone already works from.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="principles">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2>Four things that make distributed agile actually work.</h2>
+      </div>
+      <div class="prin-list reveal" data-d="1">
+        <div class="prin-row"><div class="prin-num">01</div><div><h3>Overlap hours are protected, not optional</h3><p>Every team has a real-time window where every location is online together. That window is protected for standups and decisions, not left to chance.</p></div></div>
+        <div class="prin-row"><div class="prin-num">02</div><div><h3>Async is the default, not the fallback</h3><p>Written updates, recorded walkthroughs, and a single shared backlog mean work doesn't stall just because someone's asleep.</p></div></div>
+        <div class="prin-row"><div class="prin-num">03</div><div><h3>One backlog, not four</h3><p>Every location works from the same prioritized backlog. Nobody is quietly running their own parallel roadmap.</p></div></div>
+        <div class="prin-row"><div class="prin-num">04</div><div><h3>One delivery manager owns the sprint</h3><p>Distributed teams still need a single accountable owner for the sprint outcome, not a rotating cast of leads.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="statement">
+    <div class="wrap reveal">
+      <h2>Distributed isn't the trade-off. <span class="gtext">It's the advantage.</span></h2>
+      <p>A team that only works in one time zone stops when the day ends. Ours keeps moving, with one person still accountable for where it lands.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="practices">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2>The practices behind the rhythm.</h2>
+      </div>
+      <div class="practice-grid reveal" data-d="1">
+        <div><h4>Shared backlog, always visible</h4><p>Every location works from the same prioritized tracker, updated in real time, so priority is never a guessing game across time zones.</p></div>
+        <div><h4>Recorded, not repeated</h4><p>Standups and planning sessions are recorded and summarized in writing, so no one has to choose between sleep and being informed.</p></div>
+        <div><h4>Rotating overlap windows</h4><p>When a project needs more real-time collaboration, the overlap window shifts to fit the work, not the other way around.</p></div>
+        <div><h4>One roadmap, reviewed weekly</h4><p>The delivery manager reviews the roadmap with every location weekly, so priorities never drift apart between sites.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="wrap reveal">
+      <h2>Curious how this would run for <span class="it">your team?</span></h2>
+      <p>Tell us your time zone and your current sprint cadence. We'll show you exactly how the handoffs would work.</p>
+      <a target="_blank" rel="noopener" class="btn btn-sage" href="https://calendly.com/jyamada-convene-tech/30min">Book a discovery call <span class="arr">→</span></a>
+    </div>
+  </section>
+</main>
+</div>
+
+<script>
+(function(){
+  var scope=document.querySelector('.ag1');
+  if(!scope)return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revs=scope.querySelectorAll('.reveal');
+  function vis(el,frac){var r=el.getBoundingClientRect(),vh=window.innerHeight||document.documentElement.clientHeight;return r.top<vh*(frac||0.9)&&r.bottom>0;}
+  function check(){for(var i=0;i<revs.length;i++){if(!revs[i].classList.contains('in')&&vis(revs[i]))revs[i].classList.add('in');}}
+  function revealAll(){for(var i=0;i<revs.length;i++)revs[i].classList.add('in');}
+  if(reduce){revealAll();}
+  else{
+    var ticking=false;
+    function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){check();ticking=false;});}
+    ['scroll','touchmove','wheel','resize','orientationchange','load'].forEach(function(ev){window.addEventListener(ev,onScroll,{passive:true});});
+    check();setTimeout(check,300);setTimeout(check,1200);setTimeout(revealAll,5000);
+  }
+})();
+</script>
+
+</main>
+<footer class="c-foot" role="contentinfo">
+  <div class="c-foot-inner">
+
+    <!-- Editorial statement moment at top -->
+    <div class="c-foot-statement">
+      <h2>Bring us in <span class="it">before</span> the pain shows up on a P&amp;L.</h2>
+      <div class="c-foot-statement-side">
+        Or after. Either way, the same senior team owns the outcome &mdash; from first conversation through what comes next.
+      </div>
+    </div>
+
+    <!-- Signature gradient rule -->
+    <div class="c-foot-rule" role="presentation"></div>
+
+    <!-- Column grid -->
+    <div class="c-foot-cols">
+      <div class="c-foot-brand">
+        <a class="c-foot-mark" href="convene-homepage.html" aria-label="Convene home">
+          <img src="https://www.convene-tech.com/wp-content/uploads/2020/05/logo.png" alt="Convene">
+        </a>
+        <p class="c-foot-tag">Global technology partner. Senior teams. Measurable outcomes.</p>
+        <p class="c-foot-body">ServiceNow, Salesforce, AI, custom development, and vCISO &mdash; delivered by the same team from strategy through what comes next.</p>
+      </div>
+
+      <div class="c-foot-col">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="convene-servicenow.html">ServiceNow</a></li>
+          <li><a href="convene-salesforce.html">Salesforce</a></li>
+          <li><a href="convene-ai.html">AI &amp; Automation</a></li>
+          <li><a href="convene-custom-development.html">Custom Development</a></li>
+          <li><a href="convene-vciso.html">vCISO Services</a></li>
+        </ul>
+      </div>
+
+      <div class="c-foot-col">
+        <h3>How we work</h3>
+        <ul>
+          <li><a href="convene-delivery-model.html">Delivery Model</a></li>
+          <li><a href="convene-agile-distributed-teams.html">Distributed Teams</a></li>
+          <li><a href="convene-about.html">About Convene</a></li>
+          <li><a href="convene-program-technical-cofounder.html">Technical Co-Founder Program</a></li>
+          <li><a href="convene-nonprofits.html">Convene for Impact</a></li>
+        </ul>
+      </div>
+
+      <div class="c-foot-col">
+        <h3>Case Studies</h3>
+        <ul>
+          <li><a href="convene-casestudy-intice.html">intice</a></li>
+          <li><a href="convene-casestudy-playcity.html">PlayCity</a></li>
+          <li><a href="convene-casestudy-yu-workforce.html">YU Workforce</a></li>
+        </ul>
+      </div>
+
+      <div class="c-foot-cta">
+        <h3>Ready to talk?</h3>
+        <div class="c-foot-cta-title">Book a 30-minute conversation with our team.</div>
+        <a class="c-foot-btn" target="_blank" rel="noopener" href="https://calendly.com/jyamada-convene-tech/30min">
+          Book a call
+          <svg class="arr" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg>
+          <span class="sr-only">(opens Calendly scheduling in a new tab)</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact / offices strip -->
+    <div class="c-foot-contact">
+      <div class="c-foot-offices">
+        <span class="c-foot-city">Tampa</span><span class="c-foot-sep">&middot;</span>
+        <span class="c-foot-city">Guadalajara</span><span class="c-foot-sep">&middot;</span>
+        <span class="c-foot-city">Dubai</span><span class="c-foot-sep">&middot;</span>
+        <span class="c-foot-city">Hyderabad</span>
+      </div>
+      <span class="c-foot-tz">Global delivery, US business hours</span>
+      <a class="c-foot-mail" href="mailto:hello@convene-tech.com">hello@convene-tech.com</a>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="c-foot-bottom">
+      <span>&copy; 2026 Convene Technology Partners. <span class="c-foot-signature">Built with intention.</span></span>
+      <div class="c-foot-links">
+        <a href="#privacy-placeholder">Privacy Policy</a>
+        <a href="#terms-placeholder">Terms of Service</a>
+        <a href="#accessibility-placeholder">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  var nav = document.getElementById('cNav');
+  var toggle = document.getElementById('cNavToggle');
+  var menu = document.getElementById('cNavMenu');
+  if(!nav || !toggle || !menu) return;
+
+  var isMobile = function(){ return window.matchMedia('(max-width:900px)').matches; };
+
+  function syncMenuHidden(){
+    if(isMobile()){
+      if(!nav.classList.contains('open')) menu.setAttribute('hidden','');
+      else menu.removeAttribute('hidden');
+    } else {
+      menu.removeAttribute('hidden');
+    }
+  }
+  syncMenuHidden();
+  window.addEventListener('resize', syncMenuHidden);
+
+  function onScroll(){nav.classList.toggle('scrolled', window.scrollY > 8);}
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true':'false');
+    if(open){menu.removeAttribute('hidden');} else {menu.setAttribute('hidden','');}
+  });
+
+  var dropdownTriggers = menu.querySelectorAll('.c-nav-btn');
+  function openDropdown(btn){
+    var dd = document.getElementById(btn.getAttribute('aria-controls'));
+    btn.setAttribute('aria-expanded','true');
+    if(dd) dd.removeAttribute('hidden');
+  }
+  function closeDropdown(btn){
+    var dd = document.getElementById(btn.getAttribute('aria-controls'));
+    btn.setAttribute('aria-expanded','false');
+    if(dd) dd.setAttribute('hidden','');
+  }
+  function closeAll(exceptEl){
+    dropdownTriggers.forEach(function(btn){
+      var li = btn.parentElement;
+      if(li !== exceptEl) closeDropdown(btn);
+    });
+  }
+  dropdownTriggers.forEach(function(btn){
+    var li = btn.parentElement;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      closeAll(isOpen ? null : li);
+      if(isOpen) closeDropdown(btn); else openDropdown(btn);
+    });
+    btn.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        closeAll(li);
+        openDropdown(btn);
+        var dd = document.getElementById(btn.getAttribute('aria-controls'));
+        var first = dd && dd.querySelector('a');
+        if(first) first.focus();
+      } else if(e.key === 'Escape'){
+        closeAll();
+        btn.focus();
+      }
+    });
+  });
+
+  menu.querySelectorAll('.c-dropdown').forEach(function(dd){
+    var links = dd.querySelectorAll('a');
+    links.forEach(function(link, i){
+      link.addEventListener('keydown', function(e){
+        if(e.key === 'ArrowDown'){e.preventDefault(); (links[i+1] || links[0]).focus();}
+        else if(e.key === 'ArrowUp'){e.preventDefault(); (links[i-1] || links[links.length-1]).focus();}
+        else if(e.key === 'Escape'){
+          var trigger = dd.parentElement.querySelector('.c-nav-btn');
+          closeAll();
+          if(trigger) trigger.focus();
+        } else if(e.key === 'Tab' && i === links.length - 1 && !e.shiftKey){
+          var trigger = dd.parentElement.querySelector('.c-nav-btn');
+          closeDropdown(trigger);
+        }
+      });
+    });
+  });
+
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    menu.querySelectorAll('li').forEach(function(li){
+      var btn = li.querySelector('.c-nav-btn');
+      if(!btn) return;
+      var closeTimer;
+      li.addEventListener('mouseenter', function(){
+        if(isMobile()) return;
+        clearTimeout(closeTimer);
+        closeAll(li);
+        openDropdown(btn);
+      });
+      li.addEventListener('mouseleave', function(){
+        if(isMobile()) return;
+        closeTimer = setTimeout(function(){closeDropdown(btn);}, 180);
+      });
+    });
+  }
+
+  document.addEventListener('click', function(e){
+    if(!menu.contains(e.target) && !toggle.contains(e.target)){
+      closeAll();
+      if(isMobile()){
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+        menu.setAttribute('hidden','');
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Convene delivers ServiceNow, Salesforce, AI, custom development, and vCISO services with senior teams and measurable outcomes.">
+<title>About · Convene</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap');
+:root{
+--char:#1F1F1F;--slate:#3F3F3F;--muted:#565654;--sage:#00AD4A;--sage-deep:#00773A;--sage-darker:#005A2B;--sage-glow:#8AD3AC;--blue:#5B7A99;--blue-deep:#3F5E7C;--blue-glow:#8FB6D6;
+--paper:#F4F4F2;--card:#FFFFFF;--line:#E6E6E1;--maxw:1160px;--ease:cubic-bezier(.2,.7,.2,1);
+--focus:#00773A
+}
+body{font-family:"Inter",system-ui,sans-serif;color:var(--char);background:var(--paper);margin:0;-webkit-font-smoothing:antialiased}
+.demo-page{min-height:60vh;padding:8rem 2rem 4rem;text-align:center}
+.demo-page h1{font-family:"Bricolage Grotesque";font-weight:600;font-size:2.4rem;margin:0;letter-spacing:-.02em}
+.demo-page p{color:var(--muted);margin-top:1rem;max-width:56ch;margin-inline:auto}
+
+/* Utility: visually hidden but announced by AT */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ============================================================
+   SECONDARY UTILITY BAR — GRADIENT
+   ============================================================ */
+.c-topbar{position:sticky;top:0;z-index:1001;color:#EAF2EC;font-size:.82rem;background:linear-gradient(96deg,#00773A 0%,#005A2B 42%,#0A2818 76%,#0E1B12 100%);overflow:hidden}
+.c-topbar::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 12% 50%,rgba(154,224,187,.22),transparent 60%),radial-gradient(60% 90% at 88% 50%,rgba(143,182,214,.10),transparent 60%);pointer-events:none;z-index:0}
+.c-topbar-inner{max-width:var(--maxw);margin-inline:auto;padding:.55rem 1.5rem;display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;position:relative;z-index:2}
+
+/* Left links — faded pill buttons with icons (the "faded version" of the primary CTA) */
+.c-topbar-links{list-style:none;margin:0;padding:0;display:flex;gap:.55rem;flex-wrap:wrap;align-items:center}
+.c-topbar-links a{position:relative;display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .95rem .4rem .8rem;background:rgba(255,255,255,.05);backdrop-filter:blur(10px) saturate(130%);-webkit-backdrop-filter:blur(10px) saturate(130%);border:1px solid rgba(255,255,255,.14);border-radius:999px;color:rgba(234,242,236,.9);text-decoration:none;font-weight:600;font-size:.82rem;letter-spacing:.005em;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);overflow:hidden;transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease),transform .16s var(--ease)}
+.c-topbar-links a::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,0) 55%);pointer-events:none;border-radius:inherit}
+.c-topbar-links a:hover{background:rgba(255,255,255,.11);border-color:rgba(154,224,187,.36);color:#fff;transform:translateY(-1px)}
+.c-topbar-links a:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px}
+.c-topbar-links a svg{width:13px;height:13px;flex:0 0 auto;color:var(--sage-glow);opacity:.85;transition:opacity .2s var(--ease),transform .2s var(--ease)}
+.c-topbar-links a:hover svg{opacity:1;transform:scale(1.1)}
+
+/* Glass CTA button — primary, brighter, sage-tinted so it clearly wins the hierarchy */
+.c-topbar-cta{margin-left:auto;position:relative;display:inline-flex;align-items:center;gap:.5rem;padding:.42rem 1.05rem .42rem 1.1rem;background:rgba(255,255,255,.13);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);border:1px solid rgba(154,224,187,.5);border-radius:8px;color:#fff;font-weight:700;font-size:.86rem;letter-spacing:.01em;text-decoration:none;box-shadow:0 6px 18px rgba(0,90,43,.35),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -8px 12px -6px rgba(0,0,0,.16);overflow:hidden;transition:background .22s var(--ease),border-color .22s var(--ease),transform .18s var(--ease),box-shadow .22s var(--ease)}
+.c-topbar-cta::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 55%);pointer-events:none;border-radius:inherit}
+.c-topbar-cta::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-22deg);transition:left .7s var(--ease);pointer-events:none}
+.c-topbar-cta:hover{background:rgba(255,255,255,.2);border-color:rgba(154,224,187,.75);transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,110,52,.44),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -8px 12px -6px rgba(0,0,0,.12)}
+.c-topbar-cta:hover::after{left:130%}
+.c-topbar-cta:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px}
+.c-topbar-cta .arr{position:relative;z-index:1;transition:transform .2s var(--ease)}
+.c-topbar-cta:hover .arr{transform:translate(2px,-2px)}
+@media(max-width:640px){.c-topbar-inner{padding:.5rem 1rem;gap:.4rem}.c-topbar-links{gap:.4rem}.c-topbar-links a{font-size:.76rem;padding:.35rem .7rem .35rem .6rem}}
+
+/* ============================================================
+   PRIMARY NAV — disclosure pattern
+   ============================================================ */
+.c-nav{position:sticky;top:36px;z-index:1000;background:rgba(244,244,242,.86);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid transparent;transition:background .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.c-nav.scrolled{background:rgba(255,255,255,.94);border-bottom-color:var(--line);box-shadow:0 8px 24px rgba(20,40,30,.06)}
+@media(max-width:640px){.c-nav{top:40px}}
+.c-nav-inner{max-width:var(--maxw);margin-inline:auto;padding:.9rem 1.5rem;display:flex;align-items:center;gap:1.5rem}
+.c-logo{display:inline-flex;align-items:center;text-decoration:none;padding:.25rem;border-radius:4px}
+.c-logo img{display:block;height:34px;width:auto}
+.c-logo:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+.c-nav-menu{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:.25rem;margin-left:auto}
+.c-nav-menu > li{position:relative}
+.c-nav-menu a,.c-nav-menu .c-nav-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .95rem;font-family:"Inter";font-weight:500;font-size:.95rem;color:var(--char);text-decoration:none;background:transparent;border:0;border-radius:6px;cursor:pointer;transition:background .18s var(--ease),color .18s var(--ease);font:inherit}
+.c-nav-menu a:hover,.c-nav-menu .c-nav-btn:hover,.c-nav-menu .c-nav-btn[aria-expanded="true"]{background:rgba(0,119,58,.06);color:var(--sage-deep)}
+.c-nav-menu a:focus-visible,.c-nav-menu .c-nav-btn:focus-visible{outline:3px solid var(--focus);outline-offset:2px;background:rgba(0,119,58,.04)}
+.c-nav-btn .caret{width:9px;height:9px;flex:0 0 auto;transition:transform .2s var(--ease)}
+.c-nav-btn[aria-expanded="true"] .caret{transform:rotate(-180deg)}
+
+.c-dropdown{position:absolute;top:100%;left:0;margin-top:.35rem;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.5rem;list-style:none;box-shadow:0 20px 48px rgba(20,40,30,.14)}
+.c-dropdown[hidden]{display:none}
+.c-dropdown li{margin:0}
+.c-dropdown a{display:block;padding:.7rem .85rem;border-radius:8px;color:var(--char);text-decoration:none;font-weight:500;font-size:.94rem;line-height:1.35}
+.c-dropdown a .d-desc{display:block;font-size:.8rem;font-weight:400;color:var(--muted);margin-top:.15rem}
+.c-dropdown a:hover{background:rgba(0,119,58,.07);color:var(--sage-deep)}
+.c-dropdown a:focus-visible{outline:3px solid var(--focus);outline-offset:-3px;background:rgba(0,119,58,.06)}
+
+.c-nav-toggle{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;padding:.55rem;cursor:pointer;margin-left:auto}
+.c-nav-toggle:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+@media(max-width:900px){
+  .c-nav-toggle{display:inline-flex}
+  .c-nav-menu{position:absolute;top:100%;right:1.5rem;left:1.5rem;flex-direction:column;align-items:stretch;gap:0;margin-top:.5rem;padding:.6rem;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 48px rgba(20,40,30,.14)}
+  .c-nav-menu[hidden]{display:none}
+  .c-nav-menu a,.c-nav-menu .c-nav-btn{padding:.85rem .9rem;width:100%;justify-content:space-between}
+  .c-dropdown{position:static;box-shadow:none;border:0;border-left:2px solid var(--line);border-radius:0;margin:.2rem 0 .5rem .5rem;padding:.2rem 0 .2rem .5rem;min-width:0}
+}
+
+/* ============================================================
+   FOOTER — EDITORIAL TREATMENT
+   Statement moment + signature rule + refined column grid + contact strip + elegant bottom bar.
+   ============================================================ */
+.c-foot{background:#0E1512;color:#EAF2EC;position:relative;overflow:hidden;isolation:isolate}
+/* Ambient orb wash — Convene sage + blue palette, soft */
+.c-foot::before{content:"";position:absolute;inset:-10%;background:radial-gradient(35% 55% at 8% 12%,rgba(0,173,74,.18),transparent 60%),radial-gradient(38% 60% at 92% 88%,rgba(63,94,124,.22),transparent 60%),radial-gradient(28% 45% at 55% 45%,rgba(154,224,187,.06),transparent 65%);pointer-events:none;z-index:0;filter:blur(20px)}
+/* Diaphanous wordmark as background art */
+.c-foot::after{content:"CONVENE";position:absolute;left:50%;bottom:-2.2rem;transform:translateX(-50%);font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(9rem,22vw,20rem);letter-spacing:-.05em;color:rgba(255,255,255,.024);pointer-events:none;line-height:1;white-space:nowrap;z-index:0}
+.c-foot-inner{max-width:var(--maxw);margin-inline:auto;padding:clamp(4rem,7vw,5.5rem) 1.5rem 0;position:relative;z-index:2}
+
+/* Statement moment (top) */
+.c-foot-statement{display:grid;grid-template-columns:1.5fr 1fr;gap:3rem;align-items:end;padding-bottom:3.5rem}
+@media(max-width:820px){.c-foot-statement{grid-template-columns:1fr;gap:1.6rem}}
+.c-foot-statement h2{font-family:"Bricolage Grotesque";font-weight:600;font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.08;letter-spacing:-.03em;color:#fff;margin:0;max-width:22ch}
+.c-foot-statement h2 .it{font-family:"Fraunces",serif;font-style:italic;font-weight:500;background:linear-gradient(100deg,var(--sage-glow),var(--blue-glow),var(--sage-glow));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:cfShimmer 8s linear infinite}
+@keyframes cfShimmer{to{background-position:220% 0}}
+.c-foot-statement-side{color:#B7C2BE;font-size:1rem;line-height:1.6;max-width:36ch;justify-self:end}
+@media(max-width:820px){.c-foot-statement-side{justify-self:start}}
+
+/* Signature rule — thin gradient stroke */
+.c-foot-rule{height:1px;background:linear-gradient(90deg,transparent,rgba(154,224,187,.4) 20%,rgba(143,182,214,.4) 80%,transparent);margin:0}
+
+/* Column grid */
+.c-foot-cols{display:grid;grid-template-columns:1.5fr repeat(3,1fr) 1.15fr;gap:2.6rem;padding:3.5rem 0 3rem}
+@media(max-width:960px){.c-foot-cols{grid-template-columns:1fr 1fr;gap:2rem}.c-foot-brand{grid-column:1 / -1}}
+@media(max-width:560px){.c-foot-cols{grid-template-columns:1fr}}
+
+.c-foot-brand{max-width:36ch}
+.c-foot-brand .c-foot-mark{display:inline-flex;align-items:center;text-decoration:none;padding:.25rem;border-radius:4px;margin-bottom:1.25rem}
+.c-foot-brand .c-foot-mark img{display:block;height:36px;width:auto;filter:brightness(0) invert(1)}
+.c-foot-brand .c-foot-mark:focus-visible{outline:3px solid var(--sage-glow);outline-offset:2px}
+.c-foot-brand .c-foot-tag{font-family:"Fraunces",serif;font-style:italic;font-weight:500;font-size:1.15rem;color:#fff;line-height:1.35;margin:0}
+.c-foot-brand .c-foot-body{color:#B7C2BE;font-size:.92rem;line-height:1.6;margin:.85rem 0 0}
+
+/* Column headers with a small colored accent dot */
+.c-foot-col h3,.c-foot-cta h3{position:relative;display:inline-flex;align-items:center;gap:.55rem;font-family:"Inter";font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#EAF2EC;margin:0 0 1.2rem}
+.c-foot-col h3::before,.c-foot-cta h3::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sage-glow);box-shadow:0 0 8px rgba(154,224,187,.6)}
+.c-foot-col:nth-child(3) h3::before{background:var(--blue-glow);box-shadow:0 0 8px rgba(143,182,214,.6)}
+.c-foot-col:nth-child(4) h3::before{background:linear-gradient(135deg,var(--sage-glow),var(--blue-glow))}
+.c-foot-col ul{list-style:none;margin:0;padding:0;display:grid;gap:.68rem}
+.c-foot-col a{color:#D0DCD5;text-decoration:none;font-size:.92rem;line-height:1.4;padding:.1rem 0;position:relative;display:inline-block;transition:color .18s var(--ease),padding-left .22s var(--ease)}
+.c-foot-col a::before{content:"→";position:absolute;left:-1.05em;top:0;opacity:0;transform:translateX(-4px);color:var(--sage-glow);font-size:.85em;line-height:1.5;transition:opacity .2s var(--ease),transform .22s var(--ease)}
+.c-foot-col a:hover,.c-foot-col a:focus-visible{color:#fff;padding-left:1.15em}
+.c-foot-col a:hover::before,.c-foot-col a:focus-visible::before{opacity:1;transform:translateX(0)}
+.c-foot-col a:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px;border-radius:2px}
+
+/* CTA column — glass card treatment */
+.c-foot-cta .c-foot-cta-title{font-family:"Bricolage Grotesque";font-weight:600;font-size:1.25rem;line-height:1.2;color:#fff;margin:0 0 1.15rem;letter-spacing:-.02em}
+.c-foot-cta a.c-foot-btn{position:relative;display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.15rem;background:rgba(255,255,255,.06);backdrop-filter:blur(10px) saturate(140%);-webkit-backdrop-filter:blur(10px) saturate(140%);border:1px solid rgba(255,255,255,.18);border-radius:8px;color:#fff;font-weight:600;font-size:.9rem;text-decoration:none;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.2);transition:background .2s var(--ease),border-color .2s var(--ease),transform .18s var(--ease)}
+.c-foot-cta a.c-foot-btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.32),transparent);transform:skewX(-22deg);transition:left .7s var(--ease);pointer-events:none}
+.c-foot-cta a.c-foot-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(154,224,187,.5);transform:translateY(-1px)}
+.c-foot-cta a.c-foot-btn:hover::after{left:130%}
+.c-foot-cta a.c-foot-btn:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px}
+.c-foot-cta a.c-foot-btn .arr{position:relative;z-index:1;transition:transform .2s var(--ease)}
+.c-foot-cta a.c-foot-btn:hover .arr{transform:translate(3px,-3px)}
+
+/* Contact / offices strip */
+.c-foot-contact{display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:center;padding:2rem 0;border-top:1px solid rgba(255,255,255,.08);color:#8FA298;font-size:.86rem}
+@media(max-width:820px){.c-foot-contact{grid-template-columns:1fr;gap:.75rem;text-align:left}}
+.c-foot-offices{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;font-family:"Inter";font-weight:500}
+.c-foot-offices .c-foot-city{color:#EAF2EC;position:relative}
+.c-foot-offices .c-foot-sep{color:#4A5F55}
+.c-foot-tz{font-family:"Fraunces";font-style:italic;color:#B7C2BE}
+.c-foot-mail{color:#EAF2EC;text-decoration:none;font-weight:500;padding:.15rem 0;border-bottom:1px solid transparent;transition:border-color .2s var(--ease),color .2s var(--ease)}
+.c-foot-mail:hover{color:#fff;border-bottom-color:var(--sage-glow)}
+.c-foot-mail:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px;border-radius:2px}
+
+/* Bottom bar */
+.c-foot-bottom{padding:1.4rem 0 1.6rem;display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-between;font-size:.78rem;color:#6E7F76;border-top:1px solid rgba(255,255,255,.06)}
+.c-foot-bottom .c-foot-signature{font-family:"Fraunces";font-style:italic;background:linear-gradient(100deg,var(--sage-glow),var(--blue-glow));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:500}
+.c-foot-bottom a{color:#6E7F76;text-decoration:none;padding:.15rem 0;transition:color .2s var(--ease)}
+.c-foot-bottom a:hover{color:var(--sage-glow)}
+.c-foot-bottom a:focus-visible{outline:3px solid var(--sage-glow);outline-offset:3px;border-radius:2px}
+.c-foot-bottom .c-foot-links{display:flex;gap:1.4rem;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="c-topbar" role="complementary" aria-label="Programs and quick actions">
+  <div class="c-topbar-inner">
+    <ul class="c-topbar-links">
+      <li><a href="convene-nonprofits.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Convene for Impact</a></li>
+      <li><a href="convene-program-technical-cofounder.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Technical Co-Founder Program</a></li>
+    </ul>
+    <a class="c-topbar-cta" target="_blank" rel="noopener" href="https://calendly.com/jyamada-convene-tech/30min">
+      Book a call
+      <svg class="arr" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg>
+      <span class="sr-only">(opens Calendly scheduling in a new tab)</span>
+    </a>
+  </div>
+</div>
+<nav class="c-nav" id="cNav" aria-label="Primary">
+  <div class="c-nav-inner">
+    <a class="c-logo" href="convene-homepage.html" aria-label="Convene home">
+      <img src="https://www.convene-tech.com/wp-content/uploads/2020/05/logo.png" alt="Convene" width="140" height="34">
+    </a>
+
+    <button class="c-nav-toggle" id="cNavToggle" aria-expanded="false" aria-controls="cNavMenu">
+      <span class="sr-only">Menu</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F1F1F" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
+    <ul class="c-nav-menu" id="cNavMenu">
+      <li><a href="convene-about.html">About</a></li>
+
+      <li>
+        <button type="button" class="c-nav-btn" aria-expanded="false" aria-controls="ddServices">
+          Services
+          <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg>
+        </button>
+        <ul class="c-dropdown" id="ddServices" hidden>
+          <li><a href="convene-servicenow.html">ServiceNow<span class="d-desc">Enterprise workflows, governed end to end</span></a></li>
+          <li><a href="convene-salesforce.html">Salesforce<span class="d-desc">Roadmap and advisory for growth</span></a></li>
+          <li><a href="convene-ai.html">AI &amp; Intelligent Automation<span class="d-desc">Practical AI grounded in your data</span></a></li>
+          <li><a href="convene-custom-development.html">Custom Application Development<span class="d-desc">Build, modernize, and scale software</span></a></li>
+          <li><a href="convene-vciso.html">vCISO Services<span class="d-desc">Executive cybersecurity leadership</span></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <button type="button" class="c-nav-btn" aria-expanded="false" aria-controls="ddHow">
+          How we work
+          <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg>
+        </button>
+        <ul class="c-dropdown" id="ddHow" hidden>
+          <li><a href="convene-delivery-model.html">Delivery Model<span class="d-desc">Global talent, right-placed</span></a></li>
+          <li><a href="convene-agile-distributed-teams.html">Distributed Teams<span class="d-desc">A day in the life of a Convene sprint</span></a></li>
+          <li><a href="convene-nonprofits.html">Convene for Impact<span class="d-desc">Our work with mission-driven organizations</span></a></li>
+        </ul>
+      </li>
+
+      <li>
+        <button type="button" class="c-nav-btn" aria-expanded="false" aria-controls="ddCases">
+          Case Studies
+          <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg>
+        </button>
+        <ul class="c-dropdown" id="ddCases" hidden>
+          <li><a href="convene-casestudy-intice.html">intice<span class="d-desc">Technical co-founder &middot; Custom Development</span></a></li>
+          <li><a href="convene-casestudy-playcity.html">PlayCity<span class="d-desc">Two business lines, one ServiceNow platform</span></a></li>
+          <li><a href="convene-casestudy-yu-workforce.html">YU Workforce Development<span class="d-desc">Three Salesforce programs unified</span></a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+<main>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap');
+.ab1{
+--char:#1F1F1F;--slate:#3F3F3F;--muted:#565654;--sage:#00AD4A;--sage-deep:#00773A;--sage-glow:#8AD3AC;--blue:#5B7A99;--blue-deep:#3F5E7C;--blue-glow:#8FB6D6;
+--paper:#F4F4F2;--card:#FFFFFF;--line:#E6E6E1;--maxw:1160px;--ease:cubic-bezier(.2,.7,.2,1);
+font-family:"Inter",system-ui,sans-serif;color:var(--char);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden
+}
+.ab1 *{box-sizing:border-box}
+.ab1 h1,.ab1 h2,.ab1 h3,.ab1 h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;line-height:1.05;letter-spacing:-.03em;margin:0}
+.ab1 .it{font-family:"Fraunces",serif;font-style:italic;font-weight:600;color:var(--sage-deep)}
+.ab1 p{margin:0}
+.ab1 a{color:var(--sage-deep);text-decoration:none}
+.ab1 svg{display:block}
+.ab1 .wrap{width:min(100% - 2.5rem,var(--maxw));margin-inline:auto;position:relative;z-index:4}
+
+.ab1 .eyebrow{display:inline-flex;align-items:center;gap:.65rem;font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-deep)}
+.ab1 .eyebrow::before{content:"";width:26px;height:2px;background:currentColor}
+.ab1 .on-dark .eyebrow{color:var(--sage-glow)}
+
+.ab1 .btn{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:1rem;padding:.95rem 1.6rem;border-radius:4px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease)}
+.ab1 .btn .arr{transition:transform .25s var(--ease)}.ab1 .btn:hover .arr{transform:translateX(5px)}
+.ab1 .btn-sage{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(0,122,54,.96),rgba(0,84,42,.97));backdrop-filter:blur(12px) saturate(130%);-webkit-backdrop-filter:blur(12px) saturate(130%);border:1px solid rgba(154,224,187,.5);color:#fff;box-shadow:0 10px 26px rgba(0,119,58,.35),inset 0 1px 0 rgba(255,255,255,.2),inset 0 -12px 16px -10px rgba(0,0,0,.3)}
+.ab1 .btn-sage::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%);pointer-events:none}
+.ab1 .btn-sage::after{content:"";position:absolute;top:0;left:-65%;width:35%;height:100%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-20deg);transition:left .7s var(--ease);pointer-events:none}
+.ab1 .btn-sage:hover{background:linear-gradient(135deg,rgba(0,132,58,.97),rgba(0,90,45,.98));box-shadow:0 14px 34px rgba(0,173,74,.45),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -12px 16px -10px rgba(0,0,0,.25);transform:translateY(-2px)}
+.ab1 .btn-sage:hover::after{left:130%}
+.ab1 .btn-ghost{background:rgba(255,255,255,.6);color:var(--char);border-color:rgba(35,41,43,.18)}.ab1 .btn-ghost:hover{border-color:var(--char)}
+
+.ab1 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.ab1 .reveal.in{opacity:1;transform:none}
+.ab1 .reveal[data-d="1"]{transition-delay:.08s}.ab1 .reveal[data-d="2"]{transition-delay:.16s}.ab1 .reveal[data-d="3"]{transition-delay:.24s}
+
+/* HERO — single column, editorial, distinct from the two-column widget heroes */
+.ab1 .hero{position:relative;padding:6.5rem 0 4rem;background:#F4F4F2;border-bottom:1px solid var(--line);overflow:hidden}
+.ab1 .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 70% at 85% 0%,rgba(0,173,74,.12),transparent 60%);z-index:0}
+.ab1 .hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,119,58,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,119,58,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(70% 100% at 30% 20%,#000,transparent 75%);z-index:0}
+.ab1 .hero-inner{position:relative;z-index:2;max-width:860px}
+.ab1 .hero h1{font-size:clamp(3rem,7vw,5.4rem)}
+.ab1 .hero h1 .gtext{font-family:"Fraunces",serif;font-style:italic;font-weight:600;background:linear-gradient(100deg,var(--sage-deep),var(--sage),var(--blue-deep),var(--sage-deep));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ab1sweep 6s linear infinite}
+.ab1 .hero .lead{margin-top:1.5rem;font-size:clamp(1.1rem,1.6vw,1.3rem);color:var(--slate);max-width:60ch;line-height:1.6}
+.ab1 .hero-cta{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:2.1rem}
+.ab1 .hstats{display:flex;flex-wrap:wrap;gap:clamp(1.6rem,5vw,3.2rem);margin-top:2.6rem;padding-top:1.8rem;border-top:1px solid rgba(35,41,43,.14)}
+.ab1 .hstats .v{font-family:"Inter";font-size:1.7rem;font-weight:800;letter-spacing:-.01em;color:var(--char);font-feature-settings:"tnum"}
+.ab1 .hstats .l{font-size:.82rem;color:var(--muted)}
+
+.ab1 .sec{padding:clamp(4rem,9vw,7rem) 0;position:relative}
+.ab1 .head{max-width:64ch;margin-bottom:2.8rem}
+.ab1 .head h2{font-size:clamp(2rem,4.4vw,3.1rem)}
+.ab1 .head p{color:var(--muted);font-size:1.1rem;margin-top:1rem}
+
+/* mission band — deliberately stands out from the surrounding white sections */
+.ab1 .mission-band{position:relative;background:radial-gradient(120% 100% at 15% 0%,#CFE3D6,transparent 60%),radial-gradient(100% 100% at 100% 100%,#D3DFE7,transparent 55%),#DCE6DF;overflow:hidden}
+.ab1 .mission-band::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,119,58,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,119,58,.05) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(80% 80% at 50% 30%,#000,transparent 80%)}
+.ab1 .mission-inner{position:relative;z-index:2;max-width:900px;margin-inline:auto;text-align:center}
+.ab1 .mis-statement{font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(2.4rem,6vw,4.2rem);letter-spacing:-.02em;color:var(--char);line-height:1.05}
+.ab1 .mis-statement .it{font-size:1em}
+.ab1 .mis-divider{width:60%;max-width:420px;height:3px;margin:2rem auto;border-radius:3px;background:linear-gradient(90deg,var(--sage-deep),var(--sage),var(--blue-glow),var(--sage),var(--sage-deep));background-size:220% auto;animation:ab1divsweep 5s linear infinite}
+@keyframes ab1divsweep{to{background-position:220% center}}
+.ab1 .mis-lead{font-family:"Inter";font-weight:400;font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.6;color:var(--slate);max-width:60ch;margin-inline:auto}
+.ab1 .sol-points{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:3rem}
+@media(max-width:880px){.ab1 .sol-points{grid-template-columns:1fr}}
+.ab1 .sol-pt{display:flex;gap:1rem;padding:1.3rem 1.3rem;border:1px solid rgba(35,41,43,.1);border-radius:12px;background:rgba(255,255,255,.75);backdrop-filter:blur(6px)}
+.ab1 .sol-pt .n{font-family:"Inter";font-weight:800;font-feature-settings:"tnum";color:#00602F;flex:0 0 auto}
+.ab1 .sol-pt b{font-family:"Bricolage Grotesque";font-weight:600;display:block;margin-bottom:.2rem}
+.ab1 .sol-pt span{color:var(--muted);font-size:.95rem}
+
+/* constancy comparison — replaces the invented-milestone timeline */
+.ab1 .const-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:center}
+@media(max-width:820px){.ab1 .const-grid{grid-template-columns:1fr}}
+.ab1 .const-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:2rem 2rem 1.8rem;box-shadow:0 16px 40px rgba(20,40,30,.06)}
+.ab1 .const-card.hi{border-color:var(--sage);box-shadow:0 20px 50px rgba(0,173,74,.1)}
+.ab1 .const-year{font-family:"Bricolage Grotesque";font-weight:700;font-size:1.6rem;color:var(--sage-deep);margin-bottom:1.2rem}
+.ab1 .const-list{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
+.ab1 .const-list li{display:flex;gap:.8rem;align-items:flex-start;font-size:1rem;color:var(--char);line-height:1.5}
+.ab1 .ck{width:24px;height:24px;border-radius:50%;background:rgba(0,173,74,.1);display:grid;place-items:center;flex-shrink:0;margin-top:.1rem}
+.ab1 .ck svg{width:13px;height:13px;stroke:var(--sage-deep);stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ab1 .const-divider{display:flex;align-items:center;justify-content:center;font-family:"Bricolage Grotesque";font-weight:700;font-size:2rem;color:var(--sage-deep);opacity:.5}
+@media(max-width:820px){.ab1 .const-divider{transform:rotate(90deg);padding:.3rem 0}}
+.ab1 .const-proof{margin-top:2rem;font-size:1.02rem;color:var(--muted);font-style:italic;text-align:center}
+
+/* pillars — big-number stat style, distinct from why-grid and reason-list used elsewhere */
+.ab1 .stat-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+@media(max-width:880px){.ab1 .stat-pillars{grid-template-columns:1fr}}
+.ab1 .stat-pillar{position:relative;padding:2.2rem 1.9rem 2rem;border-radius:16px;background:#fff;border:1px solid var(--line);overflow:hidden}
+.ab1 .stat-pillar .ghost-n{position:absolute;top:-.3rem;right:.4rem;font-family:"Inter";font-weight:800;font-size:5rem;color:var(--sage-deep);opacity:.07;line-height:1;pointer-events:none}
+.ab1 .stat-pillar h3{font-size:1.28rem;position:relative;z-index:1;max-width:20ch}
+.ab1 .stat-pillar p{color:var(--muted);margin-top:.7rem;font-size:.96rem;position:relative;z-index:1}
+
+/* STATEMENT — single dark punctuation */
+.ab1 .statement{position:relative;background:var(--char);color:#fff;overflow:hidden}
+.ab1 .statement::before{content:"";position:absolute;inset:0;background:radial-gradient(42% 70% at 82% 8%,rgba(78,203,130,.26),transparent 60%),radial-gradient(42% 70% at 8% 100%,rgba(91,122,153,.24),transparent 60%)}
+.ab1 .statement .wrap{padding:clamp(3.6rem,8vw,5.5rem) 0}
+.ab1 .statement .eyebrow{margin-bottom:1.3rem;color:var(--sage-glow)}
+.ab1 .statement h2{font-size:clamp(2rem,4.8vw,3.4rem);max-width:22ch}
+.ab1 .statement p{margin-top:1.2rem;color:#C3CECA;font-size:1.1rem;max-width:56ch}
+.ab1 .statement h2 .gtext{font-family:"Fraunces",serif;font-style:italic;font-weight:600;background:linear-gradient(100deg,var(--sage-glow),#B6E8CC,var(--blue-glow),var(--sage-glow));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ab1sweep 6s linear infinite}
+.ab1 .cap-sec h2 .gtext{font-family:"Fraunces",serif;font-style:italic;font-weight:600;background:linear-gradient(100deg,var(--sage-deep),var(--sage),var(--blue-deep),var(--sage-deep));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ab1sweep 6s linear infinite}
+@keyframes ab1sweep{to{background-position:220% center}}
+
+/* capabilities — plain typography, no colored slab, no pill badges */
+.ab1 .cap-sec{position:relative;text-align:center;overflow:hidden}
+.ab1 .cap-sec::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,119,58,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,119,58,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(80% 90% at 50% 40%,#000,transparent 80%);z-index:0}
+.ab1 .cap-sec::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--sage),var(--blue-glow),var(--sage),transparent);background-size:220% 100%;animation:ab1borderflow 5s linear infinite;z-index:3}
+@keyframes ab1borderflow{to{background-position:220% 0}}
+.ab1 .orb-field{position:absolute;inset:-10%;z-index:0;filter:blur(38px);pointer-events:none}
+.ab1 .orb-field i{position:absolute;border-radius:50%;mix-blend-mode:multiply;opacity:1}
+.ab1 .orb-field .o1{width:34vw;height:34vw;left:-4%;top:-14%;background:radial-gradient(circle,#63CE95,transparent 68%);animation:ab1orb1 22s ease-in-out infinite alternate}
+.ab1 .orb-field .o2{width:30vw;height:30vw;right:0%;bottom:-18%;background:radial-gradient(circle,#7CAEDA,transparent 68%);animation:ab1orb2 26s ease-in-out infinite alternate}
+@keyframes ab1orb1{to{transform:translate(8%,6%) scale(1.15)}}
+@keyframes ab1orb2{to{transform:translate(-7%,-8%) scale(1.12)}}
+.ab1 .cap-sec>.wrap{position:relative;z-index:2}
+.ab1 .cap-sec h2{font-size:clamp(2.1rem,4.6vw,3.3rem);max-width:24ch;margin-inline:auto}
+.ab1 .cap-list{font-family:"Inter";font-size:clamp(1rem,1.6vw,1.15rem);font-weight:500;color:var(--muted);letter-spacing:.02em;margin-top:1.6rem}
+.ab1 .cap-list a{color:var(--char);font-weight:600;text-decoration:none;border-bottom:1px solid transparent;transition:color .2s var(--ease),border-color .2s var(--ease)}
+.ab1 .cap-list a:hover,.ab1 .cap-list a:focus-visible{color:var(--sage-deep);border-bottom-color:var(--sage-deep)}
+.ab1 .cap-list a:focus-visible{outline:2px solid var(--sage);outline-offset:3px;border-radius:2px}
+.ab1 .cap-list .sep{color:var(--sage-deep);margin:0 .6rem;font-weight:400}
+.ab1 .cap-sec .btn{margin-top:2.2rem}
+
+/* testimonial — same big-statement voice as the mission section, no card, no avatar */
+.ab1 .proof{position:relative;background:#fff;text-align:center;overflow:hidden}
+.ab1 .proof-card{max-width:760px;margin-inline:auto;position:relative;z-index:2;background:#fff;border-radius:12px;overflow:hidden;padding:clamp(2.4rem,5vw,3.6rem) clamp(1.5rem,4vw,3rem);box-shadow:0 40px 80px -30px rgba(20,40,30,.22),0 15px 35px -15px rgba(20,40,30,.12)}
+.ab1 .proof-bgmark{position:absolute;bottom:-19rem;left:-.5rem;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:35rem;line-height:1;pointer-events:none;z-index:0;opacity:.16;background:linear-gradient(100deg,var(--sage-deep),var(--sage),var(--blue-deep),var(--sage-deep));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ab1sweep 7s linear infinite;user-select:none}
+.ab1 .proof-quote,.ab1 .proof-by{position:relative;z-index:1}
+.ab1 .proof-quote{font-family:"Bricolage Grotesque";font-weight:500;letter-spacing:-.015em;line-height:1.35;font-size:clamp(1.5rem,3.4vw,2.3rem);color:var(--char)}
+.ab1 .proof-by{margin-top:1.6rem;font-family:"Inter";font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.ab1 .proof-by b{color:var(--sage-deep)}
+
+/* CTA */
+.ab1 .cta{position:relative;overflow:hidden;text-align:left;background:#EAF0EC}
+.ab1 .cta .wrap{padding:clamp(4rem,9vw,6.5rem) 0}
+.ab1 .cta h2{font-size:clamp(2rem,4.8vw,3.3rem)}
+.ab1 .cta p{color:var(--muted);font-size:1.1rem;margin-top:1.1rem;max-width:54ch}
+.ab1 .cta .btn{margin-top:1.8rem}
+
+@media(max-width:760px){
+  .ab1 .stat-pillars{grid-template-columns:1fr!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .ab1 *{animation:none!important;transition:none!important}
+  .ab1 .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+
+<div class="ab1">
+<main>
+
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-inner">
+        <h1>A technology partner<br><span class="gtext">built to stay.</span></h1>
+        <p class="lead">Convene is a technology partner, not just another consulting firm. We translate business goals into working software, stay close enough to feel like part of your team, and deliver with senior people who don't disappear after the sale.</p>
+        <div class="hero-cta">
+          <a class="btn btn-sage" href="#story">Our story <span class="arr">→</span></a>
+          <a target="_blank" rel="noopener" class="btn btn-ghost" href="https://calendly.com/jyamada-convene-tech/30min">Start a conversation</a>
+        </div>
+        <div class="hstats reveal" data-d="1">
+          <div><div class="v">2006</div><div class="l">Established</div></div>
+          <div><div class="v">160+</div><div class="l">Projects delivered</div></div>
+          <div><div class="v">200+</div><div class="l">Engineers &amp; architects</div></div>
+          <div><div class="v">5</div><div class="l">Global locations</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec mission-band" id="mission">
+    <div class="wrap">
+      <div class="mission-inner reveal">
+        <p class="mis-statement">We're <span class="it">solutions</span> people.</p>
+        <div class="mis-divider" aria-hidden="true"></div>
+        <p class="mis-lead">We translate business goals into working software without the overhead of a big-firm engagement, and without disappearing once the contract is signed.</p>
+      </div>
+      <div class="sol-points reveal" data-d="1">
+        <div class="sol-pt"><span class="n">01</span><div><b>We translate vision into execution</b><span>From goals to working software, without unnecessary overhead.</span></div></div>
+        <div class="sol-pt"><span class="n">02</span><div><b>The same team, start to finish</b><span>The people you meet in the first conversation are the ones who deliver. No hand-offs to strangers.</span></div></div>
+        <div class="sol-pt"><span class="n">03</span><div><b>Flexible global delivery</b><span>Senior teams across the US, Mexico, and India, sized to your engagement and time zone.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="story" style="background:linear-gradient(180deg,#F4F6F4,#EFF3F0)">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2>The technology changes. The commitment doesn't.</h2>
+        <p>Our tools and technical practices update constantly. What hasn't changed is the commitment behind them, the same one we made in 2006.</p>
+      </div>
+
+      <div class="const-grid reveal" data-d="1">
+        <div class="const-card">
+          <div class="const-year">2006</div>
+          <ul class="const-list">
+            <li><span class="ck"><svg viewBox="0 0 24 24"><path d="M4 12l6 6 10-12"/></svg></span>Senior people scope the work, senior people deliver it</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24"><path d="M4 12l6 6 10-12"/></svg></span>One team, from the first call to the last delivery</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24"><path d="M4 12l6 6 10-12"/></svg></span>Distributed, flexible delivery, not a fixed bench</li>
+          </ul>
+        </div>
+        <div class="const-divider" aria-hidden="true">
+          <span>=</span>
+        </div>
+        <div class="const-card hi">
+          <div class="const-year">Today</div>
+          <ul class="const-list">
+            <li><span class="ck"><svg viewBox="0 0 24 24"><path d="M4 12l6 6 10-12"/></svg></span>Senior people scope the work, senior people deliver it</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24"><path d="M4 12l6 6 10-12"/></svg></span>One team, from the first call to the last delivery</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24"><path d="M4 12l6 6 10-12"/></svg></span>Distributed, flexible delivery, not a fixed bench</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="const-proof reveal" data-d="2">Ask intice. They've been a client since 2011, and the same team is still on the account 14 years later.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="why">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2>Three things we do exceptionally well.</h2>
+        <p>The depth of a large firm without the overhead, and the continuity of a team that stays.</p>
+      </div>
+      <div class="stat-pillars reveal" data-d="1">
+        <div class="stat-pillar"><div class="ghost-n">01</div><h3>Purpose-built AI &amp; automation</h3><p>We find where AI creates real business value, grounded in process, adoption, and measurable outcomes, not where it can simply be bolted on.</p></div>
+        <div class="stat-pillar"><div class="ghost-n">02</div><h3>Responsible implementation &amp; governance</h3><p>We build with the whole environment in mind: data readiness, security, controls, and governance. What we ship stays trusted and sustainable.</p></div>
+        <div class="stat-pillar"><div class="ghost-n">03</div><h3>Full-lifecycle delivery</h3><p>From strategy through implementation and continuous improvement. The discipline and accountability that turns ideas into operational impact.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec cap-sec">
+    <div class="orb-field" aria-hidden="true"><i class="o2"></i></div>
+    <div class="wrap reveal">
+      <h2>Five capabilities.<br>One <span class="gtext">accountable</span> partner.</h2>
+      <p class="cap-list"><a href="convene-servicenow.html">ServiceNow</a><span class="sep">/</span><a href="convene-salesforce.html">Salesforce</a><span class="sep">/</span><a href="convene-ai.html">AI &amp; Automation</a><span class="sep">/</span><a href="convene-custom-development.html">Custom Development</a><span class="sep">/</span><a href="convene-vciso.html">vCISO</a></p>
+    </div>
+  </section>
+
+  <section class="sec proof">
+    <div class="orb-field" aria-hidden="true"><i class="o1"></i><i class="o2"></i></div>
+    <div class="wrap">
+      <div class="proof-card reveal">
+        <span class="proof-bgmark" aria-hidden="true">&ldquo;</span>
+        <p class="proof-quote">It gives us peace of mind to know we don't, and we won't, have to get lost in the deep technical weeds.</p>
+        <p class="proof-by"><b>David Farmer</b> · Founder, intice</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="statement">
+    <div class="wrap reveal">
+      <h2>The people you meet first are <span class="gtext">the people who stay.</span></h2>
+      <p>No hand-off to a junior team after the deal closes. The same senior people who scope the engagement are the ones accountable for it, years in.</p>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="wrap reveal">
+      <h2>Curious if we're the <span class="it">right fit?</span></h2>
+      <p>Tell us what you're working on. We'll tell you honestly whether Convene is the right partner for it.</p>
+      <a target="_blank" rel="noopener" class="btn btn-sage" href="https://calendly.com/jyamada-convene-tech/30min">Book a discovery call <span class="arr">→</span></a>
+    </div>
+  </section>
+</main>
+</div>
+
+<script>
+(function(){
+  var scope=document.querySelector('.ab1');
+  if(!scope)return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revs=scope.querySelectorAll('.reveal');
+  function vis(el,frac){var r=el.getBoundingClientRect(),vh=window.innerHeight||document.documentElement.clientHeight;return r.top<vh*(frac||0.9)&&r.bottom>0;}
+  function check(){for(var i=0;i<revs.length;i++){if(!revs[i].classList.contains('in')&&vis(revs[i]))revs[i].classList.add('in');}}
+  function revealAll(){for(var i=0;i<revs.length;i++)revs[i].classList.add('in');}
+  if(reduce){revealAll();}
+  else{
+    var ticking=false;
+    function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){check();ticking=false;});}
+    ['scroll','touchmove','wheel','resize','orientationchange','load'].forEach(function(ev){window.addEventListener(ev,onScroll,{passive:true});});
+    check();setTimeout(check,300);setTimeout(check,1200);setTimeout(revealAll,5000);
+  }
+})();
+</script>
+
+</main>
+<footer class="c-foot" role="contentinfo">
+  <div class="c-foot-inner">
+
+    <!-- Editorial statement moment at top -->
+    <div class="c-foot-statement">
+      <h2>Bring us in <span class="it">before</span> the pain shows up on a P&amp;L.</h2>
+      <div class="c-foot-statement-side">
+        Or after. Either way, the same senior team owns the outcome &mdash; from first conversation through what comes next.
+      </div>
+    </div>
+
+    <!-- Signature gradient rule -->
+    <div class="c-foot-rule" role="presentation"></div>
+
+    <!-- Column grid -->
+    <div class="c-foot-cols">
+      <div class="c-foot-brand">
+        <a class="c-foot-mark" href="convene-homepage.html" aria-label="Convene home">
+          <img src="https://www.convene-tech.com/wp-content/uploads/2020/05/logo.png" alt="Convene">
+        </a>
+        <p class="c-foot-tag">Global technology partner. Senior teams. Measurable outcomes.</p>
+        <p class="c-foot-body">ServiceNow, Salesforce, AI, custom development, and vCISO &mdash; delivered by the same team from strategy through what comes next.</p>
+      </div>
+
+      <div class="c-foot-col">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="convene-servicenow.html">ServiceNow</a></li>
+          <li><a href="convene-salesforce.html">Salesforce</a></li>
+          <li><a href="convene-ai.html">AI &amp; Automation</a></li>
+          <li><a href="convene-custom-development.html">Custom Development</a></li>
+          <li><a href="convene-vciso.html">vCISO Services</a></li>
+        </ul>
+      </div>
+
+      <div class="c-foot-col">
+        <h3>How we work</h3>
+        <ul>
+          <li><a href="convene-delivery-model.html">Delivery Model</a></li>
+          <li><a href="convene-agile-distributed-teams.html">Distributed Teams</a></li>
+          <li><a href="convene-about.html">About Convene</a></li>
+          <li><a href="convene-program-technical-cofounder.html">Technical Co-Founder Program</a></li>
+          <li><a href="convene-nonprofits.html">Convene for Impact</a></li>
+        </ul>
+      </div>
+
+      <div class="c-foot-col">
+        <h3>Case Studies</h3>
+        <ul>
+          <li><a href="convene-casestudy-intice.html">intice</a></li>
+          <li><a href="convene-casestudy-playcity.html">PlayCity</a></li>
+          <li><a href="convene-casestudy-yu-workforce.html">YU Workforce</a></li>
+        </ul>
+      </div>
+
+      <div class="c-foot-cta">
+        <h3>Ready to talk?</h3>
+        <div class="c-foot-cta-title">Book a 30-minute conversation with our team.</div>
+        <a class="c-foot-btn" target="_blank" rel="noopener" href="https://calendly.com/jyamada-convene-tech/30min">
+          Book a call
+          <svg class="arr" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg>
+          <span class="sr-only">(opens Calendly scheduling in a new tab)</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact / offices strip -->
+    <div class="c-foot-contact">
+      <div class="c-foot-offices">
+        <span class="c-foot-city">Tampa</span><span class="c-foot-sep">&middot;</span>
+        <span class="c-foot-city">Guadalajara</span><span class="c-foot-sep">&middot;</span>
+        <span class="c-foot-city">Dubai</span><span class="c-foot-sep">&middot;</span>
+        <span class="c-foot-city">Hyderabad</span>
+      </div>
+      <span class="c-foot-tz">Global delivery, US business hours</span>
+      <a class="c-foot-mail" href="mailto:hello@convene-tech.com">hello@convene-tech.com</a>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="c-foot-bottom">
+      <span>&copy; 2026 Convene Technology Partners. <span class="c-foot-signature">Built with intention.</span></span>
+      <div class="c-foot-links">
+        <a href="#privacy-placeholder">Privacy Policy</a>
+        <a href="#terms-placeholder">Terms of Service</a>
+        <a href="#accessibility-placeholder">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  var nav = document.getElementById('cNav');
+  var toggle = document.getElementById('cNavToggle');
+  var menu = document.getElementById('cNavMenu');
+  if(!nav || !toggle || !menu) return;
+
+  var isMobile = function(){ return window.matchMedia('(max-width:900px)').matches; };
+
+  function syncMenuHidden(){
+    if(isMobile()){
+      if(!nav.classList.contains('open')) menu.setAttribute('hidden','');
+      else menu.removeAttribute('hidden');
+    } else {
+      menu.removeAttribute('hidden');
+    }
+  }
+  syncMenuHidden();
+  window.addEventListener('resize', syncMenuHidden);
+
+  function onScroll(){nav.classList.toggle('scrolled', window.scrollY > 8);}
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true':'false');
+    if(open){menu.removeAttribute('hidden');} else {menu.setAttribute('hidden','');}
+  });
+
+  var dropdownTriggers = menu.querySelectorAll('.c-nav-btn');
+  function openDropdown(btn){
+    var dd = document.getElementById(btn.getAttribute('aria-controls'));
+    btn.setAttribute('aria-expanded','true');
+    if(dd) dd.removeAttribute('hidden');
+  }
+  function closeDropdown(btn){
+    var dd = document.getElementById(btn.getAttribute('aria-controls'));
+    btn.setAttribute('aria-expanded','false');
+    if(dd) dd.setAttribute('hidden','');
+  }
+  function closeAll(exceptEl){
+    dropdownTriggers.forEach(function(btn){
+      var li = btn.parentElement;
+      if(li !== exceptEl) closeDropdown(btn);
+    });
+  }
+  dropdownTriggers.forEach(function(btn){
+    var li = btn.parentElement;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      closeAll(isOpen ? null : li);
+      if(isOpen) closeDropdown(btn); else openDropdown(btn);
+    });
+    btn.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        closeAll(li);
+        openDropdown(btn);
+        var dd = document.getElementById(btn.getAttribute('aria-controls'));
+        var first = dd && dd.querySelector('a');
+        if(first) first.focus();
+      } else if(e.key === 'Escape'){
+        closeAll();
+        btn.focus();
+      }
+    });
+  });
+
+  menu.querySelectorAll('.c-dropdown').forEach(function(dd){
+    var links = dd.querySelectorAll('a');
+    links.forEach(function(link, i){
+      link.addEventListener('keydown', function(e){
+        if(e.key === 'ArrowDown'){e.preventDefault(); (links[i+1] || links[0]).focus();}
+        else if(e.key === 'ArrowUp'){e.preventDefault(); (links[i-1] || links[links.length-1]).focus();}
+        else if(e.key === 'Escape'){
+          var trigger = dd.parentElement.querySelector('.c-nav-btn');
+          closeAll();
+          if(trigger) trigger.focus();
+        } else if(e.key === 'Tab' && i === links.length - 1 && !e.shiftKey){
+          var trigger = dd.parentElement.querySelector('.c-nav-btn');
+          closeDropdown(trigger);
+        }
+      });
+    });
+  });
+
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    menu.querySelectorAll('li').forEach(function(li){
+      var btn = li.querySelector('.c-nav-btn');
+      if(!btn) return;
+      var closeTimer;
+      li.addEventListener('mouseenter', function(){
+        if(isMobile()) return;
+        clearTimeout(closeTimer);
+        closeAll(li);
+        openDropdown(btn);
+      });
+      li.addEventListener('mouseleave', function(){
+        if(isMobile()) return;
+        closeTimer = setTimeout(function(){closeDropdown(btn);}, 180);
+      });
+    });
+  }
+
+  document.addEventListener('click', function(e){
+    if(!menu.contains(e.target) && !toggle.contains(e.target)){
+      closeAll();
+      if(isMobile()){
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+        menu.setAttribute('hidden','');
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
